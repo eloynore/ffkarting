@@ -1,19 +1,19 @@
 from rest_framework import viewsets
 from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer
-from .models import Driver, Team, Race, RaceParticipant
+from .models import driver,team,race
 # Create your views here.
 class TeamViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
+    queryset = team.Team.objects.all()
     serializer_class = TeamSerializer
 
 class DriverViewSet(viewsets.ModelViewSet):
-    queryset = Driver.objects.all()
+    queryset = driver.Driver.objects.all()
     serializer_class = DriverSerializer
     
 class RaceViewSet(viewsets.ModelViewSet):
-    queryset = Race.objects.all()
+    queryset = race.Race.objects.all()
     serializer_class = RaceSerializer
     
 class RaceParticipantViewSet(viewsets.ModelViewSet):
-    queryset = RaceParticipant.objects.all()
+    queryset = race.RaceParticipant.objects.all()
     serializer_class = RaceParticipantSerializer

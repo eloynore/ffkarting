@@ -1,22 +1,22 @@
 from rest_framework import serializers
-from .models import Driver, Team, Race, RaceParticipant
+from .models import driver,team,race
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Team
+        model=team.Team
         fields='__all__'
 
 class DriverSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Driver
+        model=driver.Driver
         fields='__all__'
 
 class RaceSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Race
+        model=race.Race
         fields='__all__'
         
 class RaceParticipantSerializer(serializers.ModelSerializer):
     class Meta:
-        model=RaceParticipant
+        model=race.RaceParticipant
         fields='__all__'

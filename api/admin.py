@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Driver,Team,Race,RaceParticipant
+from .models import driver,team,race
+
 # Register your models here.
-admin.site.register([Driver,Team,Race,RaceParticipant])
+admin.site.register([driver.Driver,team.Team,race.Race,race.RaceParticipant])
