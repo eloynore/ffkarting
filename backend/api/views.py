@@ -25,7 +25,7 @@ class DriverViewSet(viewsets.ModelViewSet):
                 'id': item.pk,
                 'name': item.name,
                 'number': item.number,
-                'team': item.team.name,
+                'team': {'id': item.team.pk,'name':item.team.name},
                 'points': totalpoints
             })
         leadeboard = sorted(driver_leaderboard, key=lambda d: d['points'],reverse=True) 
