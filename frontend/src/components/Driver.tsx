@@ -11,7 +11,13 @@ type driverProps = {
   points: number;
 };
 
-export function Driver({ id, name, number, team, points }: driverProps) {
+export function Driver({
+  id,
+  name,
+  number,
+  team,
+  points,
+}: Readonly<driverProps>) {
   return (
     <tr>
       <td>
