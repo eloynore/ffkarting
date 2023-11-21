@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type team = {
   id: number;
   name: string;
@@ -18,10 +20,13 @@ export function Driver({
   team,
   points,
 }: Readonly<driverProps>) {
+  const pathToDetail = "/driver/" + id;
   return (
     <tr>
       <td>
-        #{number} {name} / {team.name}
+        <Link to={pathToDetail}>
+          #{number} {name} / {team.name}
+        </Link>
       </td>
       <td>{points}</td>
     </tr>
