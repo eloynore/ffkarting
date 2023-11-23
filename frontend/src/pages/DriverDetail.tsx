@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Participation } from "../components/Participations";
 
 type race = {
   id: number;
@@ -12,7 +13,7 @@ type participation = {
   race: race;
   points: number;
   position: number;
-  laptime: string;
+  lapTime: string;
   qualifyLapTime: string;
   trainLapTime: string;
 };
@@ -36,10 +37,28 @@ export function DriverDetail() {
   }, []);
 
   return (
-    <div>
-      {participations?.map((participation) => {
-        return JSON.stringify(participation);
-      })}
+    <div className="container-wrap">
+      <section>
+        <nav className="ladder-nav">
+          <div className="ladder-title">
+            <h1>Clasificación</h1>
+          </div>
+        </nav>
+        <table id="rankings" className="leaderboard-results">
+          <thead>
+            <tr>
+              <th>Circuito</th>
+              <th>Mejor vuelta</th>
+              <th>Puntos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {participations?.map((item) => {
+              return <Participation key={item.id} {...item} />;
+            })}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }
