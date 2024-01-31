@@ -57,7 +57,9 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'trainLapTime': participation.trainLapTime
                 })
                 totalPoints += participation.points
-        return Response(data={'participations':driver_participations,'driver':{
+                
+        driver_participations_result = sorted(driver_participations,  key=lambda d: d['race']['date'],reverse=True)
+        return Response(data={'participations':driver_participations_result,'driver':{
             'id': curr_driver.pk,
             'name': curr_driver.name,
             'number': curr_driver.number,
