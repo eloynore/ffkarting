@@ -1,3 +1,4 @@
+import { useState } from "react";
 type race = {
   id: number;
   circuit: string;
@@ -14,20 +15,39 @@ type participationProps = {
   trainLapTime: string;
 };
 
-export function Participation({
-  id,
-  race,
-  points,
-  position,
-  lapTime,
-  qualifyLapTime,
-  trainLapTime,
-}: Readonly<participationProps>) {
-  return (
-    <tr>
-      <td>{race.circuit}</td>
-      <td>{lapTime}</td>
-      <td>{points}</td>
-    </tr>
-  );
+export function Participation(participation: Readonly<participationProps>) {
+  const [toggle, setToggle] = useState<boolean>(false);
+  if (toggle) {
+    return (
+      <>
+        <tr onClick={() => setToggle(!toggle)}>
+          <td>{participation.race.circuit}</td>
+          <td>{participation.points}</td>
+        </tr>
+        <tr onClick={() => setToggle(!toggle)}>
+          <td colSpan={2}>
+            <div className="race-data">
+              <p>Mejor vuelta:</p>
+              <p>{participation.lapTime}</p>
+            </div>
+            <div className="race-data">
+              <p>Tiempo de clasificación:</p>
+              <p>{participation.qualifyLapTime}</p>
+            </div>
+            <div className="race-data">
+              <p>Tiempo de entrenamiento:</p>
+              <p>{participation.trainLapTime}</p>
+            </div>
+          </td>
+        </tr>
+      </>
+    );
+  } else {
+    return (
+      <tr onClick={() => setToggle(!toggle)}>
+        <td>{participation.race.circuit}</td>
+        <td>{participation.points}</td>
+      </tr>
+    );
+  }
 }

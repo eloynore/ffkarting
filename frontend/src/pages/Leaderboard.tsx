@@ -4,6 +4,7 @@ import { Driver } from "../components/Driver";
 type team = {
   id: number;
   name: string;
+  color: string;
 };
 
 type driver = {

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 type team = {
   id: number;
   name: string;
+  color: string;
 };
 
 type driverProps = {
@@ -22,7 +23,11 @@ export function Driver({
 }: Readonly<driverProps>) {
   const pathToDetail = "/driver/" + id;
   return (
-    <tr>
+    <tr
+      style={{
+        background: "linear-gradient(65deg, #ffffff, 2%,#" + team.color + ")",
+      }}
+    >
       <td>
         <Link to={pathToDetail}>
           #{number} {name} / {team.name}

@@ -1,6 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Participation } from "../components/Participations";
+
+type team = {
+  id: number;
+  name: string;
+  color: string;
+};
+
+type driver = {
+  id: number;
+  name: string;
+  number: number;
+  team: team;
+  points: number;
+};
 
 type race = {
   id: number;
@@ -18,8 +32,13 @@ type participation = {
   trainLapTime: string;
 };
 
+type driverDetailData = {
+  participations: participation[];
+  driver: driver;
+};
+
 export function DriverDetail() {
-  const [participations, setParticipations] = useState<participation[]>();
+  const [driverDetailData, setDriverDetailData] = useState<driverDetailData>();
   let { id } = useParams();
   useEffect(() => {
     if (id) {
@@ -30,7 +49,7 @@ export function DriverDetail() {
             driverId +
             "/get_participations/"
         );
-        response.json().then((data) => setParticipations(data.participations));
+        response.json().then((data) => setDriverDetailData(data));
       };
       fetchParticipations();
     }
@@ -41,23 +60,41 @@ export function DriverDetail() {
       <section>
         <nav className="ladder-nav">
           <div className="ladder-title">
-            <h1>Clasificación</h1>
+            <h1>Perfil de {driverDetailData?.driver.name}</h1>
           </div>
         </nav>
-        <table id="rankings" className="leaderboard-results">
+        <article>
+          <div className="driver-data">
+            <p>Equipo</p>
+            <p>{driverDetailData?.driver.team.name}</p>
+          </div>
+          <div className="driver-data">
+            <p>Puntos</p>
+            <p>{driverDetailData?.driver.points}</p>
+          </div>
+          <div className="driver-data">
+            <p>Numero</p>
+            <p>{driverDetailData?.driver.number}</p>
+          </div>
+        </article>
+        <table id="rankings" className="leaderboard-results driver-results">
           <thead>
             <tr>
               <th>Circuito</th>
-              <th>Mejor vuelta</th>
               <th>Puntos</th>
             </tr>
           </thead>
           <tbody>
-            {participations?.map((item) => {
+            {driverDetailData?.participations?.map((item) => {
               return <Participation key={item.id} {...item} />;
             })}
           </tbody>
         </table>
+        <div className="btn-bar">
+          <Link className="btn-backTo" to="/">
+            Clasificación
+          </Link>
+        </div>
       </section>
     </div>
   );

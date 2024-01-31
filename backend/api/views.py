@@ -27,7 +27,8 @@ class DriverViewSet(viewsets.ModelViewSet):
                 'number': item.number,
                 'team': {
                     'id': item.team.pk,
-                    'name':item.team.name
+                    'name':item.team.name,
+                    'color': item.team.color
                 },
                 'points': totalpoints
             })
@@ -39,6 +40,7 @@ class DriverViewSet(viewsets.ModelViewSet):
         curr_driver = self.get_object()
         participations = race.RaceParticipant.objects.filter(driver=curr_driver.pk)
         driver_participations = []
+        totalPoints = 0
         if participations:
             for participation in participations.iterator():
                 driver_participations.append({
@@ -54,7 +56,18 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'qualifyLapTime': participation.qualifyLapTime,
                     'trainLapTime': participation.trainLapTime
                 })
-        return Response(data={'participations':driver_participations})
+                totalPoints += participation.points
+        return Response(data={'participations':driver_participations,'driver':{
+            'id': curr_driver.pk,
+            'name': curr_driver.name,
+            'number': curr_driver.number,
+            'team': {
+                'id': curr_driver.team.pk,
+                'name':curr_driver.team.name,
+                'color': curr_driver.team.color
+            },
+            'points': totalPoints
+        }})
 
 class RaceViewSet(viewsets.ModelViewSet):
     queryset = race.Race.objects.all()
