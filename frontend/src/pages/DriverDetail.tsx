@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Participation } from "../components/Participations";
 
@@ -40,6 +40,7 @@ type driverDetailData = {
 export function DriverDetail() {
   const [driverDetailData, setDriverDetailData] = useState<driverDetailData>();
   let { id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     if (id) {
       let driverId: number = +id;
@@ -63,37 +64,45 @@ export function DriverDetail() {
             <h1>Perfil de {driverDetailData?.driver.name}</h1>
           </div>
         </nav>
-        <article>
+        <article className="driver-info">
           <div className="driver-data">
-            <p>Equipo</p>
+            <p>Equipo: </p>
             <p>{driverDetailData?.driver.team.name}</p>
           </div>
           <div className="driver-data">
-            <p>Puntos</p>
+            <p>Puntos: </p>
             <p>{driverDetailData?.driver.points}</p>
           </div>
           <div className="driver-data">
-            <p>Numero</p>
+            <p>Numero: </p>
             <p>{driverDetailData?.driver.number}</p>
           </div>
         </article>
         <table id="rankings" className="leaderboard-results driver-results">
-          <thead>
+          <thead style={{ display: "none" }}>
             <tr>
               <th>Circuito</th>
               <th>Puntos</th>
             </tr>
           </thead>
           <tbody>
-            {driverDetailData?.participations?.map((item) => {
-              return <Participation key={item.id} {...item} />;
-            })}
+            {driverDetailData?.participations.length ? (
+              driverDetailData.participations.map((item) => {
+                return <Participation key={item.id} {...item} />;
+              })
+            ) : (
+              <tr>
+                <td colSpan={2} className="no-participations">
+                  Sin carreras
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
         <div className="btn-bar">
-          <Link className="btn-backTo" to="/">
+          <button className="btn-backTo" onClick={() => navigate("/")}>
             Clasificación
-          </Link>
+          </button>
         </div>
       </section>
     </div>

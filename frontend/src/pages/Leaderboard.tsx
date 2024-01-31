@@ -36,10 +36,10 @@ export function Leaderboard() {
             <h1>Clasificación</h1>
           </div>
         </nav>
-        <table id="rankings" className="leaderboard-results">
-          <thead>
+        <table id="rankings" className="leaderboard-results main">
+          <thead style={{ display: "none" }}>
             <tr>
-              <th>Piloto</th>
+              <th>Conductor</th>
               <th>Puntos</th>
             </tr>
           </thead>

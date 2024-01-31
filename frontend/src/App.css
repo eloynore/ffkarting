@@ -1,9 +1,12 @@
 :root {
-  --main-bg-color: #ffffff;
+  --main-bg-color: #eaeaea;
+  --main-bg-color-light: #ffffff;
   --secondary-bg-color: #e0feff;
   --main-text-color: #13287c;
   --main-text-color-light: #3c4d8d;
+  --second-text-color-light: #8291c4;
   --secondary-text-color: #cd2824;
+  --data-text-color: #575757;
 }
 
 * {
@@ -30,14 +33,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 10px 25px;
-  border-radius: 10px;
+  padding: 0.7rem 1.7rem;
+  border-radius: 0.7rem;
 }
 
 .ladder-title {
   flex: 2;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.8rem;
   color: var(--secondary-text-color);
   font-weight: bold;
   text-transform: uppercase;
@@ -50,14 +53,14 @@ body {
   border-collapse: collapse;
 }
 .leaderboard-results thead th {
-  padding: 25px;
+  padding: 1.8rem;
   color: var(--main-text-color-light);
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .driver-results tbody td {
-  height: 100px;
+  height: 3rem;
 }
 
 .leaderboard-results tbody td {
@@ -65,8 +68,7 @@ body {
 }
 
 .leaderboard-results tbody tr {
-  height: 65px;
-  font-size: 16px;
+  height: 4rem;
   font-weight: bold;
   color: var(--main-text-color);
   background: linear-gradient(
@@ -79,28 +81,43 @@ body {
   border-bottom: 5px solid var(--main-bg-color);
 }
 
-.leaderboard-results tbody tr:first-child {
-  height: 100px;
+.leaderboard-results.main tbody tr:first-child {
+  height: 7.6rem;
   font-weight: bold;
-  font-size: 20px;
 }
 
-a {
-  color: var(--main-text-color);
-  text-decoration: none;
+.leaderboard-results.main tbody tr:nth-child(2) {
+  height: 7rem;
+  font-weight: bold;
 }
-a:hover {
-  color: var(--main-text-color-light);
-  text-decoration: none;
+
+.leaderboard-results.main tbody tr:first-child .row-value {
+  font-size: 2rem;
+}
+
+.leaderboard-results.main tbody tr:nth-child(2) .row-value {
+  font-size: 1.7rem;
+}
+
+.row-title {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--second-text-color-light);
+}
+
+.row-value {
+  font-size: 1.3rem;
+  text-align: center;
 }
 
 .btn-backTo {
-  background-color: var(--main-bg-color);
+  text-decoration: none;
+  background-color: var(--main-bg-color-light);
   border-radius: 15px;
   border: 2px solid var(--secondary-text-color);
   flex: 1;
   text-align: center;
-  font-size: 18px;
+  font-size: 1.4rem;
   color: var(--main-text-color);
   font-weight: bold;
   text-transform: uppercase;
@@ -108,4 +125,33 @@ a:hover {
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.driver-info {
+  display: block;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.driver-data {
+  align-items: center;
+  color: var(--data-text-color);
+  display: inline-flex;
+  font-family: DBScreenSans-Regular, Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  margin-right: 2.4rem;
+}
+.no-participations {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+
 /* /end Leaderboard Results */

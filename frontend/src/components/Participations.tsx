@@ -21,22 +21,28 @@ export function Participation(participation: Readonly<participationProps>) {
     return (
       <>
         <tr onClick={() => setToggle(!toggle)}>
-          <td>{participation.race.circuit}</td>
-          <td>{participation.points}</td>
+          <td>
+            <p className="row-title left">Circuito</p>
+            <p className="row-value left">{participation.race.circuit}</p>
+          </td>
+          <td>
+            <p className="row-title">Puntos</p>
+            <p className="row-value">{participation.points}</p>
+          </td>
         </tr>
         <tr onClick={() => setToggle(!toggle)}>
           <td colSpan={2}>
             <div className="race-data">
-              <p>Mejor vuelta:</p>
-              <p>{participation.lapTime}</p>
+              <p className="row-title left">Mejor vuelta:</p>
+              <p className="row-value left">{participation.lapTime}</p>
             </div>
             <div className="race-data">
-              <p>Tiempo de clasificación:</p>
-              <p>{participation.qualifyLapTime}</p>
+              <p className="row-title left">Tiempo de clasificación:</p>
+              <p className="row-value left">{participation.qualifyLapTime}</p>
             </div>
             <div className="race-data">
-              <p>Tiempo de entrenamiento:</p>
-              <p>{participation.trainLapTime}</p>
+              <p className="row-title left">Tiempo de entrenamiento:</p>
+              <p className="row-value left">{participation.trainLapTime}</p>
             </div>
           </td>
         </tr>
@@ -45,8 +51,14 @@ export function Participation(participation: Readonly<participationProps>) {
   } else {
     return (
       <tr onClick={() => setToggle(!toggle)}>
-        <td>{participation.race.circuit}</td>
-        <td>{participation.points}</td>
+        <td>
+          <p className="row-title left">Circuito</p>
+          <p className="row-value left">{participation.race.circuit}</p>
+        </td>
+        <td>
+          <p className="row-title">Puntos</p>
+          <p className="row-value">{participation.points}</p>
+        </td>
       </tr>
     );
   }
