@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Leaderboard } from "./pages/Leaderboard";
 import { DriverDetail } from "./pages/DriverDetail";
+import { RaceDetail } from "./pages/RaceDetail";
 import "./App.css";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Leaderboard />} />
         <Route path="/driver/:id" element={<DriverDetail />} />
+        <Route path="/race/:id" element={<RaceDetail />} />
       </Routes>
     </div>
   );

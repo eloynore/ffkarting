@@ -75,6 +75,40 @@ class RaceViewSet(viewsets.ModelViewSet):
     queryset = race.Race.objects.all()
     serializer_class = RaceSerializer
     
+    @action(detail=True, methods=['get'])
+    def get_participations(self, request, pk=None):
+        curr_race = self.get_object()
+        participations = race.RaceParticipant.objects.filter(race=curr_race.pk)
+        driver_participations = []
+
+        if participations:
+            for participation in participations.iterator():
+                driver_participations.append({
+                    'id':participation.pk,
+                    'driver': {
+                        'id': participation.driver.pk,
+                        'name': participation.driver.name,
+                        'number': participation.driver.number,
+                        'team': {
+                            'id': participation.driver.team.pk,
+                            'name':participation.driver.team.name,
+                            'color': participation.driver.team.color
+                        }
+                    },
+                    'points': participation.points,
+                    'position': participation.position,
+                    'lapTime': participation.lapTime,
+                    'qualifyLapTime': participation.qualifyLapTime,
+                    'trainLapTime': participation.trainLapTime
+                })
+                
+        driver_participations_result = sorted(driver_participations,  key=lambda d: d['position'])
+        return Response(data={'participations':driver_participations_result,'race': {
+            'id': participation.race.pk,
+            'circuit': participation.race.circuit,
+            'date': participation.race.date
+        }})
+    
 class RaceParticipantViewSet(viewsets.ModelViewSet):
     queryset = race.RaceParticipant.objects.all()
     serializer_class = RaceParticipantSerializer
