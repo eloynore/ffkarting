@@ -82,6 +82,7 @@ export function DriverDetail() {
           <thead style={{ display: "none" }}>
             <tr>
               <th>Circuito</th>
+              <th>Posición</th>
               <th>Puntos</th>
             </tr>
           </thead>
@@ -92,7 +93,7 @@ export function DriverDetail() {
               })
             ) : (
               <tr>
-                <td colSpan={2} className="no-participations">
+                <td colSpan={3} className="no-participations">
                   Sin carreras
                 </td>
               </tr>

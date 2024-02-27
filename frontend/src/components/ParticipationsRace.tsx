@@ -42,11 +42,12 @@ export function ParticipationRace(participation: Readonly<participationProps>) {
           onClick={() => setToggle(!toggle)}
         >
           <td>
-            <p className="row-value left">{participation.position}</p>
+            <p className="row-value left">{participation.position}º</p>
           </td>
           <td>
-            <p className="row-title left">Driver</p>
+            <p className="row-title left">#{participation.driver.number}</p>
             <p className="row-value left">{participation.driver.name}</p>
+            <p className="row-title left">{participation.driver.team.name}</p>
           </td>
           <td>
             <p className="row-title">Puntos</p>
@@ -86,11 +87,12 @@ export function ParticipationRace(participation: Readonly<participationProps>) {
         onClick={() => setToggle(!toggle)}
       >
         <td>
-          <p className="row-value left">{participation.position}</p>
+          <p className="row-value left">{participation.position}º</p>
         </td>
         <td>
-          <p className="row-title left">Driver</p>
+          <p className="row-title left">#{participation.driver.number}</p>
           <p className="row-value left">{participation.driver.name}</p>
+          <p className="row-title left">{participation.driver.team.name}</p>
         </td>
         <td>
           <p className="row-title">Puntos</p>

@@ -1,5 +1,8 @@
 from django.db import models
+from django.core.validators import RegexValidator
 from . import driver
+
+validator = RegexValidator(r'[0-9]{2}:?[0-9]{2}.[0-9]{4}')
 
 class Race(models.Model):
     circuit = models.CharField(max_length=50)
@@ -14,6 +17,6 @@ class RaceParticipant(models.Model):
     race = models.ForeignKey(Race,on_delete=models.CASCADE,null=True)
     points = models.PositiveIntegerField(default=0)
     position = models.SmallIntegerField()
-    lapTime = models.CharField(max_length=10)
-    qualifyLapTime = models.CharField(max_length=10)
-    trainLapTime = models.CharField(max_length=10) 
+    lapTime = models.CharField(max_length=10,validators=[validator])
+    qualifyLapTime = models.CharField(max_length=10,validators=[validator])
+    trainLapTime = models.CharField(max_length=10,validators=[validator])
