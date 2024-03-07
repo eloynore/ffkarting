@@ -14,7 +14,7 @@ type driverProps = {
   points: number;
 };
 
-export function Driver({
+export function DriverLeaderboard({
   id,
   name,
   number,

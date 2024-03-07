@@ -1,23 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ParticipationsDriverProp } from "../helper/models";
 
-type race = {
-  id: number;
-  circuit: string;
-  date: string;
-};
-
-type participationProps = {
-  id: number;
-  race: race;
-  points: number;
-  position: number;
-  lapTime: string;
-  qualifyLapTime: string;
-  trainLapTime: string;
-};
-
-export function Participation(participation: Readonly<participationProps>) {
+export function DriverParticipation(
+  participation: Readonly<ParticipationsDriverProp>
+) {
   const [toggle, setToggle] = useState<boolean>(false);
   const pathToRace = "/race/" + participation.race.id;
   const navigate = useNavigate();
@@ -25,7 +12,7 @@ export function Participation(participation: Readonly<participationProps>) {
   if (toggle) {
     return (
       <>
-        <tr onClick={() => setToggle(!toggle)}>
+        <tr onClick={() => setToggle(false)}>
           <td>
             <p className="row-title left">Circuito</p>
             <p className="row-value left">{participation.race.circuit}</p>
@@ -53,12 +40,24 @@ export function Participation(participation: Readonly<participationProps>) {
               <p className="row-title left">Tiempo de entrenamiento:</p>
               <p className="row-value left">{participation.trainLapTime}</p>
             </div>
+
             <div className="race-data btn-bar">
+              {participation.videoURL ? (
+                <a
+                  href={participation.videoURL}
+                  target="_blank"
+                  className="btn-seeRace"
+                >
+                  Video
+                </a>
+              ) : (
+                <></>
+              )}
               <button
                 className="btn-seeRace"
                 onClick={() => navigate(pathToRace)}
               >
-                Ver carrera
+                Ver resultados
               </button>
             </div>
           </td>
@@ -67,7 +66,7 @@ export function Participation(participation: Readonly<participationProps>) {
     );
   } else {
     return (
-      <tr onClick={() => setToggle(!toggle)}>
+      <tr onClick={() => setToggle(true)}>
         <td>
           <p className="row-title left">Circuito</p>
           <p className="row-value left">{participation.race.circuit}</p>

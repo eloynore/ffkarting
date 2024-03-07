@@ -1,43 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Participation } from "../components/Participations";
-
-type team = {
-  id: number;
-  name: string;
-  color: string;
-};
-
-type driver = {
-  id: number;
-  name: string;
-  number: number;
-  team: team;
-  points: number;
-};
-
-type race = {
-  id: number;
-  circuit: string;
-  date: string;
-};
-
-type participation = {
-  id: number;
-  race: race;
-  points: number;
-  position: number;
-  lapTime: string;
-  qualifyLapTime: string;
-  trainLapTime: string;
-};
+import { DriverParticipation } from "../components/DriverParticipation";
+import { DriverProp, ParticipationsDriverProp } from "../helper/models";
 
 type driverDetailData = {
-  participations: participation[];
-  driver: driver;
+  participations: ParticipationsDriverProp[];
+  driver: DriverProp;
 };
 
-export function DriverDetail() {
+export function Driver() {
   const [driverDetailData, setDriverDetailData] = useState<driverDetailData>();
   let { id } = useParams();
   const navigate = useNavigate();
@@ -89,7 +60,7 @@ export function DriverDetail() {
           <tbody>
             {driverDetailData?.participations.length ? (
               driverDetailData.participations.map((item) => {
-                return <Participation key={item.id} {...item} />;
+                return <DriverParticipation key={item.id} {...item} />;
               })
             ) : (
               <tr>

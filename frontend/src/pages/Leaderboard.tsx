@@ -1,22 +1,9 @@
 import { useEffect, useState } from "react";
-import { Driver } from "../components/Driver";
-
-type team = {
-  id: number;
-  name: string;
-  color: string;
-};
-
-type driver = {
-  id: number;
-  name: string;
-  number: number;
-  team: team;
-  points: number;
-};
+import { DriverLeaderboard } from "../components/DriverLeaderboard";
+import { DriverProp } from "../helper/models";
 
 export function Leaderboard() {
-  const [drivers, setDrivers] = useState<driver[]>();
+  const [drivers, setDrivers] = useState<DriverProp[]>();
 
   useEffect(() => {
     const fetchDrivers = async () => {
@@ -45,7 +32,7 @@ export function Leaderboard() {
           </thead>
           <tbody>
             {drivers?.map((item) => {
-              return <Driver key={item.id} {...item} />;
+              return <DriverLeaderboard key={item.id} {...item} />;
             })}
           </tbody>
         </table>

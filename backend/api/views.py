@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer
+from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer, RaceIncidentSerializer
 from .models import driver,team,race
 # Create your views here.
 class TeamViewSet(viewsets.ModelViewSet):
@@ -54,7 +54,8 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'position': participation.position,
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
-                    'trainLapTime': participation.trainLapTime
+                    'trainLapTime': participation.trainLapTime,
+                    'videoURL': participation.videoURL
                 })
                 totalPoints += participation.points
                 
@@ -99,7 +100,8 @@ class RaceViewSet(viewsets.ModelViewSet):
                     'position': participation.position,
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
-                    'trainLapTime': participation.trainLapTime
+                    'trainLapTime': participation.trainLapTime,
+                    'videoURL': participation.videoURL
                 })
                 
         driver_participations_result = sorted(driver_participations,  key=lambda d: d['position'])
@@ -112,3 +114,7 @@ class RaceViewSet(viewsets.ModelViewSet):
 class RaceParticipantViewSet(viewsets.ModelViewSet):
     queryset = race.RaceParticipant.objects.all()
     serializer_class = RaceParticipantSerializer
+    
+class RaceIncidentViewSet(viewsets.ModelViewSet):
+    queryset = race.RaceIncident.objects.all()
+    serializer_class = RaceIncidentSerializer

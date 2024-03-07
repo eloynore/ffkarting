@@ -1,30 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ParticipationsRaceProp } from "../helper/models";
 
-type team = {
-  id: number;
-  name: string;
-  color: string;
-};
-
-type driver = {
-  id: number;
-  name: string;
-  number: number;
-  team: team;
-};
-
-type participationProps = {
-  id: number;
-  driver: driver;
-  points: number;
-  position: number;
-  lapTime: string;
-  qualifyLapTime: string;
-  trainLapTime: string;
-};
-
-export function ParticipationRace(participation: Readonly<participationProps>) {
+export function RaceParticipation(
+  participation: Readonly<ParticipationsRaceProp>
+) {
   const [toggle, setToggle] = useState<boolean>(false);
   const pathToDriver = "/driver/" + participation.driver.id;
   const navigate = useNavigate();
@@ -39,7 +19,7 @@ export function ParticipationRace(participation: Readonly<participationProps>) {
               participation.driver.team.color +
               ")",
           }}
-          onClick={() => setToggle(!toggle)}
+          onClick={() => setToggle(false)}
         >
           <td>
             <p className="row-value left">{participation.position}º</p>
@@ -68,8 +48,24 @@ export function ParticipationRace(participation: Readonly<participationProps>) {
               <p className="row-title left">Tiempo de entrenamiento:</p>
               <p className="row-value left">{participation.trainLapTime}</p>
             </div>
-            <div className="race-data">
-              <button onClick={() => navigate(pathToDriver)}>Driver</button>
+            <div className="race-data btn-bar">
+              {participation.videoURL ? (
+                <a
+                  href={participation.videoURL}
+                  target="_blank"
+                  className="btn-seeRace"
+                >
+                  Video
+                </a>
+              ) : (
+                <></>
+              )}
+              <button
+                className="btn-seeRace"
+                onClick={() => navigate(pathToDriver)}
+              >
+                Ver piloto
+              </button>
             </div>
           </td>
         </tr>
@@ -84,7 +80,7 @@ export function ParticipationRace(participation: Readonly<participationProps>) {
             participation.driver.team.color +
             ")",
         }}
-        onClick={() => setToggle(!toggle)}
+        onClick={() => setToggle(true)}
       >
         <td>
           <p className="row-value left">{participation.position}º</p>

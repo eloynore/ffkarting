@@ -20,3 +20,8 @@ class RaceParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model=race.RaceParticipant
         fields='__all__'
+
+class RaceIncidentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=race.RaceIncident
+        fields='__all__'

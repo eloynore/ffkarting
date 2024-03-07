@@ -1,42 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ParticipationRace } from "../components/ParticipationsRace";
-
-type team = {
-  id: number;
-  name: string;
-  color: string;
-};
-
-type driver = {
-  id: number;
-  name: string;
-  number: number;
-  team: team;
-};
-
-type race = {
-  id: number;
-  circuit: string;
-  date: string;
-};
-
-type participation = {
-  id: number;
-  driver: driver;
-  points: number;
-  position: number;
-  lapTime: string;
-  qualifyLapTime: string;
-  trainLapTime: string;
-};
+import { RaceParticipation } from "../components/RaceParticipation";
+import { RaceProp, ParticipationsRaceProp } from "../helper/models";
 
 type raceDetailData = {
-  participations: participation[];
-  race: race;
+  participations: ParticipationsRaceProp[];
+  race: RaceProp;
 };
 
-export function RaceDetail() {
+export function Race() {
   const [raceDetailData, setRaceDetailData] = useState<raceDetailData>();
   let { id } = useParams();
   const navigate = useNavigate();
@@ -77,7 +49,7 @@ export function RaceDetail() {
           <tbody>
             {raceDetailData?.participations.length ? (
               raceDetailData.participations.map((item) => {
-                return <ParticipationRace key={item.id} {...item} />;
+                return <RaceParticipation key={item.id} {...item} />;
               })
             ) : (
               <tr>
