@@ -19,7 +19,6 @@ export function RaceParticipation(
               participation.driver.team.color +
               ")",
           }}
-          onClick={() => setToggle(false)}
         >
           <td>
             <p className="row-value left">{participation.position}º</p>
@@ -33,9 +32,14 @@ export function RaceParticipation(
             <p className="row-title">Puntos</p>
             <p className="row-value">{participation.points}</p>
           </td>
+          <td>
+            <button onClick={() => setToggle(false)} className="helmet">
+              <img src="/icons/compress.svg" alt="compress row" />
+            </button>
+          </td>
         </tr>
         <tr>
-          <td colSpan={3}>
+          <td colSpan={4}>
             <div className="race-data">
               <p className="row-title left">Mejor vuelta:</p>
               <p className="row-value left">{participation.lapTime}</p>
@@ -53,18 +57,29 @@ export function RaceParticipation(
                 <a
                   href={participation.videoURL}
                   target="_blank"
-                  className="btn-seeRace"
+                  rel="noreferrer"
+                  className="btn-seeRace flex"
                 >
-                  Video
+                  <p>Video</p>
+                  <img
+                    className="helmet"
+                    src="/icons/play.svg"
+                    alt="play video"
+                  />
                 </a>
               ) : (
                 <></>
               )}
               <button
-                className="btn-seeRace"
+                className="btn-seeRace flex"
                 onClick={() => navigate(pathToDriver)}
               >
-                Ver piloto
+                <p>Piloto</p>
+                <img
+                  className="helmet"
+                  src="/icons/helmet-race.svg"
+                  alt="Helmet"
+                />
               </button>
             </div>
           </td>
@@ -80,7 +95,6 @@ export function RaceParticipation(
             participation.driver.team.color +
             ")",
         }}
-        onClick={() => setToggle(true)}
       >
         <td>
           <p className="row-value left">{participation.position}º</p>
@@ -93,6 +107,11 @@ export function RaceParticipation(
         <td>
           <p className="row-title">Puntos</p>
           <p className="row-value">{participation.points}</p>
+        </td>
+        <td>
+          <button onClick={() => setToggle(true)} className="helmet">
+            <img src="/icons/expand.svg" alt="expand row" />
+          </button>
         </td>
       </tr>
     );

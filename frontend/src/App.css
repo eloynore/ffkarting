@@ -1,7 +1,7 @@
 :root {
-  --main-bg-color: #eaeaea;
+  --main-bg-color: #f7f7f7;
   --main-bg-color-light: #ffffff;
-  --secondary-bg-color: #e0feff;
+  --secondary-bg-color: #41d3d8;
   --main-text-color: #13287c;
   --main-text-color-light: #3c4d8d;
   --second-text-color-light: #8291c4;
@@ -32,8 +32,9 @@ body {
 .btn-bar {
   display: flex;
   flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
-  padding: 0.7rem 1.7rem;
   border-radius: 0.7rem;
 }
 
@@ -41,7 +42,7 @@ body {
   flex: 2;
   text-align: center;
   font-size: 1.8rem;
-  color: var(--secondary-text-color);
+  color: var(--main-text-color);
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -64,7 +65,7 @@ body {
 }
 
 .leaderboard-results tbody td {
-  padding: 15px 25px;
+  padding: 1.2rem;
 }
 
 .leaderboard-results tbody tr {
@@ -135,11 +136,10 @@ body {
   text-align: center;
   font-size: 1.4rem;
   color: var(--secondary-text-color);
-  font-weight: bold;
+  font-weight: bolder;
   text-transform: uppercase;
-  padding: 15px;
-  margin-left: 15%;
-  margin-right: 15%;
+  padding: 10px;
+  margin: 3%;
 }
 
 .driver-info {
@@ -170,4 +170,17 @@ body {
   text-align: right;
 }
 
+.flex {
+  flex-direction: column;
+  align-items: center;
+}
+
+.helmet {
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.inline {
+  display: inline;
+}
 /* /end Leaderboard Results */

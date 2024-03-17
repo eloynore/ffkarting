@@ -25,7 +25,7 @@ export function Driver() {
       };
       fetchParticipations();
     }
-  }, []);
+  }, [id]);
 
   return (
     <div className="container-wrap">

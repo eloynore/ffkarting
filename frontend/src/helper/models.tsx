@@ -4,6 +4,20 @@ export type TeamProp = {
   color: string;
 };
 
+export type DriverTeamProp = {
+  id: number;
+  name: string;
+  number: number;
+};
+
+export type TeamLeaderboardProp = {
+  id: number;
+  name: string;
+  drivers: DriverTeamProp[];
+  color: string;
+  points: number;
+};
+
 export type DriverProp = {
   id: number;
   name: string;

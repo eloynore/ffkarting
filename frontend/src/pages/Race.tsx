@@ -23,7 +23,7 @@ export function Race() {
       };
       fetchParticipations();
     }
-  }, []);
+  }, [id]);
 
   return (
     <div className="container-wrap">

@@ -1,18 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
-type team = {
-  id: number;
-  name: string;
-  color: string;
-};
-
-type driverProps = {
-  id: number;
-  name: string;
-  number: number;
-  team: team;
-  points: number;
-};
+import { DriverProp } from "../helper/models";
 
 export function DriverLeaderboard({
   id,
@@ -20,7 +7,7 @@ export function DriverLeaderboard({
   number,
   team,
   points,
-}: Readonly<driverProps>) {
+}: Readonly<DriverProp>) {
   const pathToDetail = "/driver/" + id;
   const navigate = useNavigate();
 
@@ -29,7 +16,6 @@ export function DriverLeaderboard({
       style={{
         background: "linear-gradient(65deg, #ffffff, 2%,#" + team.color + ")",
       }}
-      onClick={() => navigate(pathToDetail)}
     >
       <td>
         <p className="row-title left">#{number}</p>
@@ -39,6 +25,15 @@ export function DriverLeaderboard({
       <td>
         <p className="row-title">Puntos</p>
         <p className="row-value">{points}</p>
+      </td>
+      <td>
+        <button onClick={() => navigate(pathToDetail)}>
+          <img
+            className="helmet"
+            src="/icons/right-arrow.svg"
+            alt="Driver helmet"
+          />
+        </button>
       </td>
     </tr>
   );

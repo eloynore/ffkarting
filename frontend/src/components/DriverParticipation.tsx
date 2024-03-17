@@ -25,9 +25,14 @@ export function DriverParticipation(
             <p className="row-title">Puntos</p>
             <p className="row-value">{participation.points}</p>
           </td>
+          <td>
+            <button onClick={() => setToggle(false)} className="helmet">
+              <img src="/icons/compress.svg" alt="compress row" />
+            </button>
+          </td>
         </tr>
         <tr>
-          <td colSpan={3}>
+          <td colSpan={4}>
             <div className="race-data">
               <p className="row-title left">Mejor vuelta:</p>
               <p className="row-value left">{participation.lapTime}</p>
@@ -46,18 +51,29 @@ export function DriverParticipation(
                 <a
                   href={participation.videoURL}
                   target="_blank"
-                  className="btn-seeRace"
+                  rel="noreferrer"
+                  className="btn-seeRace flex"
                 >
-                  Video
+                  <img
+                    className="helmet"
+                    src="/icons/play.svg"
+                    alt="play video"
+                  />
+                  <p>Video</p>
                 </a>
               ) : (
                 <></>
               )}
               <button
-                className="btn-seeRace"
+                className="btn-seeRace flex"
                 onClick={() => navigate(pathToRace)}
               >
-                Ver resultados
+                <img
+                  className="helmet"
+                  src="/icons/checkered-flag.svg"
+                  alt="checkered flag"
+                />
+                <p>Carrera</p>
               </button>
             </div>
           </td>
@@ -66,18 +82,23 @@ export function DriverParticipation(
     );
   } else {
     return (
-      <tr onClick={() => setToggle(true)}>
+      <tr>
         <td>
           <p className="row-title left">Circuito</p>
           <p className="row-value left">{participation.race.circuit}</p>
         </td>
         <td>
           <p className="row-title">Posición</p>
-          <p className="row-value">{participation.position}</p>
+          <p className="row-value">{participation.position}º</p>
         </td>
         <td>
           <p className="row-title">Puntos</p>
           <p className="row-value">{participation.points}</p>
+        </td>
+        <td>
+          <button onClick={() => setToggle(true)} className="helmet">
+            <img src="/icons/expand.svg" alt="expand row" />
+          </button>
         </td>
       </tr>
     );

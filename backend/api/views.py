@@ -7,6 +7,37 @@ from .models import driver,team,race
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = team.Team.objects.all()
     serializer_class = TeamSerializer
+    @action(detail=False, methods=['get'])
+    def get_leaderboard(self, request):
+        team_leaderboard = []
+        for item in self.queryset.iterator():
+            team_drivers = []
+            totalpoints_team = 0
+            drivers = driver.Driver.objects.filter(team=item.pk)
+            for curr_driver in drivers:
+                totalpoints_driver = 0
+                participations = race.RaceParticipant.objects.filter(driver=curr_driver.pk)
+                if participations:
+                    for participation in participations.iterator():
+                        totalpoints_driver+= participation.points
+                team_drivers.append({
+                    'id': curr_driver.pk,
+                    'name': curr_driver.name,
+                    'number': curr_driver.number,
+                    'points': totalpoints_driver,
+                })
+                totalpoints_team += totalpoints_driver
+                     
+            team_leaderboard.append({
+                'id': item.pk,
+                'name': item.name,
+                'color': item.color,
+                'drivers': team_drivers,
+                'points': totalpoints_team
+            })
+        leadeboard = sorted(team_leaderboard, key=lambda d: d['points'],reverse=True) 
+        return Response(data={'leaderboard':leadeboard})
+    
 
 class DriverViewSet(viewsets.ModelViewSet):
     queryset = driver.Driver.objects.all()
@@ -16,11 +47,11 @@ class DriverViewSet(viewsets.ModelViewSet):
     def get_leaderboard(self, request):
         driver_leaderboard = []
         for item in self.queryset.iterator():
-            totalpoints = 0
+            total_points = 0
             participations = race.RaceParticipant.objects.filter(driver=item.pk)
             if participations:
                 for participation in participations.iterator():
-                    totalpoints += participation.points
+                    total_points += participation.points
             driver_leaderboard.append({
                 'id': item.pk,
                 'name': item.name,
@@ -30,7 +61,7 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'name':item.team.name,
                     'color': item.team.color
                 },
-                'points': totalpoints
+                'points': total_points
             })
         leadeboard = sorted(driver_leaderboard, key=lambda d: d['points'],reverse=True) 
         return Response(data={'leaderboard':leadeboard})
@@ -40,7 +71,7 @@ class DriverViewSet(viewsets.ModelViewSet):
         curr_driver = self.get_object()
         participations = race.RaceParticipant.objects.filter(driver=curr_driver.pk)
         driver_participations = []
-        totalPoints = 0
+        total_points = 0
         if participations:
             for participation in participations.iterator():
                 driver_participations.append({
@@ -57,7 +88,7 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'trainLapTime': participation.trainLapTime,
                     'videoURL': participation.videoURL
                 })
-                totalPoints += participation.points
+                total_points += participation.points
                 
         driver_participations_result = sorted(driver_participations,  key=lambda d: d['race']['date'],reverse=True)
         return Response(data={'participations':driver_participations_result,'driver':{
@@ -69,7 +100,7 @@ class DriverViewSet(viewsets.ModelViewSet):
                 'name':curr_driver.team.name,
                 'color': curr_driver.team.color
             },
-            'points': totalPoints
+            'points': total_points
         }})
 
 class RaceViewSet(viewsets.ModelViewSet):
