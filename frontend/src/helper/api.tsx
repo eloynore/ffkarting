@@ -45,7 +45,7 @@ export const getImage = async (
   try {
     const options = { params, headers };
     const result = await axios.get(endpoint, options);
-    return true;
+    return result;
   } catch (error) {
     return false;
   }

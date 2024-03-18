@@ -54,12 +54,12 @@ export function DriverParticipation(
                   rel="noreferrer"
                   className="btn-seeRace flex"
                 >
+                  <p>Video</p>
                   <img
                     className="helmet"
                     src="/icons/play.svg"
                     alt="play video"
                   />
-                  <p>Video</p>
                 </a>
               ) : (
                 <></>
@@ -68,12 +68,12 @@ export function DriverParticipation(
                 className="btn-seeRace flex"
                 onClick={() => navigate(pathToRace)}
               >
+                <p>Carrera</p>
                 <img
                   className="helmet"
                   src="/icons/checkered-flag.svg"
                   alt="checkered flag"
                 />
-                <p>Carrera</p>
               </button>
             </div>
           </td>

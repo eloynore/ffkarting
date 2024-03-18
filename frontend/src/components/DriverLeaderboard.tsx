@@ -16,7 +16,7 @@ export function DriverLeaderboard({
   useEffect(() => {
     const response = getImage(TeamLogo);
     response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
-  }, []);
+  }, [TeamLogo]);
   const pathToDetail = "/driver/" + id;
   const navigate = useNavigate();
 

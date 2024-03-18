@@ -1,7 +1,8 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DriverParticipation } from "../components/DriverParticipation";
 import { DriverProp, ParticipationsDriverProp } from "../helper/models";
+import { getImage } from "../helper/api";
 
 type driverDetailData = {
   participations: ParticipationsDriverProp[];
@@ -10,8 +11,9 @@ type driverDetailData = {
 
 export function Driver() {
   const [driverDetailData, setDriverDetailData] = useState<driverDetailData>();
+  const [teamImage, setTeamImage] = useState<string>("");
+
   let { id } = useParams();
-  const navigate = useNavigate();
   useEffect(() => {
     if (id) {
       let driverId: number = +id;
@@ -21,7 +23,14 @@ export function Driver() {
             driverId +
             "/get_participations/"
         );
-        response.json().then((data) => setDriverDetailData(data));
+        response.json().then((data) => {
+          setDriverDetailData(data);
+          let TeamLogo = "/logos/" + data.driver.team.name + ".png";
+          const response = getImage(TeamLogo);
+          response.then((data) =>
+            data ? setTeamImage(TeamLogo) : setTeamImage("")
+          );
+        });
       };
       fetchParticipations();
     }
@@ -37,16 +46,22 @@ export function Driver() {
         </nav>
         <article className="driver-info">
           <div className="driver-data">
-            <p>Equipo: </p>
+            <p>{driverDetailData?.driver.points}pts</p>
+          </div>
+          <div className="driver-data">
+            <p># {driverDetailData?.driver.number}</p>
+          </div>
+          <div className="driver-data">
+            {teamImage ? (
+              <img
+                className="helmet"
+                src={teamImage}
+                alt={driverDetailData?.driver.team.name + " logo image"}
+              />
+            ) : (
+              <></>
+            )}
             <p>{driverDetailData?.driver.team.name}</p>
-          </div>
-          <div className="driver-data">
-            <p>Puntos: </p>
-            <p>{driverDetailData?.driver.points}</p>
-          </div>
-          <div className="driver-data">
-            <p>Numero: </p>
-            <p>{driverDetailData?.driver.number}</p>
           </div>
         </article>
         <table id="rankings" className="leaderboard-results driver-results">
@@ -71,11 +86,6 @@ export function Driver() {
             )}
           </tbody>
         </table>
-        <div className="btn-bar">
-          <button className="btn-backTo" onClick={() => navigate("/")}>
-            Clasificación
-          </button>
-        </div>
       </section>
     </div>
   );

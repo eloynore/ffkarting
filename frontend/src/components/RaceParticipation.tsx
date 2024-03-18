@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ParticipationsRaceProp } from "../helper/models";
+import { getImage } from "../helper/api";
 
 export function RaceParticipation(
   participation: Readonly<ParticipationsRaceProp>
@@ -8,6 +9,14 @@ export function RaceParticipation(
   const [toggle, setToggle] = useState<boolean>(false);
   const pathToDriver = "/driver/" + participation.driver.id;
   const navigate = useNavigate();
+
+  const [teamImage, setTeamImage] = useState<string>("");
+  let TeamLogo = "/logos/" + participation.driver.team.name + ".png";
+
+  useEffect(() => {
+    const response = getImage(TeamLogo);
+    response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
+  }, [TeamLogo]);
 
   if (toggle) {
     return (
@@ -24,9 +33,24 @@ export function RaceParticipation(
             <p className="row-value left">{participation.position}º</p>
           </td>
           <td>
-            <p className="row-title left">#{participation.driver.number}</p>
-            <p className="row-value left">{participation.driver.name}</p>
-            <p className="row-title left">{participation.driver.team.name}</p>
+            <div className="flex-row">
+              {teamImage ? (
+                <img
+                  className="helmet"
+                  src={teamImage}
+                  alt={participation.driver.team.name + " logo image"}
+                />
+              ) : (
+                <></>
+              )}
+              <div>
+                <p className="row-title left">#{participation.driver.number}</p>
+                <p className="row-value left">{participation.driver.name}</p>
+                <p className="row-title left">
+                  {participation.driver.team.name}
+                </p>
+              </div>
+            </div>
           </td>
           <td>
             <p className="row-title">Puntos</p>
@@ -100,9 +124,22 @@ export function RaceParticipation(
           <p className="row-value left">{participation.position}º</p>
         </td>
         <td>
-          <p className="row-title left">#{participation.driver.number}</p>
-          <p className="row-value left">{participation.driver.name}</p>
-          <p className="row-title left">{participation.driver.team.name}</p>
+          <div className="flex-row">
+            {teamImage ? (
+              <img
+                className="helmet"
+                src={teamImage}
+                alt={participation.driver.team.name + " logo image"}
+              />
+            ) : (
+              <></>
+            )}
+            <div>
+              <p className="row-title left">#{participation.driver.number}</p>
+              <p className="row-value left">{participation.driver.name}</p>
+              <p className="row-title left">{participation.driver.team.name}</p>
+            </div>
+          </div>
         </td>
         <td>
           <p className="row-title">Puntos</p>

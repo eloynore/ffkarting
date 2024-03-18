@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { RaceParticipation } from "../components/RaceParticipation";
 import { RaceProp, ParticipationsRaceProp } from "../helper/models";
@@ -11,7 +11,6 @@ type raceDetailData = {
 export function Race() {
   const [raceDetailData, setRaceDetailData] = useState<raceDetailData>();
   let { id } = useParams();
-  const navigate = useNavigate();
   useEffect(() => {
     if (id) {
       let raceId: number = +id;
@@ -35,7 +34,7 @@ export function Race() {
         </nav>
         <article className="driver-info">
           <div className="driver-data">
-            <p>Fecha: </p>
+            <img className="helmet" src="/icons/calendar.svg" alt="calendar" />
             <p>{raceDetailData?.race.date}</p>
           </div>
         </article>
@@ -60,11 +59,6 @@ export function Race() {
             )}
           </tbody>
         </table>
-        <div className="btn-bar">
-          <button className="btn-backTo" onClick={() => navigate("/")}>
-            Clasificación
-          </button>
-        </div>
       </section>
     </div>
   );

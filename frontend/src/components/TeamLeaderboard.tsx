@@ -16,7 +16,7 @@ export function TeamLeaderboard({
   useEffect(() => {
     const response = getImage(TeamLogo);
     response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
-  }, []);
+  }, [TeamLogo]);
 
   return (
     <tr>
