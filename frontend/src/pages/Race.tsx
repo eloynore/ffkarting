@@ -38,7 +38,10 @@ export function Race() {
             <p>{raceDetailData?.race.date}</p>
           </div>
         </article>
-        <table id="rankings" className="leaderboard-results driver-results">
+        <table
+          id="rankings"
+          className="leaderboard-results race driver-results"
+        >
           <thead style={{ display: "none" }}>
             <tr>
               <th>Circuito</th>

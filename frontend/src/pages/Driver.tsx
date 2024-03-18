@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { DriverParticipation } from "../components/DriverParticipation";
 import { DriverProp, ParticipationsDriverProp } from "../helper/models";
 import { getImage } from "../helper/api";
+import { useTranslation } from "react-i18next";
 
 type driverDetailData = {
   participations: ParticipationsDriverProp[];
@@ -12,6 +13,7 @@ type driverDetailData = {
 export function Driver() {
   const [driverDetailData, setDriverDetailData] = useState<driverDetailData>();
   const [teamImage, setTeamImage] = useState<string>("");
+  const { t } = useTranslation();
 
   let { id } = useParams();
   useEffect(() => {
@@ -69,7 +71,7 @@ export function Driver() {
             <tr>
               <th>Circuito</th>
               <th>Posición</th>
-              <th>Puntos</th>
+              <th>{t("points")}</th>
             </tr>
           </thead>
           <tbody>

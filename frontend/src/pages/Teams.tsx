@@ -18,12 +18,7 @@ export function Teams() {
   return (
     <div className="container-wrap">
       <section>
-        <nav className="ladder-nav">
-          <div className="ladder-title">
-            <h1>Clasificación</h1>
-          </div>
-        </nav>
-        <table id="rankings" className="leaderboard-results main">
+        <table id="rankings" className="leaderboard-results leaderboard main">
           <thead style={{ display: "none" }}>
             <tr>
               <th>Conductor</th>

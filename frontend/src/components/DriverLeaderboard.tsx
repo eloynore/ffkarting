@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { DriverProp } from "../helper/models";
 import { useState, useEffect } from "react";
 import { getImage } from "../helper/api";
+import { useTranslation } from "react-i18next";
 
 export function DriverLeaderboard({
   id,
@@ -11,6 +12,7 @@ export function DriverLeaderboard({
   points,
 }: Readonly<DriverProp>) {
   const [teamImage, setTeamImage] = useState<string>("");
+  const { t } = useTranslation();
   let TeamLogo = "/logos/" + team.name + ".png";
 
   useEffect(() => {
@@ -21,12 +23,12 @@ export function DriverLeaderboard({
   const navigate = useNavigate();
 
   return (
-    <tr
-      style={{
-        background: "linear-gradient(65deg, #ffffff, 2%,#" + team.color + ")",
-      }}
-    >
-      <td>
+    <tr>
+      <td
+        style={{
+          background: "linear-gradient(65deg, #ffffff, 2%,#" + team.color + ")",
+        }}
+      >
         <div className="flex-row">
           {teamImage ? (
             <img
@@ -42,20 +44,23 @@ export function DriverLeaderboard({
             <p className="row-value left">{name}</p>
             <p className="row-title left">{team.name}</p>
           </div>
+          <button
+            style={{ float: "right" }}
+            onClick={() => navigate(pathToDetail)}
+          >
+            <img
+              className="helmet"
+              src="/icons/right-arrow.svg"
+              alt="Driver helmet"
+            />
+          </button>
         </div>
       </td>
       <td>
-        <p className="row-title">Puntos</p>
-        <p className="row-value">{points}</p>
-      </td>
-      <td>
-        <button onClick={() => navigate(pathToDetail)}>
-          <img
-            className="helmet"
-            src="/icons/right-arrow.svg"
-            alt="Driver helmet"
-          />
-        </button>
+        <div>
+          <p className="row-title">{t("points")}</p>
+          <p className="row-value">{points}</p>
+        </div>
       </td>
     </tr>
   );

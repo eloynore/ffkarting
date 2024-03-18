@@ -5,6 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
+//Import i18n.tsx
+import "./i18n";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
