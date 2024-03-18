@@ -1,12 +1,12 @@
 :root {
-  --main-bg-color: #f7f7f7;
-  --main-bg-color-light: #ffffff;
+  --main-bg-color: #fafafa;
+  --main-bg-color-light: #f1f1f1;
   --secondary-bg-color: #41d3d8;
   --main-text-color: #16171c;
   --main-text-color-light: #09102b;
   --second-text-color-light: #8291c4;
   --secondary-text-color: #cd2824;
-  --data-text-color: #27242d;
+  --data-text-color: #271246;
 }
 
 * {
