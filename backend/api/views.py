@@ -27,7 +27,7 @@ class TeamViewSet(viewsets.ModelViewSet):
                     'points': totalpoints_driver,
                 })
                 totalpoints_team += totalpoints_driver
-                     
+            
             team_leaderboard.append({
                 'id': item.pk,
                 'name': item.name,

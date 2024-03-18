@@ -36,3 +36,17 @@ export const getData = async (
     console.log("Error fetching races");
   }
 };
+
+export const getImage = async (
+  endpoint: string,
+  params?: { [key: string]: any },
+  headers?: { [key: string]: any }
+) => {
+  try {
+    const options = { params, headers };
+    const result = await axios.get(endpoint, options);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

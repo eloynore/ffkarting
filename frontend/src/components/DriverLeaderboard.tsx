@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { DriverProp } from "../helper/models";
+import { useState, useEffect } from "react";
+import { getImage } from "../helper/api";
 
 export function DriverLeaderboard({
   id,
@@ -8,6 +10,13 @@ export function DriverLeaderboard({
   team,
   points,
 }: Readonly<DriverProp>) {
+  const [teamImage, setTeamImage] = useState<string>("");
+  let TeamLogo = "/logos/" + team.name + ".png";
+
+  useEffect(() => {
+    const response = getImage(TeamLogo);
+    response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
+  }, []);
   const pathToDetail = "/driver/" + id;
   const navigate = useNavigate();
 
@@ -18,9 +27,22 @@ export function DriverLeaderboard({
       }}
     >
       <td>
-        <p className="row-title left">#{number}</p>
-        <p className="row-value left">{name}</p>
-        <p className="row-title left">{team.name}</p>
+        <div className="flex-row">
+          {teamImage ? (
+            <img
+              className="helmet"
+              src={teamImage}
+              alt={name + " logo image"}
+            />
+          ) : (
+            <></>
+          )}
+          <div>
+            <p className="row-title left">#{number}</p>
+            <p className="row-value left">{name}</p>
+            <p className="row-title left">{team.name}</p>
+          </div>
+        </div>
       </td>
       <td>
         <p className="row-title">Puntos</p>
