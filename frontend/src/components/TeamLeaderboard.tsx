@@ -1,4 +1,3 @@
-// import { useNavigate } from "react-router-dom";
 import { TeamLeaderboardProp } from "../helper/models";
 import { useEffect, useState } from "react";
 import { getImage } from "../helper/api";

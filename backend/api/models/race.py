@@ -20,6 +20,9 @@ class RaceParticipant(models.Model):
     lapTime = models.CharField(max_length=10,validators=[validator],blank=True)
     qualifyLapTime = models.CharField(max_length=10,validators=[validator],blank=True)
     trainLapTime = models.CharField(max_length=10,validators=[validator],blank=True)
+    fastLap = models.BooleanField(default=False)
+    theFasto = models.BooleanField(default=False)
+    grandChelem = models.BooleanField(default=False)
     videoURL = models.URLField(null=True)
 
     
