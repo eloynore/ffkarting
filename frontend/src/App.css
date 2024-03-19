@@ -204,8 +204,25 @@ body {
   aspect-ratio: auto;
 }
 
+.fastlap {
+  width: 4rem;
+  aspect-ratio: auto;
+}
+
 .inline {
   display: inline;
+}
+
+.pill {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  border-radius: 16px;
 }
 /* /end Leaderboard Results */
 
@@ -259,3 +276,5 @@ body {
   background-color: var(--main-bg-color);
   border-radius: 4px;
 }
+
+/* END OF NAV STYLES*/

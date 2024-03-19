@@ -14,8 +14,39 @@ export function DriverParticipation(
       <>
         <tr onClick={() => setToggle(false)}>
           <td>
-            <p className="row-title left">Circuito</p>
-            <p className="row-value left">{participation.race.circuit}</p>
+            <div className="flex-row">
+              {participation.fastLap ? (
+                <img
+                  className="helmet"
+                  src="/icons/fastlap.png"
+                  alt="Fast lap"
+                />
+              ) : (
+                <></>
+              )}
+              {participation.theFasto ? (
+                <img
+                  className="helmet"
+                  src="/icons/thefasto.png"
+                  alt="The fasto"
+                />
+              ) : (
+                <></>
+              )}
+              {participation.grandChelem ? (
+                <img
+                  className="helmet"
+                  src="/icons/grandchelem.png"
+                  alt="Grand chelem"
+                />
+              ) : (
+                <></>
+              )}
+              <div>
+                <p className="row-title left">Circuito</p>
+                <p className="row-value left">{participation.race.circuit}</p>
+              </div>
+            </div>
           </td>
           <td>
             <p className="row-title">Posición</p>
@@ -84,8 +115,35 @@ export function DriverParticipation(
     return (
       <tr>
         <td>
-          <p className="row-title left">Circuito</p>
-          <p className="row-value left">{participation.race.circuit}</p>
+          <div className="flex-row">
+            {participation.fastLap ? (
+              <img className="helmet" src="/icons/fastlap.png" alt="Fast lap" />
+            ) : (
+              <></>
+            )}
+            {participation.theFasto ? (
+              <img
+                className="fastlap"
+                src="/icons/thefasto.png"
+                alt="The fasto"
+              />
+            ) : (
+              <></>
+            )}
+            {participation.grandChelem ? (
+              <img
+                className="fastlap"
+                src="/icons/grandchelem.png"
+                alt="Grand chelem"
+              />
+            ) : (
+              <></>
+            )}
+            <div>
+              <p className="row-title left">Circuito</p>
+              <p className="row-value left">{participation.race.circuit}</p>
+            </div>
+          </div>
         </td>
         <td>
           <p className="row-title">Posición</p>

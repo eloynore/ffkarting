@@ -50,6 +50,34 @@ export function RaceParticipation(
                   {participation.driver.team.name}
                 </p>
               </div>
+
+              {participation.fastLap ? (
+                <img
+                  className="helmet"
+                  src="/icons/fastlap.png"
+                  alt="Fast lap"
+                />
+              ) : (
+                <></>
+              )}
+              {participation.theFasto ? (
+                <img
+                  className="helmet"
+                  src="/icons/thefasto.png"
+                  alt="The fasto"
+                />
+              ) : (
+                <></>
+              )}
+              {participation.grandChelem ? (
+                <img
+                  className="helmet"
+                  src="/icons/grandchelem.png"
+                  alt="Grand chelem"
+                />
+              ) : (
+                <></>
+              )}
             </div>
           </td>
           <td>
@@ -139,6 +167,30 @@ export function RaceParticipation(
               <p className="row-value left">{participation.driver.name}</p>
               <p className="row-title left">{participation.driver.team.name}</p>
             </div>
+
+            {participation.fastLap ? (
+              <img className="helmet" src="/icons/fastlap.png" alt="Fast lap" />
+            ) : (
+              <></>
+            )}
+            {participation.theFasto ? (
+              <img
+                className="fastlap"
+                src="/icons/thefasto.png"
+                alt="The fasto"
+              />
+            ) : (
+              <></>
+            )}
+            {participation.grandChelem ? (
+              <img
+                className="fastlap"
+                src="/icons/grandchelem.png"
+                alt="Grand chelem"
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </td>
         <td>
