@@ -31,19 +31,21 @@ export function Driver() {
             setDriverDetailData(data);
           });
           // CHECK IF LOGO IS IN THE FOLDER
-          let TeamLogo =
-            "/logos/" + driverDetailData?.driver.team.name + ".png";
-          const logoResponse = getImage(TeamLogo);
-          logoResponse.then((data) =>
-            data ? setTeamImage(TeamLogo) : setTeamImage("")
-          );
+          if (driverDetailData) {
+            let TeamLogo =
+              "/logos/" + driverDetailData?.driver.team.name + ".png";
+            const logoResponse = getImage(TeamLogo);
+            logoResponse.then((data) =>
+              data ? setTeamImage(TeamLogo) : setTeamImage("")
+            );
+          }
         } catch (error) {
           console.log(error);
         }
       };
       fetchParticipations();
     }
-  }, [id]);
+  }, [id, driverDetailData]);
 
   return (
     <div className="container-wrap">

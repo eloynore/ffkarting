@@ -86,6 +86,9 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
                     'trainLapTime': participation.trainLapTime,
+                    'fastLap':participation.fastLap,
+                    'theFasto':participation.theFasto,
+                    'grandChelem':participation.grandChelem,
                     'videoURL': participation.videoURL
                 })
                 total_points += participation.points
@@ -131,6 +134,9 @@ class RaceViewSet(viewsets.ModelViewSet):
                     'position': participation.position,
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
+                    'fastLap':participation.fastLap,
+                    'theFasto':participation.theFasto,
+                    'grandChelem':participation.grandChelem,
                     'trainLapTime': participation.trainLapTime,
                     'videoURL': participation.videoURL
                 })

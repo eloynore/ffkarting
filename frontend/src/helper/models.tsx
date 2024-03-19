@@ -40,6 +40,9 @@ export type ParticipationsDriverProp = {
   lapTime: string;
   qualifyLapTime: string;
   trainLapTime: string;
+  fastLap: boolean;
+  theFasto: boolean;
+  grandChelem: boolean;
   videoURL: string;
 };
 
@@ -51,5 +54,8 @@ export type ParticipationsRaceProp = {
   lapTime: string;
   qualifyLapTime: string;
   trainLapTime: string;
+  fastLap: boolean;
+  theFasto: boolean;
+  grandChelem: boolean;
   videoURL: string;
 };
