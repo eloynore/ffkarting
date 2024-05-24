@@ -22,10 +22,12 @@ export function RaceParticipation(
     return (
       <>
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td className="px-6">
-            <p className="row-value left">{participation.position}º</p>
+          <td className="px-3">
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+              {participation.position}º
+            </p>
           </td>
-          <td className="px-6">
+          <td className="px-3">
             <div className="flex justify-left items-center my-5 ">
               {participation.fastLap ? (
                 <img
@@ -86,7 +88,7 @@ export function RaceParticipation(
               </div>
             </div>
           </td>
-          <td className="px-6">
+          <td className="px-3">
             <div className="flex justify-left items-center my-5 ">
               <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
                 {participation.points}
@@ -103,25 +105,19 @@ export function RaceParticipation(
           </td>
         </tr>
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td colSpan={3}>
-            <div className="px-6">
-              <p className="">Mejor vuelta:</p>
-              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
-                {participation.lapTime}
-              </p>
-            </div>
-            <div className="px-6">
-              <p className="">Tiempo de clasificación:</p>
-              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
-                {participation.qualifyLapTime}
-              </p>
-            </div>
-            <div className="px-6">
-              <p className="">Tiempo de entrenamiento:</p>
-              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
-                {participation.trainLapTime}
-              </p>
-            </div>
+          <td colSpan={3} className="px-3">
+            <p className="">Mejor vuelta:</p>
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+              {participation.lapTime}
+            </p>
+            <p className="">Tiempo de clasificación:</p>
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+              {participation.qualifyLapTime}
+            </p>
+            <p className="">Tiempo de entrenamiento:</p>
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+              {participation.trainLapTime}
+            </p>
 
             <div className="flex justify-center items-center">
               {participation.videoURL ? (
@@ -149,10 +145,12 @@ export function RaceParticipation(
   } else {
     return (
       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <td className="px-6">
-          <p className="row-value left">{participation.position}º</p>
+        <td className="px-3">
+          <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+            {participation.position}º
+          </p>
         </td>
-        <td className="px-6">
+        <td className="px-3">
           <div className="flex justify-left items-center my-5 ">
             {participation.fastLap ? (
               <img
@@ -213,7 +211,7 @@ export function RaceParticipation(
             </div>
           </div>
         </td>
-        <td className="px-6">
+        <td className="px-3">
           <div className="flex justify-left items-center my-5 ">
             <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
               {participation.points}
