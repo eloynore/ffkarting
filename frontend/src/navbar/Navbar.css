@@ -1,0 +1,79 @@
+:root {
+  --main-bg-color: #fafafa;
+  --main-bg-color-light: #f1f1f1;
+  --secondary-bg-color: #fcd889;
+  --main-text-color: #16171c;
+  --main-text-color-light: #09102b;
+  --second-text-color-light: #8291c4;
+  --secondary-text-color: #cd2824;
+  --data-text-color: #271246;
+  --header-height: 3.5rem;
+  --body-font: "Montserrat", sans-serif;
+  --second-font: "Dancing Script", cursive;
+  --h2-font-size: 1.25rem;
+  --small-font-size: 0.813rem;
+  --font-semi-bold: 600;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+.header {
+  background-color: var(--main-bg-color);
+  text-align: center; /* Centrar el contenido */
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: var(--header-height);
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.nav__list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__item {
+  margin-right: 20px;
+}
+
+.nav__item:last-of-type {
+  margin-right: 20px;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: var(--main-text-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  padding: 10px; /* Añadir relleno */
+}
+
+.active {
+  color: var(--secondary-text-color);
+  background-color: var(--main-bg-color);
+  border-radius: 4px;
+}
+
+.custom-select {
+  background-color: var(--main-bg-color);
+  width: fit-content;
+  display: inline;
+}
+
+/* END OF NAV STYLES*/
