@@ -3,7 +3,6 @@ import { Leaderboard } from "./pages/Leaderboard";
 import { Teams } from "./pages/Teams";
 import { Driver } from "./pages/Driver";
 import { Race } from "./pages/Race";
-import "./App.css";
 import Navbar from "./navbar/Navbar";
 
 function App() {

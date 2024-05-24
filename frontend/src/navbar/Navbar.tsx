@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <div className="bg-black flex justify-between items-center h-24 mx-auto px-4 text-white">
       {/* Logo */}
-      <h1 className="w-full text-3xl font-bold text-[#00df9a]">FFK</h1>
+      <h1 className="w-full text-5xl font-bold text-[#00df9a]">FFK</h1>
 
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
@@ -71,9 +71,9 @@ const Navbar = () => {
       </ul>
 
       {/* Mobile Navigation Icon */}
-      <div onClick={handleNav} className="block md:hidden" role="button">
+      <button onClick={handleNav} className="block md:hidden">
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-      </div>
+      </button>
 
       {/* Mobile Navigation Menu */}
       <ul
@@ -84,7 +84,7 @@ const Navbar = () => {
         }
       >
         {/* Mobile Logo */}
-        <h1 className="w-full text-3xl font-bold text-[#00df9a] m-4">FFK</h1>
+        <h1 className="w-full text-5xl font-bold text-[#00df9a] m-4">FFK</h1>
 
         {/* Mobile Navigation Items */}
         {navItems.map((item) => (

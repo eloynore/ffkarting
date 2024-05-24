@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { DriverLeaderboard } from "../components/DriverLeaderboard";
 import { DriverProp } from "../helper/models";
+import { useTranslation } from "react-i18next";
 
 export function Leaderboard() {
   const [drivers, setDrivers] = useState<DriverProp[]>();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchDrivers = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/v1/drivers/get_leaderboard/"
+          "http://192.168.0.31:8000/api/v1/drivers/get_leaderboard/"
         );
         response.json().then((data) => setDrivers(data.leaderboard));
       } catch (error) {
@@ -20,30 +22,35 @@ export function Leaderboard() {
   }, []);
 
   return (
-    <div className="container-wrap">
-      <section>
-        {drivers ? (
-          <table id="rankings" className="leaderboard-results leaderboard main">
-            <thead style={{ display: "none" }}>
-              <tr>
-                <th>Conductor</th>
-                <th>Puntos</th>
-              </tr>
-            </thead>
-            <tbody>
-              {drivers?.map((item) => {
-                return <DriverLeaderboard key={item.id} {...item} />;
-              })}
-            </tbody>
-          </table>
-        ) : (
-          <nav className="ladder-nav">
-            <div className="ladder-title">
-              <h1>Clasificación no encontrada</h1>
-            </div>
-          </nav>
-        )}
-      </section>
+    <div className="overflow-x-auto">
+      {drivers ? (
+        <table
+          id="rankings"
+          className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+        >
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                {t("driver")}
+              </th>
+              <th scope="col" className="py-3">
+                {t("points")}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {drivers?.map((item) => {
+              return <DriverLeaderboard key={item.id} {...item} />;
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <div className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+          <h1 className="text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium">
+            Clasificación no encontrada
+          </h1>
+        </div>
+      )}
     </div>
   );
 }

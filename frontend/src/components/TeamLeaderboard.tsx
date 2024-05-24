@@ -18,28 +18,29 @@ export function TeamLeaderboard({
   }, [TeamLogo]);
 
   return (
-    <tr>
-      <td
-        style={{
-          background: "linear-gradient(65deg, #ffffff, 2%,#" + color + ")",
-        }}
-      >
-        <div className="flex-row">
+    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+      <td scope="row" className="px-6 py-4 ">
+        <div className="flex items-center">
           {teamImage ? (
-            <img
-              className="helmet"
-              src={teamImage}
-              alt={name + " logo image"}
-            />
+            <div className="w-11 h-11 rounded-full flex justify-center items-center">
+              <img
+                className="w-8 h-auto"
+                src={teamImage}
+                alt={name + " logo image"}
+              />
+            </div>
           ) : (
             <></>
           )}
-          <p className="row-value left">{name}</p>
+          <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+            {name}
+          </p>
         </div>
       </td>
       <td>
-        <p className="row-title">Puntos</p>
-        <p className="row-value">{points}</p>
+        <p className="text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+          {points}
+        </p>
       </td>
     </tr>
   );

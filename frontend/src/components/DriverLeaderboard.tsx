@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { DriverProp } from "../helper/models";
 import { useState, useEffect } from "react";
 import { getImage } from "../helper/api";
-import { useTranslation } from "react-i18next";
 
 export function DriverLeaderboard({
   id,
@@ -12,7 +11,6 @@ export function DriverLeaderboard({
   points,
 }: Readonly<DriverProp>) {
   const [teamImage, setTeamImage] = useState<string>("");
-  const { t } = useTranslation();
   let TeamLogo = "/logos/" + team.name + ".png";
 
   useEffect(() => {
@@ -23,33 +21,33 @@ export function DriverLeaderboard({
   const navigate = useNavigate();
 
   return (
-    <tr>
-      <td
-        style={{
-          background: "linear-gradient(65deg, #ffffff, 2%,#" + team.color + ")",
-        }}
-      >
-        <div className="flex-row">
+    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+      <td scope="row" className="px-6 py-4 ">
+        <div className="flex items-center">
           {teamImage ? (
-            <img
-              className="helmet"
-              src={teamImage}
-              alt={name + " logo image"}
-            />
+            <div className="w-11 h-11 rounded-full flex justify-center items-center">
+              <img
+                className="w-8 h-auto"
+                src={teamImage}
+                alt={name + " logo image"}
+              />
+            </div>
           ) : (
             <></>
           )}
-          <div>
-            <p className="row-title left">#{number}</p>
-            <p className="row-value left">{name}</p>
-            <p className="row-title left">{team.name}</p>
+          <div className="text-left">
+            <p className="">#{number}</p>
+            <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+              {name}
+            </p>
+            <p className="">{team.name}</p>
           </div>
           <button
             style={{ float: "right" }}
             onClick={() => navigate(pathToDetail)}
           >
             <img
-              className="helmet"
+              className="w-8 aspect-square"
               src="/icons/right-arrow.svg"
               alt="Driver helmet"
             />
@@ -58,8 +56,9 @@ export function DriverLeaderboard({
       </td>
       <td>
         <div>
-          <p className="row-title">{t("points")}</p>
-          <p className="row-value">{points}</p>
+          <p className="text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+            {points}
+          </p>
         </div>
       </td>
     </tr>

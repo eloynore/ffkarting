@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 export default class HttpService {
   api_url: string;
   constructor() {
-    this.api_url = "http://127.0.0.1:8000/api/v1/";
+    this.api_url = "http://192.168.0.31:8000/api/v1/";
   }
 
   async get(
@@ -17,7 +17,7 @@ export default class HttpService {
   }
 }
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/v1/"; // Replace with your API base URL
+const API_BASE_URL = "http://192.168.0.31:8000/api/v1/"; // Replace with your API base URL
 
 const apiService = axios.create({
   baseURL: API_BASE_URL,

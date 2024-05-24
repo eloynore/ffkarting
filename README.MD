@@ -12,10 +12,10 @@ python.exe .\manage.py makemigrations
 python.exe .\manage.py migrate
 ```
 
-If not you can skip to this one:
+You can remove the IP if you want since I am using the local network to test on smartphone.If not you can skip to this one:
 
 ```powershell
-python .\manage.py runserver
+python .\manage.py runserver 0.0.0.0:8000
 ```
 
 # START FRONTEND

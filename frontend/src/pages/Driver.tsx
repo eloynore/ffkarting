@@ -23,14 +23,13 @@ export function Driver() {
         try {
           // GET FULL DRIVER DETAIL
           const response = await fetch(
-            "http://127.0.0.1:8000/api/v1/drivers/" +
+            "http://192.168.0.31:8000/api/v1/drivers/" +
               driverId +
               "/get_participations/"
           );
           response.json().then((data) => {
             setDriverDetailData(data);
           });
-          // CHECK IF LOGO IS IN THE FOLDER
           if (driverDetailData) {
             let TeamLogo =
               "/logos/" + driverDetailData?.driver.team.name + ".png";
@@ -45,44 +44,67 @@ export function Driver() {
       };
       fetchParticipations();
     }
-  });
+  }, [id]);
+
+  // we need to add a new use effect which depends on the status of driver data we just fetched
+  useEffect(() => {
+    if (driverDetailData) {
+      let TeamLogo = "/logos/" + driverDetailData?.driver.team.name + ".png";
+      const logoResponse = getImage(TeamLogo);
+      logoResponse.then((data) =>
+        data ? setTeamImage(TeamLogo) : setTeamImage("")
+      );
+    }
+  }, [driverDetailData]);
 
   return (
-    <div className="container-wrap">
-      <section>
-        {driverDetailData ? (
-          <>
-            <nav className="ladder-nav">
-              <div className="ladder-title">
-                <h1>Perfil de {driverDetailData?.driver.name}</h1>
-              </div>
-            </nav>
-            <article className="driver-info">
-              <div className="driver-data">
-                <p>{driverDetailData?.driver.points}pts</p>
-              </div>
-              <div className="driver-data">
-                <p># {driverDetailData?.driver.number}</p>
-              </div>
-              <div className="driver-data">
+    <div className="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      {driverDetailData ? (
+        <>
+          <div className="w-full  bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+            <div className="flex items-center justify-center">
+              <h1 className="px-6 font-bold text-left text-3xl text-white">
+                {driverDetailData?.driver.name}
+              </h1>
+              <div className="flex justify-center items-center my-5 px-6">
                 {teamImage ? (
                   <img
-                    className="helmet"
+                    className="w-8 aspect-square"
                     src={teamImage}
                     alt={driverDetailData?.driver.team.name + " logo image"}
                   />
                 ) : (
                   <></>
                 )}
-                <p>{driverDetailData?.driver.team.name}</p>
+                <p>#{driverDetailData?.driver.number}</p>
               </div>
-            </article>
-            <table id="rankings" className="leaderboard-results driver-results">
-              <thead style={{ display: "none" }}>
+              <div className="my-5 px-6">
+                <p className="text-gray-200 block rounded-lg text-center font-medium py-3">
+                  <span className="font-bold">
+                    {driverDetailData?.driver.points}
+                  </span>{" "}
+                  {t("points")}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table
+              id="rankings"
+              className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+            >
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                  <th>Circuito</th>
-                  <th>Posición</th>
-                  <th>{t("points")}</th>
+                  <th scope="col" className="px-6 py-3">
+                    Circuito
+                  </th>
+                  <th scope="col" className="py-3">
+                    Posición
+                  </th>
+                  <th scope="col" className="py-3">
+                    {t("points")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -99,15 +121,15 @@ export function Driver() {
                 )}
               </tbody>
             </table>
-          </>
-        ) : (
-          <nav className="ladder-nav">
-            <div className="ladder-title">
-              <h1>Piloto no encontrado</h1>
-            </div>
-          </nav>
-        )}
-      </section>
+          </div>
+        </>
+      ) : (
+        <div className="w-full text-sm text-left  dark:text-gray-400 p-4">
+          <h1 className="font-bold whitespace-nowrap  text-2xl text-white">
+            Driver not found
+          </h1>
+        </div>
+      )}
     </div>
   );
 }
