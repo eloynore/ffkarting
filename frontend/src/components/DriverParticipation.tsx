@@ -14,10 +14,10 @@ export function DriverParticipation(
       <>
         <tr
           onClick={() => setToggle(false)}
-          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 "
+          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
         >
           <td className="px-6">
-            <div className="flex justify-left items-center my-5 ">
+            <div className="flex justify-left items-center my-5">
               {participation.fastLap ? (
                 <img
                   className="w-8 aspect-auto"
@@ -50,6 +50,16 @@ export function DriverParticipation(
                   {participation.race.circuit}
                 </p>
               </div>
+              <button
+                style={{ float: "right" }}
+                onClick={() => navigate(pathToRace)}
+              >
+                <img
+                  className="w-8 aspect-square"
+                  src="/icons/right-arrow.svg"
+                  alt="Driver helmet"
+                />
+              </button>
             </div>
           </td>
           <td className="px-6">
@@ -112,17 +122,6 @@ export function DriverParticipation(
               ) : (
                 <></>
               )}
-              <button
-                className="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                onClick={() => navigate(pathToRace)}
-              >
-                <p>Carrera</p>
-                <img
-                  className="w-6 aspect-auto"
-                  src="/icons/checkered-flag.svg"
-                  alt="checkered flag"
-                />
-              </button>
             </div>
           </td>
         </tr>
@@ -165,6 +164,16 @@ export function DriverParticipation(
                 {participation.race.circuit}
               </p>
             </div>
+            <button
+              style={{ float: "right" }}
+              onClick={() => navigate(pathToRace)}
+            >
+              <img
+                className="w-8 aspect-square"
+                src="/icons/right-arrow.svg"
+                alt="Driver helmet"
+              />
+            </button>
           </div>
         </td>
         <td className="px-6">

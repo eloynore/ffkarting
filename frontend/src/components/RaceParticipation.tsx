@@ -21,39 +21,15 @@ export function RaceParticipation(
   if (toggle) {
     return (
       <>
-        <tr
-          style={{
-            background:
-              "linear-gradient(65deg, #ffffff, 2%,#" +
-              participation.driver.team.color +
-              ")",
-          }}
-        >
-          <td>
+        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td className="px-6">
             <p className="row-value left">{participation.position}º</p>
           </td>
-          <td>
-            <div className="flex-row">
-              {teamImage ? (
-                <img
-                  className="helmet"
-                  src={teamImage}
-                  alt={participation.driver.team.name + " logo image"}
-                />
-              ) : (
-                <></>
-              )}
-              <div>
-                <p className="row-title left">#{participation.driver.number}</p>
-                <p className="row-value left">{participation.driver.name}</p>
-                <p className="row-title left">
-                  {participation.driver.team.name}
-                </p>
-              </div>
-
+          <td className="px-6">
+            <div className="flex justify-left items-center my-5 ">
               {participation.fastLap ? (
                 <img
-                  className="helmet"
+                  className="w-8 aspect-auto"
                   src="/icons/fastlap.png"
                   alt="Fast lap"
                 />
@@ -62,7 +38,7 @@ export function RaceParticipation(
               )}
               {participation.theFasto ? (
                 <img
-                  className="helmet"
+                  className="w-8 aspect-auto"
                   src="/icons/thefasto.png"
                   alt="The fasto"
                 />
@@ -71,50 +47,93 @@ export function RaceParticipation(
               )}
               {participation.grandChelem ? (
                 <img
-                  className="helmet"
+                  className="w-8 aspect-auto"
                   src="/icons/grandchelem.png"
                   alt="Grand chelem"
                 />
               ) : (
                 <></>
               )}
+              <div className="flex items-center">
+                {teamImage ? (
+                  <div className="w-11 h-11 rounded-full flex justify-center items-center">
+                    <img
+                      className="w-8 h-auto"
+                      src={teamImage}
+                      alt={participation.driver.name + " logo image"}
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
+                <div className="text-left">
+                  <p className="">#{participation.driver.number}</p>
+                  <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+                    {participation.driver.name}
+                  </p>
+                  <p className="">{participation.driver.team.name}</p>
+                </div>
+                <button
+                  style={{ float: "right" }}
+                  onClick={() => navigate(pathToDriver)}
+                >
+                  <img
+                    className="w-8 aspect-square"
+                    src="/icons/right-arrow.svg"
+                    alt="Driver helmet"
+                  />
+                </button>
+              </div>
             </div>
           </td>
-          <td>
-            <p className="row-title">Puntos</p>
-            <p className="row-value">{participation.points}</p>
-          </td>
-          <td>
-            <button onClick={() => setToggle(false)} className="helmet">
-              <img src="/icons/compress.svg" alt="compress row" />
-            </button>
+          <td className="px-6">
+            <div className="flex justify-left items-center my-5 ">
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+                {participation.points}
+              </p>
+              <button className="pl-2 " onClick={() => setToggle(false)}>
+                <img
+                  className="w-8 
+                 aspect-auto"
+                  src="/icons/compress.svg"
+                  alt="expand row"
+                />
+              </button>
+            </div>
           </td>
         </tr>
-        <tr>
-          <td colSpan={4}>
-            <div className="race-data">
-              <p className="row-title left">Mejor vuelta:</p>
-              <p className="row-value left">{participation.lapTime}</p>
+        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td colSpan={3}>
+            <div className="px-6">
+              <p className="">Mejor vuelta:</p>
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+                {participation.lapTime}
+              </p>
             </div>
-            <div className="race-data">
-              <p className="row-title left">Tiempo de clasificación:</p>
-              <p className="row-value left">{participation.qualifyLapTime}</p>
+            <div className="px-6">
+              <p className="">Tiempo de clasificación:</p>
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+                {participation.qualifyLapTime}
+              </p>
             </div>
-            <div className="race-data">
-              <p className="row-title left">Tiempo de entrenamiento:</p>
-              <p className="row-value left">{participation.trainLapTime}</p>
+            <div className="px-6">
+              <p className="">Tiempo de entrenamiento:</p>
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+                {participation.trainLapTime}
+              </p>
             </div>
-            <div className="race-data btn-bar">
+
+            <div className="flex justify-center items-center">
               {participation.videoURL ? (
                 <a
                   href={participation.videoURL}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-seeRace flex"
+                  className="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                 >
                   <p>Video</p>
                   <img
-                    className="helmet"
+                    className="w-6 aspect-auto"
                     src="/icons/play.svg"
                     alt="play video"
                   />
@@ -122,17 +141,6 @@ export function RaceParticipation(
               ) : (
                 <></>
               )}
-              <button
-                className="btn-seeRace flex"
-                onClick={() => navigate(pathToDriver)}
-              >
-                <p>Piloto</p>
-                <img
-                  className="helmet"
-                  src="/icons/helmet-race.svg"
-                  alt="Helmet"
-                />
-              </button>
             </div>
           </td>
         </tr>
@@ -140,42 +148,24 @@ export function RaceParticipation(
     );
   } else {
     return (
-      <tr
-        style={{
-          background:
-            "linear-gradient(65deg, #ffffff, 2%,#" +
-            participation.driver.team.color +
-            ")",
-        }}
-      >
-        <td>
+      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <td className="px-6">
           <p className="row-value left">{participation.position}º</p>
         </td>
-        <td>
-          <div className="flex-row">
-            {teamImage ? (
-              <img
-                className="helmet"
-                src={teamImage}
-                alt={participation.driver.team.name + " logo image"}
-              />
-            ) : (
-              <></>
-            )}
-            <div>
-              <p className="row-title left">#{participation.driver.number}</p>
-              <p className="row-value left">{participation.driver.name}</p>
-              <p className="row-title left">{participation.driver.team.name}</p>
-            </div>
-
+        <td className="px-6">
+          <div className="flex justify-left items-center my-5 ">
             {participation.fastLap ? (
-              <img className="helmet" src="/icons/fastlap.png" alt="Fast lap" />
+              <img
+                className="w-8 aspect-auto"
+                src="/icons/fastlap.png"
+                alt="Fast lap"
+              />
             ) : (
               <></>
             )}
             {participation.theFasto ? (
               <img
-                className="fastlap"
+                className="w-8 aspect-auto"
                 src="/icons/thefasto.png"
                 alt="The fasto"
               />
@@ -184,23 +174,59 @@ export function RaceParticipation(
             )}
             {participation.grandChelem ? (
               <img
-                className="fastlap"
+                className="w-8 aspect-auto"
                 src="/icons/grandchelem.png"
                 alt="Grand chelem"
               />
             ) : (
               <></>
             )}
+            <div className="flex items-center">
+              {teamImage ? (
+                <div className="w-11 h-11 rounded-full flex justify-center items-center">
+                  <img
+                    className="w-8 h-auto"
+                    src={teamImage}
+                    alt={participation.driver.name + " logo image"}
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
+              <div className="text-left">
+                <p className="">#{participation.driver.number}</p>
+                <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+                  {participation.driver.name}
+                </p>
+                <p className="">{participation.driver.team.name}</p>
+              </div>
+              <button
+                style={{ float: "right" }}
+                onClick={() => navigate(pathToDriver)}
+              >
+                <img
+                  className="w-8 aspect-square"
+                  src="/icons/right-arrow.svg"
+                  alt="Driver helmet"
+                />
+              </button>
+            </div>
           </div>
         </td>
-        <td>
-          <p className="row-title">Puntos</p>
-          <p className="row-value">{participation.points}</p>
-        </td>
-        <td>
-          <button onClick={() => setToggle(true)} className="helmet">
-            <img src="/icons/expand.svg" alt="expand row" />
-          </button>
+        <td className="px-6">
+          <div className="flex justify-left items-center my-5 ">
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+              {participation.points}
+            </p>
+            <button className="pl-2 " onClick={() => setToggle(true)}>
+              <img
+                className="w-8 
+                 aspect-auto"
+                src="/icons/expand.svg"
+                alt="expand row"
+              />
+            </button>
+          </div>
         </td>
       </tr>
     );

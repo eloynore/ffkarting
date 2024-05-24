@@ -99,10 +99,10 @@ export function Driver() {
                   <th scope="col" className="px-6 py-3">
                     Circuito
                   </th>
-                  <th scope="col" className="px6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     Posición
                   </th>
-                  <th scope="col" className="px6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     {t("points")}
                   </th>
                 </tr>
