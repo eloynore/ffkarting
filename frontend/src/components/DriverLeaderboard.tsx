@@ -22,7 +22,7 @@ export function DriverLeaderboard({
 
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
-      <td scope="row" className="px-6 py-4 ">
+      <td className="px-6 py-4 ">
         <div className="flex items-center">
           {teamImage ? (
             <div className="w-11 h-11 rounded-full flex justify-center items-center">

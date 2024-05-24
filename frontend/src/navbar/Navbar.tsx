@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import Switcher from "../components/Switcher";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -50,7 +51,7 @@ const Navbar = () => {
     <div className="bg-black flex justify-between items-center h-24 mx-auto px-4 text-white">
       {/* Logo */}
       <h1 className="w-full text-5xl font-bold text-[#00df9a]">FFK</h1>
-
+      <Switcher />
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
         {navItems.map((item) => (

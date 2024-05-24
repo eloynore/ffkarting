@@ -22,11 +22,11 @@ export function Teams() {
   }, []);
 
   return (
-    <div className="overflow-x-auto ">
+    <div className="flex justify-center w-full">
       {teams ? (
         <table
           id="rankings"
-          className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+          className="w-full max-w-[1280px] text-sm text-left text-gray-500 dark:text-gray-400"
         >
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

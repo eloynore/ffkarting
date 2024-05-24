@@ -44,7 +44,7 @@ export function Driver() {
       };
       fetchParticipations();
     }
-  }, [id]);
+  }, [id, driverDetailData]);
 
   // we need to add a new use effect which depends on the status of driver data we just fetched
   useEffect(() => {
@@ -63,7 +63,7 @@ export function Driver() {
         <>
           <div className="w-full  bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
             <div className="flex items-center justify-center">
-              <h1 className="px-6 font-bold text-left text-3xl text-white">
+              <h1 className="px-6 font-bold text-left text-3xl dark:text-white">
                 {driverDetailData?.driver.name}
               </h1>
               <div className="flex justify-center items-center my-5 px-6">
@@ -79,7 +79,7 @@ export function Driver() {
                 <p>#{driverDetailData?.driver.number}</p>
               </div>
               <div className="my-5 px-6">
-                <p className="text-gray-200 block rounded-lg text-center font-medium py-3">
+                <p className="text-black dark:text-gray-200 block rounded-lg text-center font-medium py-3">
                   <span className="font-bold">
                     {driverDetailData?.driver.points}
                   </span>{" "}
@@ -89,10 +89,10 @@ export function Driver() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="flex justify-center w-full">
             <table
               id="rankings"
-              className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+              className="w-full max-w-[1280px] text-sm text-left text-gray-500 dark:text-gray-400"
             >
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>

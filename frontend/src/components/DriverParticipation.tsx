@@ -53,12 +53,12 @@ export function DriverParticipation(
             </div>
           </td>
           <td>
-            <p className="text-gray-100 block rounded-lg text-left font-medium">
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
               {participation.position}º
             </p>
           </td>
           <td>
-            <p className="text-gray-100 block rounded-lg text-left font-medium">
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
               {participation.points}
             </p>
           </td>
@@ -75,19 +75,19 @@ export function DriverParticipation(
           <td colSpan={4}>
             <div className="px-6">
               <p className="">Mejor vuelta:</p>
-              <p className="text-gray-100 block rounded-lg text-left font-medium">
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
                 {participation.lapTime}
               </p>
             </div>
             <div className="px-6">
               <p className="">Tiempo de clasificación:</p>
-              <p className="text-gray-100 block rounded-lg text-left font-medium">
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
                 {participation.qualifyLapTime}
               </p>
             </div>
             <div className="px-6">
               <p className="">Tiempo de entrenamiento:</p>
-              <p className="text-gray-100 block rounded-lg text-left font-medium">
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
                 {participation.trainLapTime}
               </p>
             </div>
@@ -98,11 +98,11 @@ export function DriverParticipation(
                   href={participation.videoURL}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                  className="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                 >
                   <p>Video</p>
                   <img
-                    className="w-8 aspect-auto"
+                    className="w-6 aspect-auto"
                     src="/icons/play.svg"
                     alt="play video"
                   />
@@ -111,12 +111,12 @@ export function DriverParticipation(
                 <></>
               )}
               <button
-                className="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                className="flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                 onClick={() => navigate(pathToRace)}
               >
                 <p>Carrera</p>
                 <img
-                  className="w-8 aspect-auto"
+                  className="w-6 aspect-auto"
                   src="/icons/checkered-flag.svg"
                   alt="checkered flag"
                 />

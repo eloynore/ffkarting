@@ -22,11 +22,11 @@ export function Leaderboard() {
   }, []);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="flex justify-center w-full">
       {drivers ? (
         <table
           id="rankings"
-          className="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+          className="w-full max-w-[1280px] text-sm text-left text-gray-500 dark:text-gray-400"
         >
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -45,7 +45,7 @@ export function Leaderboard() {
           </tbody>
         </table>
       ) : (
-        <div className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+        <div className="w-full max-w-[1280px] text-sm text-center text-gray-500 dark:text-gray-400">
           <h1 className="text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium">
             Clasificación no encontrada
           </h1>
