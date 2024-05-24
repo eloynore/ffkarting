@@ -54,7 +54,7 @@ export function DriverLeaderboard({
           </button>
         </div>
       </td>
-      <td>
+      <td className="px-6 py-4 ">
         <div>
           <p className="text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
             {points}

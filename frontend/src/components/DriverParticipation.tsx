@@ -16,8 +16,8 @@ export function DriverParticipation(
           onClick={() => setToggle(false)}
           className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 "
         >
-          <td>
-            <div className="flex justify-left items-center my-5 px-6">
+          <td className="px-6">
+            <div className="flex justify-left items-center my-5 ">
               {participation.fastLap ? (
                 <img
                   className="w-8 aspect-auto"
@@ -52,23 +52,25 @@ export function DriverParticipation(
               </div>
             </div>
           </td>
-          <td>
+          <td className="px-6">
             <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
               {participation.position}º
             </p>
           </td>
-          <td>
-            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
-              {participation.points}
-            </p>
-          </td>
-          <td>
-            <button
-              onClick={() => setToggle(false)}
-              className="w-8 aspect-auto"
-            >
-              <img src="/icons/compress.svg" alt="expand row" />
-            </button>
+          <td className="px-6">
+            <div className="flex justify-left items-center my-5 ">
+              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+                {participation.points}
+              </p>
+              <button className="pl-2 " onClick={() => setToggle(false)}>
+                <img
+                  className="w-8 
+                 aspect-auto"
+                  src="/icons/compress.svg"
+                  alt="expand row"
+                />
+              </button>
+            </div>
           </td>
         </tr>
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
@@ -129,8 +131,8 @@ export function DriverParticipation(
   } else {
     return (
       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
-        <td>
-          <div className="flex justify-left items-center my-5 px-6">
+        <td className="px-6">
+          <div className="flex justify-left items-center my-5 ">
             {participation.fastLap ? (
               <img
                 className="w-8 aspect-auto"
@@ -165,20 +167,25 @@ export function DriverParticipation(
             </div>
           </div>
         </td>
-        <td>
+        <td className="px-6">
           <p className="text-gray-100 block rounded-lg text-left font-medium">
             {participation.position}º
           </p>
         </td>
-        <td>
-          <p className="text-gray-100 block rounded-lg text-left font-medium">
-            {participation.points}
-          </p>
-        </td>
-        <td>
-          <button onClick={() => setToggle(true)} className="w-8 aspect-auto">
-            <img src="/icons/expand.svg" alt="expand row" />
-          </button>
+        <td className="px-6">
+          <div className="flex justify-left items-center my-5 ">
+            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+              {participation.points}
+            </p>
+            <button className="pl-2 " onClick={() => setToggle(true)}>
+              <img
+                className="w-8 
+                 aspect-auto"
+                src="/icons/expand.svg"
+                alt="expand row"
+              />
+            </button>
+          </div>
         </td>
       </tr>
     );

@@ -33,7 +33,7 @@ export function Leaderboard() {
               <th scope="col" className="px-6 py-3">
                 {t("driver")}
               </th>
-              <th scope="col" className="py-3">
+              <th scope="col" className="px-6 py-3">
                 {t("points")}
               </th>
             </tr>

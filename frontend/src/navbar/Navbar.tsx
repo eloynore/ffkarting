@@ -50,7 +50,9 @@ const Navbar = () => {
   return (
     <div className="bg-black flex justify-between items-center h-24 mx-auto px-4 text-white">
       {/* Logo */}
-      <h1 className="w-full text-5xl font-bold text-[#00df9a]">FFK</h1>
+      <h1 className="w-full text-5xl font-bold text-[#00df9a]">
+        {url === "/" ? "FFK" : <NavLink to="/">FFK </NavLink>}
+      </h1>
       <Switcher />
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
