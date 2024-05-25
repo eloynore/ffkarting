@@ -4,6 +4,7 @@ import { DriverParticipation } from "../components/DriverParticipation";
 import { DriverProp, ParticipationsDriverProp } from "../helper/models";
 import { getImage } from "../helper/api";
 import { useTranslation } from "react-i18next";
+import { getData } from "../helper/api";
 
 type driverDetailData = {
   participations: ParticipationsDriverProp[];
@@ -16,35 +17,16 @@ export function Driver() {
   const { t } = useTranslation();
 
   let { id } = useParams();
+
+  // Fetch data when the component mounts
+  async function fetchData() {
+    const result = await getData("drivers/" + id + "/get_participations/");
+    setDriverDetailData(result);
+  }
+
   useEffect(() => {
-    if (id) {
-      let driverId: number = +id;
-      const fetchParticipations = async () => {
-        try {
-          // GET FULL DRIVER DETAIL
-          const response = await fetch(
-            "http://192.168.0.31:8000/api/v1/drivers/" +
-              driverId +
-              "/get_participations/"
-          );
-          response.json().then((data) => {
-            setDriverDetailData(data);
-          });
-          if (driverDetailData) {
-            let TeamLogo =
-              "/logos/" + driverDetailData?.driver.team.name + ".png";
-            const logoResponse = getImage(TeamLogo);
-            logoResponse.then((data) =>
-              data ? setTeamImage(TeamLogo) : setTeamImage("")
-            );
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchParticipations();
-    }
-  }, [id, driverDetailData]);
+    fetchData();
+  }, [id]);
 
   // we need to add a new use effect which depends on the status of driver data we just fetched
   useEffect(() => {
@@ -125,7 +107,7 @@ export function Driver() {
         </>
       ) : (
         <div className="w-full text-sm text-left  dark:text-gray-400 p-4">
-          <h1 className="font-bold whitespace-nowrap  text-2xl text-white">
+          <h1 className="font-bold whitespace-nowrap  text-2xl text-black dark:text-white">
             Driver not found
           </h1>
         </div>

@@ -1,21 +1,4 @@
-import axios, { AxiosResponse } from "axios";
-
-export default class HttpService {
-  api_url: string;
-  constructor() {
-    this.api_url = "http://192.168.0.31:8000/api/v1/";
-  }
-
-  async get(
-    endpoint?: string,
-    params?: { [key: string]: any },
-    headers?: { [key: string]: any }
-  ): Promise<AxiosResponse> {
-    const url = endpoint ? this.api_url.concat(endpoint) : this.api_url;
-    const options = { params, headers };
-    return await axios.get(url, options);
-  }
-}
+import axios from "axios";
 
 const API_BASE_URL = "http://192.168.0.31:8000/api/v1/"; // Replace with your API base URL
 
@@ -49,4 +32,16 @@ export const getImage = async (
   } catch (error) {
     return false;
   }
+};
+
+export const login = async (username: string, password: string) => {
+  try {
+    const body = { username: username, password: password };
+    const response = await apiService.post("login", body);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+  return false;
 };

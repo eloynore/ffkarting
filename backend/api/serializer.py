@@ -1,5 +1,11 @@
 from rest_framework import serializers
 from .models import driver,team,race
+from django.contrib.auth.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields=['id','username','password']
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:

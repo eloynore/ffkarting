@@ -2,23 +2,20 @@ import { useEffect, useState } from "react";
 import { TeamLeaderboard } from "../components/TeamLeaderboard";
 import { TeamLeaderboardProp } from "../helper/models";
 import { useTranslation } from "react-i18next";
+import { getData } from "../helper/api";
 
 export function Teams() {
   const [teams, setTeams] = useState<TeamLeaderboardProp[]>();
   const { t } = useTranslation();
 
+  // Fetch data when the component mounts
+  async function fetchData() {
+    const result = await getData("teams/get_leaderboard/");
+    setTeams(result.leaderboard);
+  }
+
   useEffect(() => {
-    const fetchDrivers = async () => {
-      try {
-        const response = await fetch(
-          "http://192.168.0.31:8000/api/v1/teams/get_leaderboard/"
-        );
-        response.json().then((data) => setTeams(data.leaderboard));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDrivers();
+    fetchData();
   }, []);
 
   return (
@@ -45,9 +42,9 @@ export function Teams() {
           </tbody>
         </table>
       ) : (
-        <div className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-          <h1 className="text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium">
-            Clasificación no encontrada
+        <div className="w-full text-sm text-left  dark:text-gray-400 p-4">
+          <h1 className="font-bold whitespace-nowrap  text-2xl text-black dark:text-white">
+            Currently there are no teams
           </h1>
         </div>
       )}

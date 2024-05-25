@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework import routers
 from api import views
 
@@ -11,4 +11,5 @@ router.register(r'raceincident',views.RaceIncidentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    re_path('login', views.login)
 ]

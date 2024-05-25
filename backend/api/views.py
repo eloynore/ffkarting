@@ -1,9 +1,28 @@
-from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework import viewsets, status
+from rest_framework.decorators import action, api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
-from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer, RaceIncidentSerializer
+from rest_framework.authtoken.models import Token
+
+from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer, RaceIncidentSerializer, UserSerializer
 from .models import driver,team,race
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+
+@api_view(['POST'])
+def login(request):
+    user = get_object_or_404(User, username=request.data['username'])
+    
+    if not user.check_password(request.data['password']):
+        return Response({"error": "Invalid user"}, status=status.HTTP_404_NOT_FOUND)
+    
+    token, created = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key, "username": user.username}, status=status.HTTP_200_OK)
+
 # Create your views here.
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticatedOrReadOnly])
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = team.Team.objects.all()
     serializer_class = TeamSerializer
@@ -38,11 +57,12 @@ class TeamViewSet(viewsets.ModelViewSet):
         leadeboard = sorted(team_leaderboard, key=lambda d: d['points'],reverse=True) 
         return Response(data={'leaderboard':leadeboard})
     
-
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticatedOrReadOnly])
 class DriverViewSet(viewsets.ModelViewSet):
     queryset = driver.Driver.objects.all()
     serializer_class = DriverSerializer
-    
+
     @action(detail=False, methods=['get'])
     def get_leaderboard(self, request):
         driver_leaderboard = []
@@ -106,6 +126,8 @@ class DriverViewSet(viewsets.ModelViewSet):
             'points': total_points
         }})
 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticatedOrReadOnly])
 class RaceViewSet(viewsets.ModelViewSet):
     queryset = race.Race.objects.all()
     serializer_class = RaceSerializer
@@ -147,11 +169,17 @@ class RaceViewSet(viewsets.ModelViewSet):
             'circuit': participation.race.circuit,
             'date': participation.race.date
         }})
-    
+
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticatedOrReadOnly])    
 class RaceParticipantViewSet(viewsets.ModelViewSet):
     queryset = race.RaceParticipant.objects.all()
     serializer_class = RaceParticipantSerializer
-    
+
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticatedOrReadOnly])    
 class RaceIncidentViewSet(viewsets.ModelViewSet):
     queryset = race.RaceIncident.objects.all()
     serializer_class = RaceIncidentSerializer

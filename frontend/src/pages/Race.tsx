@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { RaceParticipation } from "../components/RaceParticipation";
 import { RaceProp, ParticipationsRaceProp } from "../helper/models";
 import { useTranslation } from "react-i18next";
+import { getData } from "../helper/api";
 
 type raceDetailData = {
   participations: ParticipationsRaceProp[];
@@ -12,24 +13,17 @@ type raceDetailData = {
 export function Race() {
   const { t } = useTranslation();
   const [raceDetailData, setRaceDetailData] = useState<raceDetailData>();
+
   let { id } = useParams();
+
+  // Fetch data when the component mounts
+  async function fetchData() {
+    const result = await getData("race/" + id + "/get_participations/");
+    setRaceDetailData(result);
+  }
+
   useEffect(() => {
-    if (id) {
-      let raceId: number = +id;
-      const fetchParticipations = async () => {
-        try {
-          const response = await fetch(
-            "http://192.168.0.31:8000/api/v1/race/" +
-              raceId +
-              "/get_participations/"
-          );
-          response.json().then((data) => setRaceDetailData(data));
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchParticipations();
-    }
+    fetchData();
   }, [id]);
 
   return (
@@ -87,11 +81,11 @@ export function Race() {
             </div>
           </>
         ) : (
-          <nav className="ladder-nav">
-            <div className="ladder-title">
-              <h1>Carrera no encontrada</h1>
-            </div>
-          </nav>
+          <div className="w-full text-sm text-left  dark:text-gray-400 p-4">
+            <h1 className="font-bold whitespace-nowrap  text-2xl text-black dark:text-white">
+              Race not found
+            </h1>
+          </div>
         )}
       </section>
     </div>

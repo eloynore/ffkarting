@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { getData } from "../helper/api"; // Import your API functions
 
-function MyComponent() {
+export default function Incidents() {
   const [data, setData] = useState(null);
 
   // Fetch data when the component mounts
   async function fetchData() {
-    const result = await getData("races");
+    const result = await getData("raceincident");
     setData(result);
   }
   // useEffect block
@@ -28,5 +28,3 @@ function MyComponent() {
     </div>
   );
 }
-
-export default MyComponent;
