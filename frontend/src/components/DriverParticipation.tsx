@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ParticipationsDriverProp } from "../helper/models";
+import ShowBadges from "./ShowBadges";
 
 export function DriverParticipation(
   participation: Readonly<ParticipationsDriverProp>
@@ -8,6 +9,12 @@ export function DriverParticipation(
   const [toggle, setToggle] = useState<boolean>(false);
   const pathToRace = "/race/" + participation.race.id;
   const navigate = useNavigate();
+
+  const badges = {
+    fastLap: participation.fastLap,
+    theFasto: participation.theFasto,
+    grandChelem: participation.grandChelem,
+  };
 
   if (toggle) {
     return (
@@ -23,33 +30,7 @@ export function DriverParticipation(
           </td>
           <td className="px-3">
             <div className="flex justify-left items-center my-5">
-              {participation.fastLap ? (
-                <img
-                  className="w-8 aspect-auto"
-                  src="/icons/fastlap.png"
-                  alt="Fast lap"
-                />
-              ) : (
-                <></>
-              )}
-              {participation.theFasto ? (
-                <img
-                  className="w-8 aspect-auto"
-                  src="/icons/thefasto.png"
-                  alt="The fasto"
-                />
-              ) : (
-                <></>
-              )}
-              {participation.grandChelem ? (
-                <img
-                  className="w-8 aspect-auto"
-                  src="/icons/grandchelem.png"
-                  alt="Grand chelem"
-                />
-              ) : (
-                <></>
-              )}
+              <ShowBadges {...badges} />
               <div>
                 <button
                   onClick={() => navigate(pathToRace)}
@@ -134,33 +115,7 @@ export function DriverParticipation(
         </td>
         <td className="px-3">
           <div className="flex justify-left items-center my-5 ">
-            {participation.fastLap ? (
-              <img
-                className="w-8 aspect-auto"
-                src="/icons/fastlap.png"
-                alt="Fast lap"
-              />
-            ) : (
-              <></>
-            )}
-            {participation.theFasto ? (
-              <img
-                className="w-8 aspect-auto"
-                src="/icons/thefasto.png"
-                alt="The fasto"
-              />
-            ) : (
-              <></>
-            )}
-            {participation.grandChelem ? (
-              <img
-                className="w-8 aspect-auto"
-                src="/icons/grandchelem.png"
-                alt="Grand chelem"
-              />
-            ) : (
-              <></>
-            )}
+            <ShowBadges {...badges} />
             <div>
               <button
                 onClick={() => navigate(pathToRace)}

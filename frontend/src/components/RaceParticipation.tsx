@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ParticipationsRaceProp } from "../helper/models";
 import { getImage } from "../helper/api";
+import ShowBadges from "./ShowBadges";
 
 export function RaceParticipation(
   participation: Readonly<ParticipationsRaceProp>
@@ -18,6 +19,12 @@ export function RaceParticipation(
     response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
   }, [TeamLogo]);
 
+  const badges = {
+    fastLap: participation.fastLap,
+    theFasto: participation.theFasto,
+    grandChelem: participation.grandChelem,
+  };
+
   if (toggle) {
     return (
       <>
@@ -29,33 +36,7 @@ export function RaceParticipation(
           </td>
           <td className="px-3">
             <div className="flex justify-left items-center my-5 ">
-              {participation.fastLap ? (
-                <img
-                  className="w-8 aspect-auto"
-                  src="/icons/fastlap.png"
-                  alt="Fast lap"
-                />
-              ) : (
-                <></>
-              )}
-              {participation.theFasto ? (
-                <img
-                  className="w-8 aspect-auto"
-                  src="/icons/thefasto.png"
-                  alt="The fasto"
-                />
-              ) : (
-                <></>
-              )}
-              {participation.grandChelem ? (
-                <img
-                  className="w-8 aspect-auto"
-                  src="/icons/grandchelem.png"
-                  alt="Grand chelem"
-                />
-              ) : (
-                <></>
-              )}
+              <ShowBadges {...badges} />
               <div className="flex items-center">
                 {teamImage ? (
                   <div className="w-11 h-11 rounded-full flex justify-center items-center">
@@ -155,33 +136,7 @@ export function RaceParticipation(
         </td>
         <td className="px-3">
           <div className="flex justify-left items-center my-5 ">
-            {participation.fastLap ? (
-              <img
-                className="w-8 aspect-auto"
-                src="/icons/fastlap.png"
-                alt="Fast lap"
-              />
-            ) : (
-              <></>
-            )}
-            {participation.theFasto ? (
-              <img
-                className="w-8 aspect-auto"
-                src="/icons/thefasto.png"
-                alt="The fasto"
-              />
-            ) : (
-              <></>
-            )}
-            {participation.grandChelem ? (
-              <img
-                className="w-8 aspect-auto"
-                src="/icons/grandchelem.png"
-                alt="Grand chelem"
-              />
-            ) : (
-              <></>
-            )}
+            <ShowBadges {...badges} />
             <div className="flex items-center">
               {teamImage ? (
                 <div className="w-11 h-11 rounded-full flex justify-center items-center">

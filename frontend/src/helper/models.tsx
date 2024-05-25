@@ -1,3 +1,9 @@
+export type FastLaps = {
+  fastLap: boolean;
+  theFasto: boolean;
+  grandChelem: boolean;
+};
+
 export type TeamProp = {
   id: number;
   name: string;
