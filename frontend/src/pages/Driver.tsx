@@ -79,7 +79,7 @@ export function Driver() {
                 <p>#{driverDetailData?.driver.number}</p>
               </div>
               <div className="my-5 px-6">
-                <p className="text-black dark:text-gray-200 block rounded-lg text-center font-medium py-3">
+                <p className="text-black dark:text-gray-200 block text-center font-medium py-3">
                   <span className="font-bold">
                     {driverDetailData?.driver.points}
                   </span>{" "}
@@ -96,13 +96,13 @@ export function Driver() {
             >
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                  <th scope="col" className="px-3 py-3">
+                  <th scope="col" className="px-3 py-3 w-1">
                     Posición
                   </th>
                   <th scope="col" className="px-3 py-3">
                     Circuito
                   </th>
-                  <th scope="col" className="px-3 py-3">
+                  <th scope="col" className="px-7 py-3 w-1">
                     {t("points")}
                   </th>
                 </tr>

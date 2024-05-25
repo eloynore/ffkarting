@@ -59,13 +59,13 @@ export function Race() {
               >
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-3 py-3 w-1">
                       {t("position")}
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-3 py-3">
                       {t("drivers")}
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-7 py-3 w-1">
                       {t("points")}
                     </th>
                   </tr>

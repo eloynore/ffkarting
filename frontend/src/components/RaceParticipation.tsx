@@ -72,9 +72,9 @@ export function RaceParticipation(
               </div>
             </div>
           </td>
-          <td className="px-3">
+          <td className="px-7">
             <div className="flex justify-left items-center my-5 ">
-              <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+              <p className="text-black text-lg dark:text-gray-100 block rounded-lg text-left font-medium">
                 {participation.points}
               </p>
               <button className="pl-2 " onClick={() => setToggle(false)}>
@@ -172,9 +172,9 @@ export function RaceParticipation(
             </div>
           </div>
         </td>
-        <td className="px-3">
+        <td className="px-7">
           <div className="flex justify-left items-center my-5 ">
-            <p className="text-black dark:text-gray-100 block rounded-lg text-left font-medium">
+            <p className="text-black text-lg dark:text-gray-100 block rounded-lg text-left font-medium">
               {participation.points}
             </p>
             <button className="pl-2 " onClick={() => setToggle(true)}>
