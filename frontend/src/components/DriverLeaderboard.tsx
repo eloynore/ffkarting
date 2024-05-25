@@ -37,10 +37,13 @@ export function DriverLeaderboard({
           )}
           <div className="text-left">
             <p className="">#{number}</p>
-            <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+            <button
+              onClick={() => navigate(pathToDetail)}
+              className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium "
+            >
               {name}
-            </p>
-            <p className="">{team.name}</p>
+            </button>
+            <p>{team.name}</p>
           </div>
           <button
             style={{ float: "right" }}

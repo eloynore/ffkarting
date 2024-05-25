@@ -51,9 +51,12 @@ export function DriverParticipation(
                 <></>
               )}
               <div>
-                <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+                <button
+                  onClick={() => navigate(pathToRace)}
+                  className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium "
+                >
                   {participation.race.circuit}
-                </p>
+                </button>
               </div>
               <button
                 style={{ float: "right" }}
@@ -159,9 +162,12 @@ export function DriverParticipation(
               <></>
             )}
             <div>
-              <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+              <button
+                onClick={() => navigate(pathToRace)}
+                className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium "
+              >
                 {participation.race.circuit}
-              </p>
+              </button>
             </div>
             <button
               style={{ float: "right" }}

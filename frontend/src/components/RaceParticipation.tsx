@@ -70,9 +70,12 @@ export function RaceParticipation(
                 )}
                 <div className="text-left">
                   <p className="">#{participation.driver.number}</p>
-                  <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+                  <button
+                    onClick={() => navigate(pathToDriver)}
+                    className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium "
+                  >
                     {participation.driver.name}
-                  </p>
+                  </button>
                   <p className="">{participation.driver.team.name}</p>
                 </div>
                 <button
@@ -193,9 +196,12 @@ export function RaceParticipation(
               )}
               <div className="text-left">
                 <p className="">#{participation.driver.number}</p>
-                <p className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium ">
+                <button
+                  onClick={() => navigate(pathToDriver)}
+                  className=" text-gray-900 whitespace-nowrap dark:text-white text-2xl font-medium "
+                >
                   {participation.driver.name}
-                </p>
+                </button>
                 <p className="">{participation.driver.team.name}</p>
               </div>
               <button
