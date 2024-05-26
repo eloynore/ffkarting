@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DriverLeaderboard } from "../components/DriverLeaderboard";
+import { DriverLeaderboard } from "../components/leaderboards/Driver";
 import { DriverProp } from "../helper/models";
 import { useTranslation } from "react-i18next";
 import { getData } from "../helper/api";

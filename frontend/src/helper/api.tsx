@@ -10,6 +10,7 @@ const apiVisitor = axios.create({
   baseURL: API_BASE_URL,
 });
 
+// We will use one axios instance to intercept all requests and add our auth token
 apiService.interceptors.request.use(
   (config) => {
     const auth = localStorage.getItem("auth");
@@ -22,6 +23,8 @@ apiService.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+// Api interfaces
 interface Race {
   circuit: string;
   date: string;
@@ -61,6 +64,7 @@ interface RaceIncident {
   resolution: string;
 }
 
+// Define all the routes for our token calls
 export const createRace = (data: Race) => apiService.post("/races/", data);
 export const createTeam = (data: Team) => apiService.post("/teams/", data);
 export const createDriver = (data: Driver) =>
@@ -74,6 +78,7 @@ export const getTeams = () => apiService.get("/teams/");
 export const getDrivers = () => apiService.get("/drivers/");
 export const getRaces = () => apiService.get("/race/");
 
+// Here we have all the non logged calls
 export const getData = async (
   endpoint: string,
   params?: { [key: string]: any },

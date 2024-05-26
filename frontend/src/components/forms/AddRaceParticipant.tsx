@@ -1,6 +1,6 @@
 // src/components/AddRaceParticipantForm.tsx
 import React, { useState, useEffect } from "react";
-import { createRaceParticipant, getDrivers, getRaces } from "../helper/api";
+import { createRaceParticipant, getDrivers, getRaces } from "../../helper/api";
 
 interface Driver {
   id: number;
@@ -41,6 +41,7 @@ export default function AddRaceParticipantForm() {
     grandChelem: false,
   });
 
+  // We need to update the message when the data changes
   useEffect(() => {
     setErrMsg("");
     setSuccessMessage("");
@@ -68,6 +69,7 @@ export default function AddRaceParticipantForm() {
     }));
   };
 
+  // We need this extra function to catch the checkbox value
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setFormData((prevData) => ({
@@ -75,7 +77,7 @@ export default function AddRaceParticipantForm() {
       [name]: checked,
     }));
   };
-
+  // Handle the form submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {

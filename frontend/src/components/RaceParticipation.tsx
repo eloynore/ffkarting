@@ -12,7 +12,7 @@ export function RaceParticipation(
   const navigate = useNavigate();
 
   const [teamImage, setTeamImage] = useState<string>("");
-  let TeamLogo = "/logos/" + participation.driver.team.name + ".png";
+  let TeamLogo = `/logos/${participation.driver.team.name}.png`;
 
   useEffect(() => {
     const response = getImage(TeamLogo);

@@ -1,6 +1,6 @@
-import { TeamLeaderboardProp } from "../helper/models";
+import { TeamLeaderboardProp } from "../../helper/models";
 import { useEffect, useState } from "react";
-import { getImage } from "../helper/api";
+import { getImage } from "../../helper/api";
 
 export function TeamLeaderboard({
   id,
@@ -10,7 +10,7 @@ export function TeamLeaderboard({
   color,
 }: Readonly<TeamLeaderboardProp>) {
   const [teamImage, setTeamImage] = useState<string>("");
-  let TeamLogo = "/logos/" + name + ".png";
+  let TeamLogo = `/logos/${name}.png`;
 
   useEffect(() => {
     const response = getImage(TeamLogo);

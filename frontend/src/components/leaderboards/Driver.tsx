@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { DriverProp } from "../helper/models";
+import { DriverProp } from "../../helper/models";
 import { useState, useEffect } from "react";
-import { getImage } from "../helper/api";
+import { getImage } from "../../helper/api";
 
 export function DriverLeaderboard({
   id,
@@ -11,7 +11,7 @@ export function DriverLeaderboard({
   points,
 }: Readonly<DriverProp>) {
   const [teamImage, setTeamImage] = useState<string>("");
-  let TeamLogo = "/logos/" + team.name + ".png";
+  let TeamLogo = `/logos/${team.name}.png`;
 
   useEffect(() => {
     const response = getImage(TeamLogo);

@@ -1,9 +1,10 @@
 {
-  "leaderboard": "Clasificación",
-  "teams": "Equipos",
+  "leaderboard": "Clasificacioa",
+  "teams": "Equipoa",
   "driver": "Conductero",
-  "points": "Puntos",
-  "spanish": "Español",
-  "english": "Inglés",
-  "basque": "Euskera"
+  "points": "Puntoa",
+  "spanish": "Españoa",
+  "english": "Inglésoa",
+  "basque": "Euskero",
+  "adminDashboard": "Paneloa de adminstracioa"
 }

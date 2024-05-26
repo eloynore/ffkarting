@@ -1,10 +1,10 @@
 import React from "react";
 import { useAuthProvider } from "../context/AuthProvider";
-import AddRaceForm from "../components/AddRaceForm";
-import AddTeamForm from "../components/AddTeamForm";
-import AddDriverForm from "../components/AddDriverForm";
-import AddRaceParticipantForm from "../components/AddRaceParticipantForm";
-import AddRaceIncidentForm from "../components/AddRaceIncident";
+import AddRaceForm from "../components/forms/AddRace";
+import AddTeamForm from "../components/forms/AddTeam";
+import AddDriverForm from "../components/forms/AddDriver";
+import AddRaceParticipantForm from "../components/forms/AddRaceParticipant";
+import AddRaceIncidentForm from "../components/forms/AddRaceIncident";
 import { useNavigate } from "react-router-dom";
 
 export function Admin() {

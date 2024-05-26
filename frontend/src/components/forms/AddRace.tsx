@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createRace } from "../helper/api";
+import { createRace } from "../../helper/api";
 
 export default function AddRaceForm() {
   const [circuit, setCircuit] = useState<string>("");

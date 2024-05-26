@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createTeam } from "../helper/api";
+import { createTeam } from "../../helper/api";
 
 export default function AddTeamForm() {
   const [name, setName] = useState<string>("");

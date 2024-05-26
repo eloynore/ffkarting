@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TeamLeaderboard } from "../components/TeamLeaderboard";
+import { TeamLeaderboard } from "../components/leaderboards/Team";
 import { TeamLeaderboardProp } from "../helper/models";
 import { useTranslation } from "react-i18next";
 import { getData } from "../helper/api";
