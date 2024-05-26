@@ -7,6 +7,7 @@ import Incidents from "./pages/Incidents";
 import Navbar from "./navbar/Navbar";
 import { AuthProvider } from "./context/AuthProvider";
 import Login from "./pages/Login";
+import { Admin } from "./pages/Admin";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Leaderboard />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/driver/:id" element={<Driver />} />
         <Route path="/race/:id" element={<Race />} />

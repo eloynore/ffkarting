@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthProvider } from "../context/AuthProvider";
 import { login } from "../helper/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { getAuth, addAuth } = useAuthProvider();
@@ -8,6 +9,7 @@ export default function Login() {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setErrMsg("");
@@ -20,6 +22,7 @@ export default function Login() {
       addAuth(response.data);
       setUser("");
       setPwd("");
+      navigate("/admin");
     } else {
       setErrMsg("Invalid username or password");
     }
@@ -37,7 +40,7 @@ export default function Login() {
         ) : (
           <div>
             <p className={errMsg ? "text-red-500 mb-4" : "hidden"}>{errMsg}</p>
-            <h1 className="text-2xl font-bold mb-4">Sign In</h1>
+            <h1 className="text-2xl font-bold mb-4 dark:text-white">Sign In</h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
@@ -50,7 +53,7 @@ export default function Login() {
                   type="text"
                   id="username"
                   autoComplete="off"
-                  className="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className="mt-1 p-2 block w-full rounded-md border-gray-800 dark:border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
                   onChange={(e) => setUser(e.target.value)}
                   value={user}
                   required

@@ -9,7 +9,7 @@ export default function LogoutButton() {
   const handleLogout = () => {
     removeAuth();
     // Redirect to home after logout
-    navigate("/");
+    navigate("/login");
   };
   const { token } = getAuth();
   return (
