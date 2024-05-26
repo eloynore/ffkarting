@@ -3,6 +3,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Switcher from "../components/Switcher";
+import LogoutButton from "../components/LogoutButton";
+import RenderLanguageSelector from "../components/LanguajeSelector";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -26,20 +28,10 @@ const Navbar = () => {
 
   // LangOptions
 
-  const onClickLanguageChange = (e: any) => {
+  const handleLanguageChange = (e: any) => {
     const language = e.target.value;
     i18n.changeLanguage(language); //change the language
   };
-
-  function addLanguageSelector() {
-    return (
-      <select className="bg-black " onChange={onClickLanguageChange}>
-        <option value="en">en</option>
-        <option value="es">es</option>
-        <option value="eus">eus</option>
-      </select>
-    );
-  }
 
   const location = useLocation(); // once ready it returns the 'window.location' object
   const [url, setUrl] = useState("");
@@ -47,6 +39,7 @@ const Navbar = () => {
   useEffect(() => {
     setUrl(location.pathname);
   }, [location]);
+
   return (
     <div className="bg-black flex justify-between items-center h-24 mx-auto px-4 text-white">
       {/* Logo */}
@@ -69,8 +62,11 @@ const Navbar = () => {
           </li>
         ))}
         <li className="p-4 m-2 rounded cursor-pointer border-gray-600">
-          {addLanguageSelector()}
+          <RenderLanguageSelector
+            onClickLanguageChange={handleLanguageChange}
+          />
         </li>
+        <LogoutButton />
       </ul>
 
       {/* Mobile Navigation Icon */}
@@ -105,7 +101,12 @@ const Navbar = () => {
           </li>
         ))}
         <li className="p-4 rounded m-2 cursor-pointer border-gray-600">
-          {addLanguageSelector()}
+          <RenderLanguageSelector
+            onClickLanguageChange={handleLanguageChange}
+          />
+        </li>
+        <li className="p-4 rounded m-2 border-gray-600">
+          <LogoutButton />
         </li>
       </ul>
     </div>

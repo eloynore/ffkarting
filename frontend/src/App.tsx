@@ -5,10 +5,12 @@ import { Driver } from "./pages/Driver";
 import { Race } from "./pages/Race";
 import Incidents from "./pages/Incidents";
 import Navbar from "./navbar/Navbar";
+import { AuthProvider } from "./context/AuthProvider";
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Leaderboard />} />
@@ -16,8 +18,9 @@ function App() {
         <Route path="/driver/:id" element={<Driver />} />
         <Route path="/race/:id" element={<Race />} />
         <Route path="/incidents" element={<Incidents />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
-    </div>
+    </AuthProvider>
   );
 }
 

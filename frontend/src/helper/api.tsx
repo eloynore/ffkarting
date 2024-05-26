@@ -16,7 +16,7 @@ export const getData = async (
     const response = await apiService.get(endpoint, options);
     return response.data;
   } catch (error) {
-    console.log("Error fetching races");
+    console.error(error);
   }
 };
 
@@ -38,10 +38,9 @@ export const login = async (username: string, password: string) => {
   try {
     const body = { username: username, password: password };
     const response = await apiService.post("login", body);
-    console.log(response.data);
-    return response.data;
+    return response;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
   return false;
 };

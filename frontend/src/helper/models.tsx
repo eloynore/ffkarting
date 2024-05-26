@@ -1,4 +1,5 @@
-export type FastLaps = {
+// Common properties
+export type FastLapProps = {
   fastLap: boolean;
   theFasto: boolean;
   grandChelem: boolean;
@@ -10,24 +11,13 @@ export type TeamProp = {
   color: string;
 };
 
-export type DriverTeamProp = {
+export type DriverBaseProp = {
   id: number;
   name: string;
   number: number;
 };
 
-export type TeamLeaderboardProp = {
-  id: number;
-  name: string;
-  drivers: DriverTeamProp[];
-  color: string;
-  points: number;
-};
-
-export type DriverProp = {
-  id: number;
-  name: string;
-  number: number;
+export type DriverProp = DriverBaseProp & {
   team: TeamProp;
   points: number;
 };
@@ -38,30 +28,30 @@ export type RaceProp = {
   date: string;
 };
 
-export type ParticipationsDriverProp = {
+export type ParticipationBaseProp = {
   id: number;
-  race: RaceProp;
   points: number;
   position: number;
   lapTime: string;
   qualifyLapTime: string;
   trainLapTime: string;
-  fastLap: boolean;
-  theFasto: boolean;
-  grandChelem: boolean;
   videoURL: string;
 };
 
-export type ParticipationsRaceProp = {
+export type TeamLeaderboardProp = {
   id: number;
-  driver: DriverProp;
+  name: string;
+  drivers: DriverBaseProp[];
+  color: string;
   points: number;
-  position: number;
-  lapTime: string;
-  qualifyLapTime: string;
-  trainLapTime: string;
-  fastLap: boolean;
-  theFasto: boolean;
-  grandChelem: boolean;
-  videoURL: string;
 };
+
+export type ParticipationsDriverProp = ParticipationBaseProp &
+  FastLapProps & {
+    race: RaceProp;
+  };
+
+export type ParticipationsRaceProp = ParticipationBaseProp &
+  FastLapProps & {
+    driver: DriverProp;
+  };

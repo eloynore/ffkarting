@@ -1,6 +1,6 @@
-import { FastLaps } from "../helper/models";
+import { FastLapProps } from "../helper/models";
 
-export default function ShowBadges(badges: Readonly<FastLaps>) {
+export default function ShowBadges(badges: Readonly<FastLapProps>) {
   if (badges.fastLap) {
     return (
       <img
