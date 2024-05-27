@@ -34,6 +34,7 @@ interface Race {
 interface Team {
   name: string;
   color?: string;
+  logo: File | null;
 }
 
 interface Driver {
@@ -66,7 +67,20 @@ interface RaceIncident {
 
 // Define all the routes for our token calls
 export const createRace = (data: Race) => apiService.post("/race/", data);
-export const createTeam = (data: Team) => apiService.post("/teams/", data);
+
+export const createTeam = (data: Team) => {
+  const formData = new FormData();
+  formData.append("name", data.name);
+  if (data.color) formData.append("color", data.color);
+  if (data.logo) formData.append("logo", data.logo);
+
+  return apiService.post("/teams/", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export const createDriver = (data: Driver) =>
   apiService.post("/drivers/", data);
 export const createRaceParticipant = (data: RaceParticipant) =>

@@ -5,8 +5,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
-from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer, RaceIncidentSerializer, UserSerializer
-from .models import driver,team,race
+from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer, RaceIncidentSerializer
+from .models import driver, team, race
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
@@ -20,12 +20,12 @@ def login(request):
     token, created = Token.objects.get_or_create(user=user)
     return Response({'token': token.key, "username": user.username}, status=status.HTTP_200_OK)
 
-# Create your views here.
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticatedOrReadOnly])
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = team.Team.objects.all()
     serializer_class = TeamSerializer
+    
     @action(detail=False, methods=['get'])
     def get_leaderboard(self, request):
         team_leaderboard = []
@@ -38,7 +38,7 @@ class TeamViewSet(viewsets.ModelViewSet):
                 participations = race.RaceParticipant.objects.filter(driver=curr_driver.pk)
                 if participations:
                     for participation in participations.iterator():
-                        totalpoints_driver+= participation.points
+                        totalpoints_driver += participation.points
                 team_drivers.append({
                     'id': curr_driver.pk,
                     'name': curr_driver.name,
@@ -51,12 +51,13 @@ class TeamViewSet(viewsets.ModelViewSet):
                 'id': item.pk,
                 'name': item.name,
                 'color': item.color,
+                'logo': request.build_absolute_uri(item.logo.url) if item.logo else None,
                 'drivers': team_drivers,
                 'points': totalpoints_team
             })
-        leadeboard = sorted(team_leaderboard, key=lambda d: d['points'],reverse=True) 
-        return Response(data={'leaderboard':leadeboard})
-    
+        leadeboard = sorted(team_leaderboard, key=lambda d: d['points'], reverse=True) 
+        return Response(data={'leaderboard': leadeboard})
+
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticatedOrReadOnly])
 class DriverViewSet(viewsets.ModelViewSet):
@@ -78,14 +79,15 @@ class DriverViewSet(viewsets.ModelViewSet):
                 'number': item.number,
                 'team': {
                     'id': item.team.pk,
-                    'name':item.team.name,
-                    'color': item.team.color
+                    'name': item.team.name,
+                    'color': item.team.color,
+                    'logo': request.build_absolute_uri(item.team.logo.url) if item.team.logo else None,
                 },
                 'points': total_points
             })
-        leadeboard = sorted(driver_leaderboard, key=lambda d: d['points'],reverse=True) 
-        return Response(data={'leaderboard':leadeboard})
-    
+        leadeboard = sorted(driver_leaderboard, key=lambda d: d['points'], reverse=True) 
+        return Response(data={'leaderboard': leadeboard})
+
     @action(detail=True, methods=['get'])
     def get_participations(self, request, pk=None):
         curr_driver = self.get_object()
@@ -95,7 +97,7 @@ class DriverViewSet(viewsets.ModelViewSet):
         if participations:
             for participation in participations.iterator():
                 driver_participations.append({
-                    'id':participation.pk,
+                    'id': participation.pk,
                     'race': {
                         'id': participation.race.pk,
                         'circuit': participation.race.circuit,
@@ -106,22 +108,23 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
                     'trainLapTime': participation.trainLapTime,
-                    'fastLap':participation.fastLap,
-                    'theFasto':participation.theFasto,
-                    'grandChelem':participation.grandChelem,
+                    'fastLap': participation.fastLap,
+                    'theFasto': participation.theFasto,
+                    'grandChelem': participation.grandChelem,
                     'videoURL': participation.videoURL
                 })
                 total_points += participation.points
                 
-        driver_participations_result = sorted(driver_participations,  key=lambda d: d['race']['date'],reverse=True)
-        return Response(data={'participations':driver_participations_result,'driver':{
+        driver_participations_result = sorted(driver_participations,  key=lambda d: d['race']['date'], reverse=True)
+        return Response(data={'participations': driver_participations_result, 'driver': {
             'id': curr_driver.pk,
             'name': curr_driver.name,
             'number': curr_driver.number,
             'team': {
                 'id': curr_driver.team.pk,
-                'name':curr_driver.team.name,
-                'color': curr_driver.team.color
+                'name': curr_driver.team.name,
+                'color': curr_driver.team.color,
+                'logo': request.build_absolute_uri(curr_driver.team.logo.url) if curr_driver.team.logo else None,
             },
             'points': total_points
         }})
@@ -141,45 +144,44 @@ class RaceViewSet(viewsets.ModelViewSet):
         if participations:
             for participation in participations.iterator():
                 driver_participations.append({
-                    'id':participation.pk,
+                    'id': participation.pk,
                     'driver': {
                         'id': participation.driver.pk,
                         'name': participation.driver.name,
                         'number': participation.driver.number,
                         'team': {
                             'id': participation.driver.team.pk,
-                            'name':participation.driver.team.name,
-                            'color': participation.driver.team.color
+                            'name': participation.driver.team.name,
+                            'color': participation.driver.team.color,
+                            'logo': request.build_absolute_uri(participation.driver.team.logo.url) if participation.driver.team.logo else None,
                         }
                     },
                     'points': participation.points,
                     'position': participation.position,
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
-                    'fastLap':participation.fastLap,
-                    'theFasto':participation.theFasto,
-                    'grandChelem':participation.grandChelem,
                     'trainLapTime': participation.trainLapTime,
+                    'fastLap': participation.fastLap,
+                    'theFasto': participation.theFasto,
+                    'grandChelem': participation.grandChelem,
                     'videoURL': participation.videoURL
                 })
                 
         driver_participations_result = sorted(driver_participations,  key=lambda d: d['position'])
-        return Response(data={'participations':driver_participations_result,'race': {
-            'id': participation.race.pk,
-            'circuit': participation.race.circuit,
-            'date': participation.race.date
+        return Response(data={'participations': driver_participations_result, 'race': {
+            'id': curr_race.pk,
+            'circuit': curr_race.circuit,
+            'date': curr_race.date
         }})
 
-
 @authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticatedOrReadOnly])    
+@permission_classes([IsAuthenticatedOrReadOnly])
 class RaceParticipantViewSet(viewsets.ModelViewSet):
     queryset = race.RaceParticipant.objects.all()
     serializer_class = RaceParticipantSerializer
 
-
 @authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticatedOrReadOnly])    
+@permission_classes([IsAuthenticatedOrReadOnly])
 class RaceIncidentViewSet(viewsets.ModelViewSet):
     queryset = race.RaceIncident.objects.all()
     serializer_class = RaceIncidentSerializer

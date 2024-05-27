@@ -136,3 +136,5 @@ redis-stable/
 
 # vscode
 .vscode/
+
+migrations/

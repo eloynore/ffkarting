@@ -9,6 +9,7 @@ export type TeamProp = {
   id: number;
   name: string;
   color: string;
+  logo?: string; // Campo condicional para el logo
 };
 
 export type DriverBaseProp = {
@@ -32,10 +33,10 @@ export type ParticipationBaseProp = {
   id: number;
   points: number;
   position: number;
-  lapTime: string;
-  qualifyLapTime: string;
-  trainLapTime: string;
-  videoURL: string;
+  lapTime?: string; // conditional field
+  qualifyLapTime?: string; // conditional field
+  trainLapTime?: string; // conditional field
+  videoURL?: string; // conditional field
 };
 
 export type TeamLeaderboardProp = {
@@ -44,6 +45,7 @@ export type TeamLeaderboardProp = {
   drivers: DriverBaseProp[];
   color: string;
   points: number;
+  logo?: string; // conditinal logo url
 };
 
 export type ParticipationsDriverProp = ParticipationBaseProp &

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ParticipationsRaceProp } from "../helper/models";
-import { getImage } from "../helper/api";
 import ShowBadges from "./ShowBadges";
 
 export function RaceParticipation(
@@ -10,14 +9,6 @@ export function RaceParticipation(
   const [toggle, setToggle] = useState<boolean>(false);
   const pathToDriver = "/driver/" + participation.driver.id;
   const navigate = useNavigate();
-
-  const [teamImage, setTeamImage] = useState<string>("");
-  let TeamLogo = `/logos/${participation.driver.team.name}.png`;
-
-  useEffect(() => {
-    const response = getImage(TeamLogo);
-    response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
-  }, [TeamLogo]);
 
   const badges = {
     fastLap: participation.fastLap,
@@ -38,11 +29,11 @@ export function RaceParticipation(
             <div className="flex justify-left items-center my-5 ">
               <ShowBadges {...badges} />
               <div className="flex items-center">
-                {teamImage ? (
+                {participation.driver.team.logo ? (
                   <div className="w-11 h-11 rounded-full flex justify-center items-center">
                     <img
                       className="w-8 h-auto"
-                      src={teamImage}
+                      src={participation.driver.team.logo}
                       alt={participation.driver.name + " logo image"}
                     />
                   </div>
@@ -138,11 +129,11 @@ export function RaceParticipation(
           <div className="flex justify-left items-center my-5 ">
             <ShowBadges {...badges} />
             <div className="flex items-center">
-              {teamImage ? (
+              {participation.driver.team.logo ? (
                 <div className="w-11 h-11 rounded-full flex justify-center items-center">
                   <img
                     className="w-8 h-auto"
-                    src={teamImage}
+                    src={participation.driver.team.logo}
                     alt={participation.driver.name + " logo image"}
                   />
                 </div>

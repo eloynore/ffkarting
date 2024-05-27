@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { createTeam } from "../../helper/api";
 
+interface Team {
+  name: string;
+  color?: string;
+  logo: File | null;
+}
+
 export default function AddTeamForm() {
   const [name, setName] = useState<string>("");
   const [color, setColor] = useState<string>("");
+  const [logo, setLogo] = useState<File | null>(null);
 
   const [errMsg, setErrMsg] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -15,10 +22,15 @@ export default function AddTeamForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
-      const newTeam = { name, color };
-      const response = await createTeam(newTeam);
+      const teamData: Team = { name, color, logo };
+
+      if (!color) {
+        delete teamData.color;
+      }
+      const response = await createTeam(teamData);
       setName("");
       setColor("");
+      setLogo(null);
       if (response.status === 201) {
         setSuccessMessage("Team added!");
       }
@@ -63,6 +75,17 @@ export default function AddTeamForm() {
             setColor(e.target.value);
           }}
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="logo" className="block text-gray-700 font-bold mb-2">
+          Team Logo:
+        </label>
+        <input
+          type="file"
+          id="logo"
+          onChange={(e) => setLogo(e.target.files ? e.target.files[0] : null)}
+          className="w-full p-2 border border-gray-300 rounded"
         />
       </div>
       <button

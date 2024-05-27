@@ -136,3 +136,7 @@ redis-stable/
 
 # vscode
 .vscode/
+
+# Media
+media/
+uploads/

@@ -182,6 +182,7 @@ export default function AddRaceParticipantForm() {
         </label>
         <input
           title="Format: 00:00.000"
+          placeholder="00:00.000"
           type="text"
           name="lapTime"
           pattern="[0-9]{2}:?[0-9]{2}.[0-9]{4}"
@@ -197,6 +198,7 @@ export default function AddRaceParticipantForm() {
         </label>
         <input
           title="Format: 00:00.000"
+          placeholder="00:00.000"
           type="text"
           name="qualifyLapTime"
           pattern="[0-9]{2}:?[0-9]{2}.[0-9]{4}"
@@ -212,6 +214,7 @@ export default function AddRaceParticipantForm() {
         </label>
         <input
           title="Format: 00:00.000"
+          placeholder="00:00.000"
           type="text"
           name="trainLapTime"
           pattern="[0-9]{2}:?[0-9]{2}.[0-9]{4}"

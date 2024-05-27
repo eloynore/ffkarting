@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DriverParticipation } from "../components/DriverParticipation";
 import { DriverProp, ParticipationsDriverProp } from "../helper/models";
-import { getImage } from "../helper/api";
 import { useTranslation } from "react-i18next";
 import { getData } from "../helper/api";
 
@@ -13,7 +12,6 @@ type driverDetailData = {
 
 export function Driver() {
   const [driverDetailData, setDriverDetailData] = useState<driverDetailData>();
-  const [teamImage, setTeamImage] = useState<string>("");
   const { t } = useTranslation();
 
   let { id } = useParams();
@@ -28,17 +26,6 @@ export function Driver() {
     fetchData();
   }, [id]);
 
-  // we need to add a new use effect which depends on the status of driver data we just fetched
-  useEffect(() => {
-    if (driverDetailData) {
-      let TeamLogo = "/logos/" + driverDetailData?.driver.team.name + ".png";
-      const logoResponse = getImage(TeamLogo);
-      logoResponse.then((data) =>
-        data ? setTeamImage(TeamLogo) : setTeamImage("")
-      );
-    }
-  }, [driverDetailData]);
-
   return (
     <div className="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       {driverDetailData ? (
@@ -49,10 +36,10 @@ export function Driver() {
                 {driverDetailData?.driver.name}
               </h1>
               <div className="flex justify-center items-center my-5 px-6">
-                {teamImage ? (
+                {driverDetailData.driver.team.logo ? (
                   <img
                     className="w-8 aspect-square"
-                    src={teamImage}
+                    src={driverDetailData.driver.team.logo}
                     alt={driverDetailData?.driver.team.name + " logo image"}
                   />
                 ) : (

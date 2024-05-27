@@ -1,6 +1,4 @@
 import { TeamLeaderboardProp } from "../../helper/models";
-import { useEffect, useState } from "react";
-import { getImage } from "../../helper/api";
 
 export function TeamLeaderboard({
   id,
@@ -8,24 +6,17 @@ export function TeamLeaderboard({
   drivers,
   points,
   color,
+  logo,
 }: Readonly<TeamLeaderboardProp>) {
-  const [teamImage, setTeamImage] = useState<string>("");
-  let TeamLogo = `/logos/${name}.png`;
-
-  useEffect(() => {
-    const response = getImage(TeamLogo);
-    response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
-  }, [TeamLogo]);
-
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
       <td className="px-6 py-4 ">
         <div className="flex items-center">
-          {teamImage ? (
+          {logo ? (
             <div className="w-11 h-11 rounded-full flex justify-center items-center">
               <img
                 className="w-8 h-auto"
-                src={teamImage}
+                src={logo}
                 alt={name + " logo image"}
               />
             </div>

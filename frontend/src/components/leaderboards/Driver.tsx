@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { DriverProp } from "../../helper/models";
-import { useState, useEffect } from "react";
-import { getImage } from "../../helper/api";
 
 export function DriverLeaderboard({
   id,
@@ -10,13 +8,6 @@ export function DriverLeaderboard({
   team,
   points,
 }: Readonly<DriverProp>) {
-  const [teamImage, setTeamImage] = useState<string>("");
-  let TeamLogo = `/logos/${team.name}.png`;
-
-  useEffect(() => {
-    const response = getImage(TeamLogo);
-    response.then((data) => (data ? setTeamImage(TeamLogo) : setTeamImage("")));
-  }, [TeamLogo]);
   const pathToDetail = "/driver/" + id;
   const navigate = useNavigate();
 
@@ -24,11 +15,11 @@ export function DriverLeaderboard({
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
       <td className="px-6 py-4 ">
         <div className="flex items-center">
-          {teamImage ? (
+          {team.logo ? (
             <div className="w-11 h-11 rounded-full flex justify-center items-center">
               <img
                 className="w-8 h-auto"
-                src={teamImage}
+                src={team.logo}
                 alt={name + " logo image"}
               />
             </div>
