@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createTeam } from "../../helper/api";
 
 export default function AddTeamForm() {
   const [name, setName] = useState<string>("");
   const [color, setColor] = useState<string>("");
 
+  const [errMsg, setErrMsg] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [name, color]);
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const newTeam = { name, color };
-    await createTeam(newTeam);
-    setName("");
-    setColor("");
+    try {
+      e.preventDefault();
+      const newTeam = { name, color };
+      const response = await createTeam(newTeam);
+      setName("");
+      setColor("");
+      if (response.status === 201) {
+        setSuccessMessage("Team added!");
+      }
+    } catch (error) {
+      setErrMsg("Error adding driver");
+      setSuccessMessage("");
+    }
   };
 
   return (
@@ -27,7 +42,10 @@ export default function AddTeamForm() {
           type="text"
           id="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setSuccessMessage("");
+            setName(e.target.value);
+          }}
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         />
@@ -40,7 +58,10 @@ export default function AddTeamForm() {
           type="text"
           id="color"
           value={color}
-          onChange={(e) => setColor(e.target.value)}
+          onChange={(e) => {
+            setSuccessMessage("");
+            setColor(e.target.value);
+          }}
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         />
       </div>
@@ -50,6 +71,10 @@ export default function AddTeamForm() {
       >
         Add Team
       </button>
+      <p className={errMsg ? "text-red-500 mb-4" : "hidden"}>{errMsg}</p>
+      <p className={successMessage ? "text-green-500 mb-4" : "hidden"}>
+        {successMessage}
+      </p>
     </form>
   );
 }

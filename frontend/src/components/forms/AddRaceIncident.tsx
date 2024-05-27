@@ -34,7 +34,6 @@ export default function AddRaceIncidentForm() {
 
   useEffect(() => {
     setErrMsg("");
-    setSuccessMessage("");
   }, [formData]);
 
   useEffect(() => {
@@ -68,6 +67,7 @@ export default function AddRaceIncidentForm() {
         [name]: value,
       }));
     }
+    setSuccessMessage("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -76,7 +76,7 @@ export default function AddRaceIncidentForm() {
       if (!formData.videoURL) {
         delete formData.videoURL;
       }
-      await createRaceIncident(formData);
+      const response = await createRaceIncident(formData);
       setFormData({
         race: 0,
         drivers: [],
@@ -84,9 +84,12 @@ export default function AddRaceIncidentForm() {
         resolution: "",
         videoURL: "",
       });
-      setSuccessMessage("Incident added");
+      if (response.status === 201) {
+        setSuccessMessage("Incident added");
+      }
     } catch (error) {
       setErrMsg("Invalid data fix the form");
+      setSuccessMessage("");
     }
   };
 

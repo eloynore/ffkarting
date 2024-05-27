@@ -65,7 +65,7 @@ interface RaceIncident {
 }
 
 // Define all the routes for our token calls
-export const createRace = (data: Race) => apiService.post("/races/", data);
+export const createRace = (data: Race) => apiService.post("/race/", data);
 export const createTeam = (data: Team) => apiService.post("/teams/", data);
 export const createDriver = (data: Driver) =>
   apiService.post("/drivers/", data);

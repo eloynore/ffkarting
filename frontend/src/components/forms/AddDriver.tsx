@@ -12,6 +12,9 @@ export default function AddDriverForm() {
   const [team, setTeam] = useState<number | "">("");
   const [teams, setTeams] = useState<Team[]>([]);
 
+  const [errMsg, setErrMsg] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
   useEffect(() => {
     const fetchTeams = async () => {
       const response = await getTeams();
@@ -21,13 +24,25 @@ export default function AddDriverForm() {
     fetchTeams();
   }, []);
 
+  useEffect(() => {
+    setErrMsg("");
+  }, [name, number, team]);
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const newDriver = { name, number, team: team as number };
-    await createDriver(newDriver);
-    setName("");
-    setNumber(0);
-    setTeam("");
+    try {
+      e.preventDefault();
+      const newDriver = { name, number, team: team as number };
+      const response = await createDriver(newDriver);
+      setName("");
+      setNumber(0);
+      setTeam("");
+      if (response.status === 201) {
+        setSuccessMessage("Driver added!");
+      }
+    } catch (error) {
+      setErrMsg("Error adding driver");
+      setSuccessMessage("");
+    }
   };
 
   return (
@@ -44,7 +59,10 @@ export default function AddDriverForm() {
           type="text"
           id="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setSuccessMessage("");
+            setName(e.target.value);
+          }}
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         />
@@ -57,7 +75,10 @@ export default function AddDriverForm() {
           type="number"
           id="number"
           value={number}
-          onChange={(e) => setNumber(Number(e.target.value))}
+          onChange={(e) => {
+            setSuccessMessage("");
+            setNumber(Number(e.target.value));
+          }}
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         />
@@ -69,7 +90,10 @@ export default function AddDriverForm() {
         <select
           id="team"
           value={team}
-          onChange={(e) => setTeam(Number(e.target.value))}
+          onChange={(e) => {
+            setSuccessMessage("");
+            setTeam(Number(e.target.value));
+          }}
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         >
@@ -87,6 +111,10 @@ export default function AddDriverForm() {
       >
         Add Driver
       </button>
+      <p className={errMsg ? "text-red-500 mb-4" : "hidden"}>{errMsg}</p>
+      <p className={successMessage ? "text-green-500 mb-4" : "hidden"}>
+        {successMessage}
+      </p>
     </form>
   );
 }

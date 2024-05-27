@@ -44,7 +44,6 @@ export default function AddRaceParticipantForm() {
   // We need to update the message when the data changes
   useEffect(() => {
     setErrMsg("");
-    setSuccessMessage("");
   }, [formData]);
 
   useEffect(() => {
@@ -67,6 +66,7 @@ export default function AddRaceParticipantForm() {
       ...prevData,
       [name]: value,
     }));
+    setSuccessMessage("");
   };
 
   // We need this extra function to catch the checkbox value
@@ -76,6 +76,7 @@ export default function AddRaceParticipantForm() {
       ...prevData,
       [name]: checked,
     }));
+    setSuccessMessage("");
   };
   // Handle the form submit
   const handleSubmit = async (e: React.FormEvent) => {
@@ -84,7 +85,7 @@ export default function AddRaceParticipantForm() {
       if (!formData.videoURL) {
         delete formData.videoURL;
       }
-      await createRaceParticipant(formData);
+      const response = await createRaceParticipant(formData);
       setFormData({
         driver: 0,
         race: 0,
@@ -95,9 +96,12 @@ export default function AddRaceParticipantForm() {
         grandChelem: false,
         videoURL: "",
       });
-      setSuccessMessage("Participation added");
+      if (response.status === 201) {
+        setSuccessMessage("Participation added");
+      }
     } catch (error) {
       setErrMsg("Invalid data fix the form");
+      setSuccessMessage("");
     }
   };
 
@@ -177,8 +181,10 @@ export default function AddRaceParticipantForm() {
           Lap Time:
         </label>
         <input
+          title="Format: 00:00.000"
           type="text"
           name="lapTime"
+          pattern="[0-9]{2}:?[0-9]{2}.[0-9]{4}"
           value={formData.lapTime}
           onChange={handleChange}
           className="border p-2 rounded w-full dark:bg-gray-800"
@@ -190,8 +196,10 @@ export default function AddRaceParticipantForm() {
           Qualify Lap Time:
         </label>
         <input
+          title="Format: 00:00.000"
           type="text"
           name="qualifyLapTime"
+          pattern="[0-9]{2}:?[0-9]{2}.[0-9]{4}"
           value={formData.qualifyLapTime}
           onChange={handleChange}
           className="border p-2 rounded w-full dark:bg-gray-800"
@@ -203,8 +211,10 @@ export default function AddRaceParticipantForm() {
           Train Lap Time:
         </label>
         <input
+          title="Format: 00:00.000"
           type="text"
           name="trainLapTime"
+          pattern="[0-9]{2}:?[0-9]{2}.[0-9]{4}"
           value={formData.trainLapTime}
           onChange={handleChange}
           className="border p-2 rounded w-full dark:bg-gray-800"
