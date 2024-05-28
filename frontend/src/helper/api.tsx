@@ -74,6 +74,7 @@ interface Incident {
 export const createRace = (data: Race) => apiService.post("/races/", data);
 export const updateRace = (id: number, data: Race) =>
   apiService.put(`/races/${id}/`, data);
+export const deleteRace = (id: number) => apiService.delete(`/races/${id}/`);
 export const getRace = (id: number) => apiService.get(`/races/${id}/`);
 export const getRaces = () => apiService.get("/races/");
 
@@ -102,6 +103,7 @@ export const updateTeam = (id: number, data: Team) => {
     },
   });
 };
+export const deleteTeam = (id: number) => apiService.delete(`/teams/${id}/`);
 export const getTeam = (id: number) => apiService.get(`/teams/${id}/`);
 export const getTeams = () => apiService.get("/teams/");
 
@@ -110,6 +112,8 @@ export const createDriver = (data: Driver) =>
   apiService.post("/drivers/", data);
 export const updateDriver = (id: number, data: Driver) =>
   apiService.put(`/drivers/${id}/`, data);
+export const deleteDriver = (id: number) =>
+  apiService.delete(`/drivers/${id}/`);
 export const getDriver = (id: number) => apiService.get(`/drivers/${id}/`);
 export const getDrivers = () => apiService.get("/drivers/");
 
@@ -118,6 +122,8 @@ export const createParticipant = (data: RaceParticipant) =>
   apiService.post("/participant/", data);
 export const updateRaceParticipant = (id: number, data: RaceParticipant) =>
   apiService.put(`/participant/${id}/`, data);
+export const deleteParticipant = (id: number) =>
+  apiService.delete(`/participant/${id}/`);
 export const getParticipant = (id: number) =>
   apiService.get(`/participant/${id}/`);
 
@@ -126,6 +132,8 @@ export const createIncident = (data: Incident) =>
   apiService.post("/incident/", data);
 export const updateIncident = (id: number, data: Incident) =>
   apiService.put(`/raceincident/${id}/`, data);
+export const deleteIncident = (id: number) =>
+  apiService.delete(`/incident/${id}/`);
 export const getIncident = (id: number) => apiService.get(`/incident/${id}/`);
 
 // Here we have all the non logged calls
