@@ -6,6 +6,11 @@ export type DetailProps = {
   unit: string;
 };
 
+export type FormInfo = {
+  isEdit: boolean;
+  id?: string | null;
+};
+
 export type FastLapProps = {
   fastLap?: boolean;
   theFasto?: boolean;

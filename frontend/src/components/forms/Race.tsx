@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createRace } from "../../helper/api";
+import { FormInfo } from "../../helper/models";
 
 interface Race {
   circuit: string;
@@ -7,7 +8,7 @@ interface Race {
   photo?: string;
 }
 
-export default function AddRaceForm() {
+export default function AddRaceForm(context: FormInfo) {
   const [circuit, setCircuit] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [photo, setPhoto] = useState<string>("");

@@ -6,7 +6,7 @@ interface Team {
   name: string;
 }
 
-export default function AddDriverForm() {
+export default function DriverForm() {
   const [name, setName] = useState<string>("");
   const [number, setNumber] = useState<number>(0);
   const [team, setTeam] = useState<number | "">("");

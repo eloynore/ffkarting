@@ -1,10 +1,10 @@
 import React from "react";
 import { useAuthProvider } from "../context/AuthProvider";
-import AddRaceForm from "../components/forms/AddRace";
-import AddTeamForm from "../components/forms/AddTeam";
-import AddDriverForm from "../components/forms/AddDriver";
-import AddRaceParticipantForm from "../components/forms/AddParticipant";
-import AddRaceIncidentForm from "../components/forms/AddIncident";
+import RaceForm from "../components/forms/Race";
+import TeamForm from "../components/forms/Team";
+import DriverForm from "../components/forms/Driver";
+import ParticipantForm from "../components/forms/Participant";
+import IncidentForm from "../components/forms/Incident";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -22,11 +22,11 @@ export function Admin() {
         {t("adminDashboard")}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <AddRaceForm />
-        <AddTeamForm />
-        <AddDriverForm />
-        <AddRaceParticipantForm />
-        <AddRaceIncidentForm />
+        <RaceForm {...{ isEdit: false }} />
+        <TeamForm />
+        <DriverForm />
+        <ParticipantForm />
+        <IncidentForm />
       </div>
     </div>
   );

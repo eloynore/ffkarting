@@ -20,7 +20,7 @@ interface Incident {
   resolution: string;
 }
 
-export default function AddRaceIncidentForm() {
+export default function IncidentForm() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [races, setRaces] = useState<Race[]>([]);
   const [errMsg, setErrMsg] = useState("");
