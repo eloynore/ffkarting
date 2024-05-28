@@ -25,6 +25,10 @@ export type DriverBaseProp = {
   number: number;
 };
 
+export type DriverPointProp = DriverBaseProp & {
+  points: number;
+};
+
 export type DriverProp = DriverBaseProp & {
   team: TeamProp;
   points: number;
@@ -52,7 +56,7 @@ export type ParticipationBaseProp = {
 export type TeamLeaderboardProp = {
   id: number;
   name: string;
-  drivers: DriverBaseProp[];
+  drivers: DriverPointProp[];
   color: string;
   points: number;
   logo?: string; // conditinal logo url

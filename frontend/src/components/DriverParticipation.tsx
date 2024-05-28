@@ -52,7 +52,7 @@ export function DriverParticipation(
               </button>
             </div>
           </td>
-          <td className="px-7">
+          <td className="pl-7">
             <div className="flex justify-left items-center my-5 ">
               <p className="text-black text-lg dark:text-gray-100 block text-left font-medium">
                 {participation.points}
@@ -179,7 +179,7 @@ export function DriverParticipation(
             </button>
           </div>
         </td>
-        <td className="px-7">
+        <td className="pl-7">
           <div className="flex justify-left items-center my-5 ">
             <p className="text-black text-lg dark:text-gray-100 block rounded-lg text-left font-medium">
               {participation.points}

@@ -140,3 +140,4 @@ redis-stable/
 # Media
 media/
 uploads/
+migrations/

@@ -10,7 +10,7 @@ export function Teams() {
 
   // Fetch data when the component mounts
   async function fetchData() {
-    const result = await getData("teams/get_leaderboard/");
+    const result = await getData("teams/getLeaderboard/");
     setTeams(result.leaderboard);
   }
 

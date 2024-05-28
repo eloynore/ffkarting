@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ParticipationsRaceProp } from "../helper/models";
 import ShowBadges from "./ShowBadges";
@@ -67,7 +67,7 @@ export function RaceParticipation(
               </div>
             </div>
           </td>
-          <td className="px-7">
+          <td className="pl-7">
             <div className="flex justify-left items-center my-5 ">
               <p className="text-black text-lg dark:text-gray-100 block rounded-lg text-left font-medium">
                 {participation.points}
@@ -209,7 +209,7 @@ export function RaceParticipation(
             </div>
           </div>
         </td>
-        <td className="px-7">
+        <td className="pl-7">
           <div className="flex justify-left items-center my-5 ">
             <p className="text-black text-lg dark:text-gray-100 block rounded-lg text-left font-medium">
               {participation.points}

@@ -10,7 +10,7 @@ export function Leaderboard() {
 
   // Fetch data when the component mounts
   async function fetchData() {
-    const result = await getData("drivers/get_leaderboard/");
+    const result = await getData("drivers/getLeaderboard/");
     setDrivers(result.leaderboard);
   }
   useEffect(() => {

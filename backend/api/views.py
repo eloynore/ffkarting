@@ -27,7 +27,7 @@ class TeamViewSet(viewsets.ModelViewSet):
     serializer_class = TeamSerializer
     
     @action(detail=False, methods=['get'])
-    def get_leaderboard(self, request):
+    def getLeaderboard(self, request):
         team_leaderboard = []
         for item in self.queryset.iterator():
             team_drivers = []
@@ -57,6 +57,26 @@ class TeamViewSet(viewsets.ModelViewSet):
             })
         leadeboard = sorted(team_leaderboard, key=lambda d: d['points'], reverse=True) 
         return Response(data={'leaderboard': leadeboard})
+    
+    @action(detail=True, methods=['get'])
+    def getDrivers(self, request, pk=None):
+        curr_team = self.get_object()
+        team_drivers = []
+        drivers = driver.Driver.objects.filter(team=curr_team.pk)
+        for curr_driver in drivers:
+            totalpoints_driver = 0
+            participations = race.Participant.objects.filter(driver=curr_driver.pk)
+            if participations:
+                for participation in participations.iterator():
+                    totalpoints_driver += participation.points
+            team_drivers.append({
+                'id': curr_driver.pk,
+                'name': curr_driver.name,
+                'number': curr_driver.number,
+                'points': totalpoints_driver,
+            })
+        leadeboard = sorted(team_drivers, key=lambda d: d['points'], reverse=True) 
+        return Response(data={'drivers': leadeboard})
 
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticatedOrReadOnly])
@@ -65,7 +85,7 @@ class DriverViewSet(viewsets.ModelViewSet):
     serializer_class = DriverSerializer
 
     @action(detail=False, methods=['get'])
-    def get_leaderboard(self, request):
+    def getLeaderboard(self, request):
         driver_leaderboard = []
         for item in self.queryset.iterator():
             total_points = 0
@@ -89,7 +109,7 @@ class DriverViewSet(viewsets.ModelViewSet):
         return Response(data={'leaderboard': leadeboard})
 
     @action(detail=True, methods=['get'])
-    def get_participations(self, request, pk=None):
+    def getParticipations(self, request, pk=None):
         curr_driver = self.get_object()
         participations = race.Participant.objects.filter(driver=curr_driver.pk)
         driver_participations = []
@@ -139,7 +159,7 @@ class RaceViewSet(viewsets.ModelViewSet):
     serializer_class = RaceSerializer
     
     @action(detail=True, methods=['get'])
-    def get_participations(self, request, pk=None):
+    def getParticipations(self, request, pk=None):
         curr_race = self.get_object()
         participations = race.Participant.objects.filter(race=curr_race.pk)
         driver_participations = []
