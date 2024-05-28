@@ -70,7 +70,7 @@ export function DriverParticipation(
         </tr>
         <tr className=" w-full bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
           <td colSpan={3} className="">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div className="grid p-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
               <RenderDetail
                 {...{
                   imagePath: "/icons/chronometer.svg",
