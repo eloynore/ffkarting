@@ -45,9 +45,10 @@ export default function AddTeamForm() {
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-lg shadow-md text-gray-700 dark:bg-gray-800 dark:text-white"
     >
-      <h2 className="text-2xl font-bold mb-4">Add New Team</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Add New Team</h2>
+      <hr className="my-5 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
       <div className="mb-4">
-        <label htmlFor="name" className="block ">
+        <label htmlFor="name" className="block dark:text-white font-bold mb-2">
           Name
         </label>
         <input
@@ -63,7 +64,7 @@ export default function AddTeamForm() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="color" className="block ">
+        <label htmlFor="color" className="block dark:text-white font-bold mb-2">
           Color
         </label>
         <input
@@ -78,19 +79,19 @@ export default function AddTeamForm() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="logo" className="block text-gray-700 font-bold mb-2">
-          Team Logo:
+        <label htmlFor="logo" className="block dark:text-white font-bold mb-2">
+          Team Logo
         </label>
         <input
           type="file"
           id="logo"
           onChange={(e) => setLogo(e.target.files ? e.target.files[0] : null)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border  border-gray-300 rounded"
         />
       </div>
       <button
         type="submit"
-        className="w-full bg-green-500 text-white py-2 rounded-lg"
+        className="w-full bg-green-500 font-bold dark:text-white py-2 rounded-lg"
       >
         Add Team
       </button>

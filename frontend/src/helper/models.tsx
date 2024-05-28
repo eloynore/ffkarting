@@ -1,14 +1,21 @@
 // Common properties
+export type DetailProps = {
+  imagePath: string;
+  title: string;
+  data?: string | number;
+  unit: string;
+};
+
 export type FastLapProps = {
-  fastLap: boolean;
-  theFasto: boolean;
-  grandChelem: boolean;
+  fastLap?: boolean;
+  theFasto?: boolean;
+  grandChelem?: boolean;
 };
 
 export type TeamProp = {
   id: number;
   name: string;
-  color: string;
+  color?: string;
   logo?: string; // Campo condicional para el logo
 };
 
@@ -36,6 +43,9 @@ export type ParticipationBaseProp = {
   lapTime?: string; // conditional field
   qualifyLapTime?: string; // conditional field
   trainLapTime?: string; // conditional field
+  avgTime?: string; // conditional field
+  qualifyAvgTime?: string; // conditional field
+  trainAvgTime?: string; // conditional field
   videoURL?: string; // conditional field
 };
 

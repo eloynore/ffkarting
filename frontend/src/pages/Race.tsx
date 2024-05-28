@@ -18,7 +18,7 @@ export function Race() {
 
   // Fetch data when the component mounts
   async function fetchData() {
-    const result = await getData("race/" + id + "/get_participations/");
+    const result = await getData(`races/${id}/get_participations/`);
     setRaceDetailData(result);
   }
 

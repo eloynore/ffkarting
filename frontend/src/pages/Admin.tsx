@@ -3,8 +3,8 @@ import { useAuthProvider } from "../context/AuthProvider";
 import AddRaceForm from "../components/forms/AddRace";
 import AddTeamForm from "../components/forms/AddTeam";
 import AddDriverForm from "../components/forms/AddDriver";
-import AddRaceParticipantForm from "../components/forms/AddRaceParticipant";
-import AddRaceIncidentForm from "../components/forms/AddRaceIncident";
+import AddRaceParticipantForm from "../components/forms/AddParticipant";
+import AddRaceIncidentForm from "../components/forms/AddIncident";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 

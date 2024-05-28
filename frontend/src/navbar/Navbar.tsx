@@ -43,7 +43,8 @@ const Navbar = () => {
   return (
     <div className="bg-black flex justify-between items-center h-24 mx-auto px-4 text-white">
       {/* Logo */}
-      <h1 className="w-full text-5xl font-bold text-[#00df9a]">
+      <h1 className="w-full text-5xl font-bold text-white flex items-center">
+        <img src="tractor.png" />
         {url === "/" ? "FFK" : <NavLink to="/">FFK </NavLink>}
       </h1>
       <Switcher />

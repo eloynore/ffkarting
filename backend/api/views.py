@@ -5,7 +5,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
-from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, RaceParticipantSerializer, RaceIncidentSerializer
+from .serializer import DriverSerializer, TeamSerializer, RaceSerializer, ParticipantSerializer, IncidentSerializer
 from .models import driver, team, race
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -35,7 +35,7 @@ class TeamViewSet(viewsets.ModelViewSet):
             drivers = driver.Driver.objects.filter(team=item.pk)
             for curr_driver in drivers:
                 totalpoints_driver = 0
-                participations = race.RaceParticipant.objects.filter(driver=curr_driver.pk)
+                participations = race.Participant.objects.filter(driver=curr_driver.pk)
                 if participations:
                     for participation in participations.iterator():
                         totalpoints_driver += participation.points
@@ -69,7 +69,7 @@ class DriverViewSet(viewsets.ModelViewSet):
         driver_leaderboard = []
         for item in self.queryset.iterator():
             total_points = 0
-            participations = race.RaceParticipant.objects.filter(driver=item.pk)
+            participations = race.Participant.objects.filter(driver=item.pk)
             if participations:
                 for participation in participations.iterator():
                     total_points += participation.points
@@ -91,7 +91,7 @@ class DriverViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def get_participations(self, request, pk=None):
         curr_driver = self.get_object()
-        participations = race.RaceParticipant.objects.filter(driver=curr_driver.pk)
+        participations = race.Participant.objects.filter(driver=curr_driver.pk)
         driver_participations = []
         total_points = 0
         if participations:
@@ -108,6 +108,9 @@ class DriverViewSet(viewsets.ModelViewSet):
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
                     'trainLapTime': participation.trainLapTime,
+                    'avgTime': participation.avgTime,
+                    'qualifyAvgTime': participation.qualifyAvgTime,
+                    'trainAvgTime': participation.trainAvgTime,
                     'fastLap': participation.fastLap,
                     'theFasto': participation.theFasto,
                     'grandChelem': participation.grandChelem,
@@ -138,7 +141,7 @@ class RaceViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def get_participations(self, request, pk=None):
         curr_race = self.get_object()
-        participations = race.RaceParticipant.objects.filter(race=curr_race.pk)
+        participations = race.Participant.objects.filter(race=curr_race.pk)
         driver_participations = []
 
         if participations:
@@ -161,6 +164,9 @@ class RaceViewSet(viewsets.ModelViewSet):
                     'lapTime': participation.lapTime,
                     'qualifyLapTime': participation.qualifyLapTime,
                     'trainLapTime': participation.trainLapTime,
+                    'avgTime': participation.avgTime,
+                    'qualifyAvgTime': participation.qualifyAvgTime,
+                    'trainAvgTime': participation.trainAvgTime,
                     'fastLap': participation.fastLap,
                     'theFasto': participation.theFasto,
                     'grandChelem': participation.grandChelem,
@@ -176,12 +182,12 @@ class RaceViewSet(viewsets.ModelViewSet):
 
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticatedOrReadOnly])
-class RaceParticipantViewSet(viewsets.ModelViewSet):
-    queryset = race.RaceParticipant.objects.all()
-    serializer_class = RaceParticipantSerializer
+class ParticipantViewSet(viewsets.ModelViewSet):
+    queryset = race.Participant.objects.all()
+    serializer_class = ParticipantSerializer
 
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticatedOrReadOnly])
-class RaceIncidentViewSet(viewsets.ModelViewSet):
-    queryset = race.RaceIncident.objects.all()
-    serializer_class = RaceIncidentSerializer
+class IncidentViewSet(viewsets.ModelViewSet):
+    queryset = race.Incident.objects.all()
+    serializer_class = IncidentSerializer

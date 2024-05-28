@@ -19,7 +19,7 @@ export function Leaderboard() {
 
   return (
     <div className="flex justify-center w-full">
-      {drivers ? (
+      {drivers?.length ? (
         <table
           id="rankings"
           className="w-full max-w-[1280px] text-sm text-left text-gray-500 dark:text-gray-400"
@@ -41,7 +41,7 @@ export function Leaderboard() {
           </tbody>
         </table>
       ) : (
-        <div className="w-full text-sm text-left  dark:text-gray-400 p-4">
+        <div className="flex justify-center w-full text-sm text-left  dark:text-gray-400 p-4">
           <h1 className="font-bold whitespace-nowrap  text-2xl text-black dark:text-white">
             Currently there are no drivers
           </h1>

@@ -22,12 +22,12 @@ class RaceSerializer(serializers.ModelSerializer):
         model=race.Race
         fields='__all__'
         
-class RaceParticipantSerializer(serializers.ModelSerializer):
+class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
-        model=race.RaceParticipant
+        model=race.Participant
         fields='__all__'
 
-class RaceIncidentSerializer(serializers.ModelSerializer):
+class IncidentSerializer(serializers.ModelSerializer):
     class Meta:
-        model=race.RaceIncident
+        model=race.Incident
         fields='__all__'

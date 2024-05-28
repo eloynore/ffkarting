@@ -18,7 +18,7 @@ export function Driver() {
 
   // Fetch data when the component mounts
   async function fetchData() {
-    const result = await getData("drivers/" + id + "/get_participations/");
+    const result = await getData(`drivers/${id}/get_participations/`);
     setDriverDetailData(result);
   }
 

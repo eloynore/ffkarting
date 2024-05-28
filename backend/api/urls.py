@@ -5,9 +5,9 @@ from api import views
 router = routers.DefaultRouter()
 router.register(r'drivers',views.DriverViewSet)
 router.register(r'teams',views.TeamViewSet)
-router.register(r'race',views.RaceViewSet)
-router.register(r'raceparticipant',views.RaceParticipantViewSet)
-router.register(r'raceincident',views.RaceIncidentViewSet)
+router.register(r'races',views.RaceViewSet)
+router.register(r'participant',views.ParticipantViewSet)
+router.register(r'incident',views.IncidentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

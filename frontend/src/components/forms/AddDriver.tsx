@@ -50,9 +50,10 @@ export default function AddDriverForm() {
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-lg shadow-md text-gray-700 dark:bg-gray-800 dark:text-white"
     >
-      <h2 className="text-2xl font-bold mb-4">Add New Driver</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Add New Driver</h2>
+      <hr className="my-5 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
       <div className="mb-4">
-        <label htmlFor="name" className="block ">
+        <label htmlFor="name" className="block dark:text-white font-bold mb-2">
           Name
         </label>
         <input
@@ -68,7 +69,10 @@ export default function AddDriverForm() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="number" className="block ">
+        <label
+          htmlFor="number"
+          className="block dark:text-white font-bold mb-2"
+        >
           Number
         </label>
         <input
@@ -84,7 +88,7 @@ export default function AddDriverForm() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="team" className="block ">
+        <label htmlFor="team" className="block dark:text-white font-bold mb-2">
           Team
         </label>
         <select
@@ -107,7 +111,7 @@ export default function AddDriverForm() {
       </div>
       <button
         type="submit"
-        className="w-full bg-green-500 text-white py-2 rounded-lg"
+        className="w-full bg-green-500 font-bold dark:text-white py-2 rounded-lg"
       >
         Add Driver
       </button>
