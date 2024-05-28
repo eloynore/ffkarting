@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { createRace } from "../../helper/api";
+import { createRace, updateRace } from "../../helper/api";
 import { FormInfo } from "../../helper/models";
+import { getRace } from "../../helper/api";
+import { AxiosResponse } from "axios";
 
 interface Race {
   circuit: string;
@@ -8,36 +10,75 @@ interface Race {
   photo?: string;
 }
 
-export default function AddRaceForm(context: FormInfo) {
-  const [circuit, setCircuit] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [photo, setPhoto] = useState<string>("");
-
+export default function RaceForm(context: Readonly<FormInfo>) {
+  const [race, setRace] = useState<Race>({
+    circuit: "",
+    date: "",
+    photo: "",
+  });
+  const statusCodeSuccess = context.isEdit ? 200 : 201;
+  const buttonText = context.isEdit ? "Edit race" : "Add race";
+  const errorMessage = context.isEdit
+    ? "Error editing race"
+    : "Error adding race";
+  const successMessage = context.isEdit ? "Race edited!" : "Race added!";
   const [errMsg, setErrMsg] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [scsMessage, setScsMessage] = useState("");
+
+  useEffect(() => {
+    if (context.isEdit) {
+      const fetchData = async () => {
+        if (context.id) {
+          const race = await getRace(context.id);
+          setRace(race.data);
+        }
+      };
+      fetchData();
+    }
+  }, []);
 
   useEffect(() => {
     setErrMsg("");
-  }, [circuit, date, photo]);
+  }, [race]);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    console.log(e.target.value);
+    const { name, value } = e.target;
+    setRace((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setScsMessage("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      let newRace: Race = { circuit, date, photo };
-      if (!photo) {
-        delete newRace.photo;
+      if (!race.photo) {
+        delete race.photo;
+      }
+      let response: AxiosResponse;
+      if (context.isEdit && context.id) {
+        response = await updateRace(context.id, race);
+      } else {
+        response = await createRace(race);
+        setRace({
+          circuit: "",
+          date: "",
+          photo: "",
+        });
       }
 
-      const response = await createRace(newRace);
-      setCircuit("");
-      setDate("");
-      setPhoto("");
-      if (response.status === 201) {
-        setSuccessMessage("Race added!");
+      if (response.status === statusCodeSuccess) {
+        setScsMessage(successMessage);
       }
     } catch (error) {
-      setErrMsg("Error adding race");
-      setSuccessMessage("");
+      setErrMsg(errorMessage);
+      setScsMessage("");
     }
   };
 
@@ -56,13 +97,11 @@ export default function AddRaceForm(context: FormInfo) {
           Circuit
         </label>
         <input
+          name="circuit"
           type="text"
           id="circuit"
-          value={circuit}
-          onChange={(e) => {
-            setSuccessMessage("");
-            setCircuit(e.target.value);
-          }}
+          value={race.circuit}
+          onChange={handleChange}
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         />
@@ -72,13 +111,11 @@ export default function AddRaceForm(context: FormInfo) {
           Date
         </label>
         <input
+          name="date"
           type="date"
           id="date"
-          value={date}
-          onChange={(e) => {
-            setSuccessMessage("");
-            setDate(e.target.value);
-          }}
+          value={race.date}
+          onChange={handleChange}
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         />
@@ -88,13 +125,11 @@ export default function AddRaceForm(context: FormInfo) {
           Photo URL
         </label>
         <input
+          name="photo"
           type="url"
           id="photo"
-          value={photo}
-          onChange={(e) => {
-            setSuccessMessage("");
-            setPhoto(e.target.value);
-          }}
+          value={race.photo}
+          onChange={handleChange}
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         />
       </div>
@@ -102,11 +137,11 @@ export default function AddRaceForm(context: FormInfo) {
         type="submit"
         className="w-full bg-green-500 font-bold dark:text-white py-2 rounded-lg"
       >
-        Add Race
+        {buttonText}
       </button>
       <p className={errMsg ? "text-red-500 mb-4" : "hidden"}>{errMsg}</p>
-      <p className={successMessage ? "text-green-500 mb-4" : "hidden"}>
-        {successMessage}
+      <p className={scsMessage ? "text-green-500 mb-4" : "hidden"}>
+        {scsMessage}
       </p>
     </form>
   );

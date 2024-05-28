@@ -29,7 +29,7 @@ interface Participant {
   videoURL?: string;
 }
 
-export default function AddRaceParticipantForm() {
+export default function ParticipantForm() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [races, setRaces] = useState<Race[]>([]);
   const [errMsg, setErrMsg] = useState("");

@@ -8,7 +8,7 @@ export type DetailProps = {
 
 export type FormInfo = {
   isEdit: boolean;
-  id?: string | null;
+  id?: number;
 };
 
 export type FastLapProps = {

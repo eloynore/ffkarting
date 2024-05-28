@@ -20,8 +20,11 @@ export function Edit() {
   const id = searchParams.get("id");
   const formInfo: FormInfo = {
     isEdit: true,
-    id: id,
   };
+  if (id) {
+    formInfo.id = Number(id);
+  }
+
   if (!currentAuth.token) {
     navigate("/login");
   }
