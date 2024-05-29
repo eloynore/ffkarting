@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { createRace, updateRace } from "../../helper/api";
+import { createRace, updateRace, getRace } from "../../helper/api";
 import { FormInfo } from "../../helper/models";
-import { getRace } from "../../helper/api";
 import { AxiosResponse } from "axios";
 
 interface Race {
@@ -37,16 +36,11 @@ export default function RaceForm(context: Readonly<FormInfo>) {
     }
   }, []);
 
-  useEffect(() => {
-    setErrMsg("");
-  }, [race]);
-
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
     setRace((prevData) => ({
       ...prevData,

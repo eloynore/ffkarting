@@ -35,7 +35,7 @@ export function Edit() {
       </h1>
       <div className="w-full max-w-[1280px]">
         {type === "race" ? <RaceForm {...formInfo} /> : <></>}
-        {type === "team" ? <TeamForm /> : <></>}
+        {type === "team" ? <TeamForm {...formInfo} /> : <></>}
         {type === "driver" ? <DriverForm /> : <></>}
         {type === "participation" ? <ParticipantForm /> : <></>}
         {type === "incident" ? <IncidentForm /> : <></>}
