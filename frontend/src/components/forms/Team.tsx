@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { createTeam, updateTeam, getTeam } from "../../helper/api";
 import { FormInfo } from "../../helper/models";
 import { AxiosResponse } from "axios";
+// translation context
+import { useTranslation } from "react-i18next";
 
 interface Team {
   name: string;
@@ -10,12 +12,11 @@ interface Team {
 }
 
 export default function AddTeamForm(context: Readonly<FormInfo>) {
+  const { t } = useTranslation();
   const statusCodeSuccess = context.isEdit ? 200 : 201;
-  const buttonText = context.isEdit ? "Edit team" : "Add team";
-  const errorMessage = context.isEdit
-    ? "Error editing race"
-    : "Error adding race";
-  const successMessage = context.isEdit ? "Team edited!" : "Team added!";
+  const buttonText = context.isEdit ? t("editTeam") : t("addTeam");
+  const errorMessage = context.isEdit ? t("errEditTeam") : t("errAddTeam");
+  const successMessage = context.isEdit ? t("editedTeam") : t("addedTeam");
   const [errMsg, setErrMsg] = useState("");
   const [scsMessage, setScsMessage] = useState("");
   const [team, setTeam] = useState<Team>({
@@ -23,7 +24,6 @@ export default function AddTeamForm(context: Readonly<FormInfo>) {
     color: "",
     logo: null,
   });
-
   useEffect(() => {
     if (context.isEdit) {
       const fetchData = async () => {
@@ -86,11 +86,20 @@ export default function AddTeamForm(context: Readonly<FormInfo>) {
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-lg shadow-md text-gray-700 dark:bg-gray-800 dark:text-white"
     >
-      <h2 className="text-2xl font-bold mb-4 text-center">Add New Team</h2>
-      <hr className="my-5 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
+      {context.isEdit ? (
+        <></>
+      ) : (
+        <>
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            {t("addNewTeam")}
+          </h2>
+          <hr className="my-5 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
+        </>
+      )}
+
       <div className="mb-4">
         <label htmlFor="name" className="block dark:text-white font-bold mb-2">
-          Name
+          {t("name")}
         </label>
         <input
           name="name"
@@ -104,7 +113,7 @@ export default function AddTeamForm(context: Readonly<FormInfo>) {
       </div>
       <div className="mb-4">
         <label htmlFor="color" className="block dark:text-white font-bold mb-2">
-          Color
+          {t("color")}
         </label>
         <input
           name="color"
@@ -117,7 +126,7 @@ export default function AddTeamForm(context: Readonly<FormInfo>) {
       </div>
       <div className="mb-4">
         <label htmlFor="logo" className="block dark:text-white font-bold mb-2">
-          Team Logo
+          {t("logo")}
         </label>
         <input
           name="logo"

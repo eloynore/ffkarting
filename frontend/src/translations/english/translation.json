@@ -6,5 +6,15 @@
   "spanish": "Spanish",
   "english": "English",
   "basque": "Baske",
-  "adminDashboard": "Admin Dashboard"
+  "adminDashboard": "Admin Dashboard",
+  "logo": "Logo",
+  "color": "Color",
+  "name": "Name",
+  "editTeam": "Edit Team",
+  "editedTeam": "Team edited!",
+  "errEditTeam": "Error editing team!",
+  "addTeam": "Add team",
+  "addNewTeam": "Add New Team",
+  "addedTeam": "Team added!",
+  "errAddTeam": "Error adding team!"
 }
