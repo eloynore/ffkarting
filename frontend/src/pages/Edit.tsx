@@ -34,11 +34,19 @@ export function Edit() {
         Edit {type}
       </h1>
       <div className="w-full max-w-[1280px]">
-        {type === "race" ? <RaceForm {...formInfo} /> : <></>}
-        {type === "team" ? <TeamForm {...formInfo} /> : <></>}
-        {type === "driver" ? <DriverForm /> : <></>}
-        {type === "participation" ? <ParticipantForm /> : <></>}
-        {type === "incident" ? <IncidentForm /> : <></>}
+        {id ? (
+          <>
+            {type === "race" ? <RaceForm {...formInfo} /> : <></>}
+            {type === "team" ? <TeamForm {...formInfo} /> : <></>}
+            {type === "driver" ? <DriverForm /> : <></>}
+            {type === "participation" ? <ParticipantForm /> : <></>}
+            {type === "incident" ? <IncidentForm /> : <></>}
+          </>
+        ) : (
+          <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
+            Where are you going without id ??
+          </h2>
+        )}
       </div>
     </div>
   );
