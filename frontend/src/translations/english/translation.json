@@ -16,5 +16,12 @@
   "addTeam": "Add team",
   "addNewTeam": "Add New Team",
   "addedTeam": "Team added!",
-  "errAddTeam": "Error adding team!"
+  "errAddTeam": "Error adding team!",
+  "editRace": "Edit Race",
+  "editedRace": "Race edited!",
+  "errEditRace": "Error editing race!",
+  "addRace": "Add race",
+  "addNewRace": "Add New Race",
+  "addedRace": "Race added!",
+  "errAddRace": "Error adding race!"
 }

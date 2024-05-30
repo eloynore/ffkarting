@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createRace, updateRace, getRace } from "../../helper/api";
 import { FormInfo } from "../../helper/models";
 import { AxiosResponse } from "axios";
+import { useTranslation } from "react-i18next";
 
 interface Race {
   circuit: string;
@@ -10,17 +11,16 @@ interface Race {
 }
 
 export default function RaceForm(context: Readonly<FormInfo>) {
+  const { t } = useTranslation();
   const [race, setRace] = useState<Race>({
     circuit: "",
     date: "",
     photo: "",
   });
   const statusCodeSuccess = context.isEdit ? 200 : 201;
-  const buttonText = context.isEdit ? "Edit race" : "Add race";
-  const errorMessage = context.isEdit
-    ? "Error editing race"
-    : "Error adding race";
-  const successMessage = context.isEdit ? "Race edited!" : "Race added!";
+  const buttonText = context.isEdit ? t("editRace") : t("addRace");
+  const errorMessage = context.isEdit ? t("errEditRace") : t("errAddRace");
+  const successMessage = context.isEdit ? t("editedRace") : t("addedRace");
   const [errMsg, setErrMsg] = useState("");
   const [scsMessage, setScsMessage] = useState("");
 
