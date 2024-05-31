@@ -38,7 +38,7 @@ export function Edit() {
           <>
             {type === "race" ? <RaceForm {...formInfo} /> : <></>}
             {type === "team" ? <TeamForm {...formInfo} /> : <></>}
-            {type === "driver" ? <DriverForm /> : <></>}
+            {type === "driver" ? <DriverForm {...formInfo} /> : <></>}
             {type === "participation" ? <ParticipantForm /> : <></>}
             {type === "incident" ? <IncidentForm /> : <></>}
           </>

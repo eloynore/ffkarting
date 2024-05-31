@@ -23,5 +23,12 @@
   "addRace": "Add race",
   "addNewRace": "Add New Race",
   "addedRace": "Race added!",
-  "errAddRace": "Error adding race!"
+  "errAddRace": "Error adding race!",
+  "editDriver": "Edit Driver",
+  "editedDriver": "Driver edited!",
+  "errEditDriver": "Error editing driver!",
+  "addDriver": "Add driver",
+  "addNewDriver": "Add New Driver",
+  "addedDriver": "Driver added!",
+  "errAddDriver": "Error adding driver!"
 }

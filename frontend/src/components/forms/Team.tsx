@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createTeam, updateTeam, getTeam } from "../../helper/api";
-import { FormInfo } from "../../helper/models";
 import { AxiosResponse } from "axios";
 // translation context
 import { useTranslation } from "react-i18next";
+import { FormInfo } from "../../helper/models";
 
 interface Team {
   name: string;

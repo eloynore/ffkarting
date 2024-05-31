@@ -17,6 +17,7 @@ export default function RaceForm(context: Readonly<FormInfo>) {
     date: "",
     photo: "",
   });
+  // TODO: fix this part to be used everywhere
   const statusCodeSuccess = context.isEdit ? 200 : 201;
   const buttonText = context.isEdit ? t("editRace") : t("addRace");
   const errorMessage = context.isEdit ? t("errEditRace") : t("errAddRace");
@@ -66,7 +67,6 @@ export default function RaceForm(context: Readonly<FormInfo>) {
           photo: "",
         });
       }
-
       if (response.status === statusCodeSuccess) {
         setScsMessage(successMessage);
       }
