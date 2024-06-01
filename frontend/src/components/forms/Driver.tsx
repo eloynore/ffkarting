@@ -76,8 +76,12 @@ export default function DriverForm(context: Readonly<FormInfo>) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (driver.team === 0) {
+      setErrMsg("Select a team first!");
+      return;
+    }
     try {
-      e.preventDefault();
       let response: AxiosResponse;
       if (context.isEdit && context.id) {
         response = await updateDriver(context.id, driver);
@@ -116,7 +120,7 @@ export default function DriverForm(context: Readonly<FormInfo>) {
 
       <div className="mb-4">
         <label htmlFor="name" className="block dark:text-white font-bold mb-2">
-          Name
+          {t("name")}
         </label>
         <input
           name="name"
@@ -133,7 +137,7 @@ export default function DriverForm(context: Readonly<FormInfo>) {
           htmlFor="number"
           className="block dark:text-white font-bold mb-2"
         >
-          Number
+          {t("number")}
         </label>
         <input
           name="number"
@@ -147,7 +151,7 @@ export default function DriverForm(context: Readonly<FormInfo>) {
       </div>
       <div className="mb-4">
         <label htmlFor="team" className="block dark:text-white font-bold mb-2">
-          Team
+          {t("team")}
         </label>
         <select
           name="team"
@@ -157,7 +161,7 @@ export default function DriverForm(context: Readonly<FormInfo>) {
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         >
-          <option value={0}>Select a team</option>
+          <option value={0}>{t("selectTeam")}</option>
           {teams.map((team) => (
             <option key={team.id} value={team.id}>
               {team.name}
