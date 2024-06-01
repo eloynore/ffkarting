@@ -12,7 +12,7 @@ import { AxiosResponse } from "axios";
 interface Driver {
   name: string;
   number: number;
-  team: number;
+  team: number | string;
 }
 interface Team {
   id: number;
@@ -24,7 +24,7 @@ export default function DriverForm(context: Readonly<FormInfo>) {
   const [driver, setDriver] = useState<Driver>({
     name: "",
     number: 0,
-    team: 0,
+    team: "",
   });
   const [teams, setTeams] = useState<Team[]>([]);
 
@@ -77,10 +77,11 @@ export default function DriverForm(context: Readonly<FormInfo>) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (driver.team === 0) {
-      setErrMsg("Select a team first!");
+    if (!driver.number) {
+      setErrMsg("Select a valid number, 0 not allowed!");
       return;
     }
+
     try {
       let response: AxiosResponse;
       if (context.isEdit && context.id) {
@@ -90,7 +91,7 @@ export default function DriverForm(context: Readonly<FormInfo>) {
         setDriver({
           name: "",
           number: 0,
-          team: 0,
+          team: "",
         });
       }
       if (response.status === statusCodeSuccess) {
@@ -161,7 +162,7 @@ export default function DriverForm(context: Readonly<FormInfo>) {
           required
           className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
         >
-          <option value={0}>{t("selectTeam")}</option>
+          <option value="">{t("selectTeam")}</option>
           {teams.map((team) => (
             <option key={team.id} value={team.id}>
               {team.name}

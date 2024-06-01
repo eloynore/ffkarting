@@ -40,7 +40,7 @@ interface Team {
 interface Driver {
   name: string;
   number: number;
-  team: number;
+  team: number | string;
 }
 
 interface RaceParticipant {
