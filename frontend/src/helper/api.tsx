@@ -120,7 +120,7 @@ export const getDrivers = () => apiService.get("/drivers/");
 // Participation routes
 export const createParticipant = (data: RaceParticipant) =>
   apiService.post("/participant/", data);
-export const updateRaceParticipant = (id: number, data: RaceParticipant) =>
+export const updateParticipant = (id: number, data: RaceParticipant) =>
   apiService.put(`/participant/${id}/`, data);
 export const deleteParticipant = (id: number) =>
   apiService.delete(`/participant/${id}/`);

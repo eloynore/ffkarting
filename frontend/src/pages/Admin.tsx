@@ -25,7 +25,7 @@ export function Admin() {
         <RaceForm {...{ isEdit: false }} />
         <TeamForm {...{ isEdit: false }} />
         <DriverForm {...{ isEdit: false }} />
-        <ParticipantForm />
+        <ParticipantForm {...{ isEdit: false }} />
         <IncidentForm />
       </div>
     </div>

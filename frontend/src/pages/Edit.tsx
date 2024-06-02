@@ -39,7 +39,11 @@ export function Edit() {
             {type === "race" ? <RaceForm {...formInfo} /> : <></>}
             {type === "team" ? <TeamForm {...formInfo} /> : <></>}
             {type === "driver" ? <DriverForm {...formInfo} /> : <></>}
-            {type === "participation" ? <ParticipantForm /> : <></>}
+            {type === "participation" ? (
+              <ParticipantForm {...formInfo} />
+            ) : (
+              <></>
+            )}
             {type === "incident" ? <IncidentForm /> : <></>}
           </>
         ) : (

@@ -1,6 +1,16 @@
 // src/components/AddRaceParticipantForm.tsx
 import React, { useState, useEffect } from "react";
-import { createParticipant, getDrivers, getRaces } from "../../helper/api";
+import { AxiosResponse } from "axios";
+import {
+  createParticipant,
+  getDrivers,
+  getRaces,
+  getParticipant,
+  updateParticipant,
+} from "../../helper/api";
+// translation context
+import { useTranslation } from "react-i18next";
+import { FormInfo } from "../../helper/models";
 
 interface Driver {
   id: number;
@@ -29,11 +39,16 @@ interface Participant {
   videoURL?: string;
 }
 
-export default function ParticipantForm() {
+export default function ParticipantForm(context: Readonly<FormInfo>) {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [races, setRaces] = useState<Race[]>([]);
+  const { t } = useTranslation();
+  const statusCodeSuccess = context.isEdit ? 200 : 201;
+  const buttonText = context.isEdit ? t("editTeam") : t("addTeam");
+  const errorMessage = context.isEdit ? t("errEditTeam") : t("errAddTeam");
+  const successMessage = context.isEdit ? t("editedTeam") : t("addedTeam");
   const [errMsg, setErrMsg] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [scsMessage, setScsMessage] = useState("");
   const [formData, setFormData] = useState<Participant>({
     driver: 0,
     race: 0,
@@ -51,6 +66,11 @@ export default function ParticipantForm() {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (context.isEdit && context.id) {
+        const currTeam = await getParticipant(context.id);
+        currTeam.data.logo = null;
+        setFormData(currTeam.data);
+      }
       const drivers = await getDrivers();
       const races = await getRaces();
       setDrivers(drivers.data);
@@ -69,7 +89,7 @@ export default function ParticipantForm() {
       ...prevData,
       [name]: value,
     }));
-    setSuccessMessage("");
+    setScsMessage("");
   };
 
   // We need this extra function to catch the checkbox value
@@ -79,7 +99,7 @@ export default function ParticipantForm() {
       ...prevData,
       [name]: checked,
     }));
-    setSuccessMessage("");
+    setScsMessage("");
   };
   // Handle the form submit
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,29 +108,34 @@ export default function ParticipantForm() {
       if (!formData.videoURL) {
         delete formData.videoURL;
       }
-      const response = await createParticipant(formData);
-      setFormData({
-        driver: 0,
-        race: 0,
-        points: 0,
-        position: 0,
-        lapTime: "",
-        qualifyLapTime: "",
-        trainLapTime: "",
-        avgTime: "",
-        qualifyAvgTime: "",
-        trainAvgTime: "",
-        fastLap: false,
-        theFasto: false,
-        grandChelem: false,
-        videoURL: "",
-      });
-      if (response.status === 201) {
-        setSuccessMessage("Participation added");
+      let response: AxiosResponse;
+      if (context.isEdit && context.id) {
+        response = await updateParticipant(context.id, formData);
+      } else {
+        response = await createParticipant(formData);
+        setFormData({
+          driver: 0,
+          race: 0,
+          points: 0,
+          position: 0,
+          lapTime: "",
+          qualifyLapTime: "",
+          trainLapTime: "",
+          avgTime: "",
+          qualifyAvgTime: "",
+          trainAvgTime: "",
+          fastLap: false,
+          theFasto: false,
+          grandChelem: false,
+          videoURL: "",
+        });
+      }
+      if (response.status === statusCodeSuccess) {
+        setScsMessage(successMessage);
       }
     } catch (error) {
-      setErrMsg("Invalid data fix the form");
-      setSuccessMessage("");
+      setErrMsg(errorMessage);
+      setScsMessage("");
     }
   };
 
@@ -398,8 +423,8 @@ export default function ParticipantForm() {
         Add Participant
       </button>
       <p className={errMsg ? "text-red-500 mb-4" : "hidden"}>{errMsg}</p>
-      <p className={successMessage ? "text-green-500 mb-4" : "hidden"}>
-        {successMessage}
+      <p className={scsMessage ? "text-green-500 mb-4" : "hidden"}>
+        {scsMessage}
       </p>
     </form>
   );
