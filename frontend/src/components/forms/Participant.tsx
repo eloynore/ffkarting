@@ -44,9 +44,15 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
   const [races, setRaces] = useState<Race[]>([]);
   const { t } = useTranslation();
   const statusCodeSuccess = context.isEdit ? 200 : 201;
-  const buttonText = context.isEdit ? t("editTeam") : t("addTeam");
-  const errorMessage = context.isEdit ? t("errEditTeam") : t("errAddTeam");
-  const successMessage = context.isEdit ? t("editedTeam") : t("addedTeam");
+  const buttonText = context.isEdit
+    ? t("editParticipant")
+    : t("addParticipant");
+  const errorMessage = context.isEdit
+    ? t("errEditParticipant")
+    : t("errAddParticipant");
+  const successMessage = context.isEdit
+    ? t("editedParticipant")
+    : t("addedParticipant");
   const [errMsg, setErrMsg] = useState("");
   const [scsMessage, setScsMessage] = useState("");
   const [formData, setFormData] = useState<Participant>({
@@ -420,7 +426,7 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
         type="submit"
         className="w-full bg-green-500 font-bold dark:text-white py-2 rounded-lg"
       >
-        Add Participant
+        {buttonText}
       </button>
       <p className={errMsg ? "text-red-500 mb-4" : "hidden"}>{errMsg}</p>
       <p className={scsMessage ? "text-green-500 mb-4" : "hidden"}>

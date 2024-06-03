@@ -33,5 +33,12 @@
   "addDriver": "Add driver",
   "addNewDriver": "Add New Driver",
   "addedDriver": "Driver added!",
-  "errAddDriver": "Error adding driver!"
+  "errAddDriver": "Error adding driver!",
+  "editParticipant": "Edit Participant",
+  "editedParticipant": "Participant edited!",
+  "errEditParticipant": "Error editing Participant!",
+  "addParticipant": "Add participant",
+  "addNewParticipant": "Add New Participant",
+  "addedParticipant": "Participant added!",
+  "errAddParticipant": "Error adding participant!"
 }
