@@ -151,7 +151,7 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
       className="bg-white p-6 rounded-lg shadow-md text-gray-700 dark:bg-gray-800 dark:text-white"
     >
       <h2 className="text-2xl font-bold mb-4 text-center">
-        Add New Participant
+        {t("addNewParticipant")}
       </h2>
       <hr className="my-5 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
       <div className="mb-4">
@@ -159,7 +159,7 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
           htmlFor="driver"
           className="block dark:text-white font-bold mb-2"
         >
-          Driver
+          {t("driver")}
         </label>
         <select
           name="driver"
@@ -179,7 +179,7 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
 
       <div className="mb-4">
         <label htmlFor="race" className="block dark:text-white font-bold mb-2">
-          Race
+          {t("race")}
         </label>
         <select
           name="race"
@@ -202,7 +202,7 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
           htmlFor="points"
           className="block dark:text-white font-bold mb-2"
         >
-          Points
+          {t("points")}
         </label>
         <input
           type="number"
@@ -219,7 +219,7 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
           htmlFor="position"
           className="block dark:text-white font-bold mb-2"
         >
-          Position
+          {t("position")}
         </label>
         <input
           type="number"
@@ -233,8 +233,7 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
       {/* Laptimes */}
       <details>
         <summary className="mb-4 dark:text-white font-bold">
-          {" "}
-          Lap times{" "}
+          {t("lapTimes")}
         </summary>
         <div className="mb-4">
           <label
