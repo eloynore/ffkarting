@@ -150,9 +150,16 @@ export default function ParticipantForm(context: Readonly<FormInfo>) {
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-lg shadow-md text-gray-700 dark:bg-gray-800 dark:text-white"
     >
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        {t("addNewParticipant")}
-      </h2>
+      {!context.isEdit ? (
+        <>
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            {t("addNewParticipant")}
+          </h2>
+          <hr className="my-5 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
+        </>
+      ) : (
+        <></>
+      )}
       <hr className="my-5 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
       <div className="mb-4">
         <label
