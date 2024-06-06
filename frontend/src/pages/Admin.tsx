@@ -26,7 +26,7 @@ export function Admin() {
         <TeamForm {...{ isEdit: false }} />
         <DriverForm {...{ isEdit: false }} />
         <ParticipantForm {...{ isEdit: false }} />
-        <IncidentForm />
+        <IncidentForm {...{ isEdit: false }} />
       </div>
     </div>
   );

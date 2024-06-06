@@ -44,7 +44,7 @@ export function Edit() {
             ) : (
               <></>
             )}
-            {type === "incident" ? <IncidentForm /> : <></>}
+            {type === "incident" ? <IncidentForm {...formInfo} /> : <></>}
           </>
         ) : (
           <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">

@@ -1,6 +1,16 @@
 // src/components/AddRaceIncidentForm.tsx
 import React, { useState, useEffect } from "react";
-import { createIncident, getDrivers, getRaces } from "../../helper/api";
+import { AxiosResponse } from "axios";
+import {
+  createIncident,
+  getDrivers,
+  getRaces,
+  getIncident,
+  updateIncident,
+} from "../../helper/api";
+// translation context
+import { useTranslation } from "react-i18next";
+import { FormInfo } from "../../helper/models";
 
 interface Driver {
   id: number;
@@ -20,7 +30,7 @@ interface Incident {
   resolution: string;
 }
 
-export default function IncidentForm() {
+export default function IncidentForm(context: Readonly<FormInfo>) {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [races, setRaces] = useState<Race[]>([]);
   const [errMsg, setErrMsg] = useState("");
